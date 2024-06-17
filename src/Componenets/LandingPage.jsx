@@ -34,9 +34,9 @@ function LandingPage() {
         <div className='flex flex-row justify-center my-4'>
           <div className='  h-full w-3/6 flex justify-center items-center'>
             <div>
-              <p className='font-LondrinaOutline text-xl sm:text-5xl font-medium my-2 '>Advisers<br />
+              <p className='font-LondrinaOutline text-3xl sm:text-5xl font-medium my-2 '>Advisers<br />
                 Onboarded</p>
-              <p className='font-Poppins text-xl sm:text-5xl font-bold mt-4'>1200+</p>
+              <p className='font-Poppins text-3xl sm:text-5xl font-bold mt-4'>1200+</p>
             </div>
           </div>
           <div className='  h-full w-3/6 flex justify-center items-center'>
@@ -80,7 +80,7 @@ function LandingPage() {
       <div style={{ marginTop: "50px", height: "300px" }} className='bg-gradient-to-r from-[#000000E5] to-[#489CFFE5] flex justify-center items-center'>
         <div>
           <p className='font-Poppins text-xl sm:text-5xl text-white font-bold sm:leading-normal my-2'>
-            Don’t Miss out the chance of becoming <span className='text-black'>TOP 1 %</span>
+            Don’t Miss out the chance of becoming <span className='text-black text-center'>TOP 1 %</span>
           </p>
           <div className='flex justify-center'>
             <button className='bg-[#489CFF] text-white px-1 py-1 sm:px-4 sm:py-2 rounded-md cursor-pointer font-Poppins my-3'>Create My Page</button>
@@ -115,7 +115,7 @@ function LandingPage() {
 
 
       <div className='bg-[#F6F6F6CC]' style={{marginTop:"100px",height:"350px"}}>
-        <div className='container mx-auto flex'>
+        <div className='container mx-auto flex flex-col sm:flex-row justify-center items-center'>
           <div className='w-3/6 flex flex-col justify-center items-center pl-2'>
           <div >
           <div className=' flex items-center '>
