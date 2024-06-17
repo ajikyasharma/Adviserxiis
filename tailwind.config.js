@@ -8,7 +8,8 @@ export default {
     extend: {
       fontFamily:{
         Poppins:[ "Poppins", "sans-serif"],
-      }
+        LondrinaOutline:["Londrina Outline", "sans-serif"]
+      },
     },
   },
   plugins: [],
