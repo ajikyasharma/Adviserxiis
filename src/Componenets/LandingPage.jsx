@@ -41,7 +41,7 @@ function LandingPage() {
           </div>
           <div className='  h-full w-3/6 flex justify-center items-center'>
             <div>
-              <p className='font-LondrinaOutline text-xl sm:text-5xl font-medium my-2 '>Adviser<br />
+              <p className='font-LondrinaOutline text-3xl sm:text-5xl font-medium my-2 '>Adviser<br />
                 Earning</p>
               <p className='font-Poppins text-xl sm:text-5xl font-bold mt-4'>1 Lakh +</p>
             </div>
