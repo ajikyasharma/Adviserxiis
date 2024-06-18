@@ -5,6 +5,7 @@ import './index.css'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import Login from './Componenets/Login.jsx'
 import SignUp from './Componenets/SignUp.jsx'
+import ConfirmEmail from './Componenets/ConfirmEmail.jsx'
 
 
 const router = createBrowserRouter(
@@ -13,6 +14,7 @@ const router = createBrowserRouter(
     <Route path ="/" element={<App />} />,
     <Route path="/login" element={<Login />} />,
     <Route path="/signup" element={<SignUp />} />,
+    <Route path="/emailconfirmation" element={<ConfirmEmail />} />,
 
 
   </>

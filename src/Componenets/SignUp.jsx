@@ -3,11 +3,15 @@ import background2 from '../assets/background2.png'
 import image3 from '../assets/image3.png'
 import logo from '../assets/logo.png'
 import { Autocomplete, Button, Checkbox, TextField } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 const country = ['India', 'USA', 'Russia']
 const state = ['UttarPradesh', 'Gujrat', 'Uttrakhand']
 
 function SignUp() {
+
+   const navigate = useNavigate()
+
   return (
     <div className='min-h-screen flex flex-col sm:flex-row'>
       <div className=' w-full sm:w-3/6 bg-cover flex justify-center items-center ' style={{ backgroundImage: `url(${background2})` }} >
@@ -19,8 +23,8 @@ function SignUp() {
         </div>
 
         <div style={{ marginTop: "30px" }}>
-          <p className='font-workSans text-3xl font-bold'>Create Account</p>
-          <p className='font-workSans text-md mt-4'>Follow the instructions to make it easier to<br /> register and you will be able to explore inside.
+          <p className='font-workSans text-3xl font-bold text-center'>Create Account</p>
+          <p className='font-workSans text-md mt-4 text-center text-[#03014C]'>Follow the instructions to make it easier to<br /> register and you will be able to explore inside.
           </p>
         </div>
 
@@ -83,6 +87,7 @@ function SignUp() {
               type="submit"
               margin="normal"
               // onClick={formik.handleSubmit}
+              onClick={()=>navigate('/emailconfirmation') }
               size="large"
               className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
             style={{ margin: "0 auto", marginTop:"5px",height:"50px", backgroundColor:"#489CFF" }}
