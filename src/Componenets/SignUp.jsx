@@ -25,53 +25,51 @@ function SignUp() {
         </div>
 
         <div style={{ marginTop: "15px" }}>
-          <form className='flex flex-col'>
+          <form className='flex flex-col mb-[100px] '>
             <TextField
               id="outlined-basic"
               label="Full Name"
               variant="outlined"
               margin="dense"
-              className='bg-[#F6F6F6] font-workSans'
-              sx={{ width: "380px" }} />
+              className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
+               />
 
             <TextField
               id="outlined-basic"
               label="Email"
               variant="outlined"
               margin="dense"
-              className='bg-[#F6F6F6] font-workSans'
-              sx={{ width: "380px" }} />
+              className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
+               />
 
             <TextField
               id="outlined-basic"
               label="Phone number"
               variant="outlined"
               margin="dense"
-              className='bg-[#F6F6F6] font-workSans'
-              sx={{ width: "380px" }} />
+              className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
+               />
 
             <TextField
               id="outlined-basic"
               label="Password"
               variant="outlined"
               margin="dense"
-              className='bg-[#F6F6F6] font-workSans'
-              sx={{ width: "380px" }} />
+              className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
+               />
 
             <Autocomplete
               disablePortal
               id="combo-box-demo"
               options={country}
-              className='bg-[#F6F6F6] font-workSans'
-              sx={{ width: "380px" }}
+              className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
               renderInput={(params) => <TextField {...params} label="Country" margin="dense" />}
             />
             <Autocomplete
               disablePortal
               id="combo-box-demo"
               options={state}
-              className='bg-[#F6F6F6] font-workSans'
-              sx={{ width: "380px" }}
+              className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
               renderInput={(params) => <TextField {...params} label="State" margin="dense" />}
             />
             <div className='flex'>
@@ -86,7 +84,8 @@ function SignUp() {
               margin="normal"
               // onClick={formik.handleSubmit}
               size="large"
-            style={{ margin: "0 auto", marginTop:"5px", width:"380px",height:"50px", backgroundColor:"#489CFF" }}
+              className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
+            style={{ margin: "0 auto", marginTop:"5px",height:"50px", backgroundColor:"#489CFF" }}
             >
               Create Account
             </Button>
