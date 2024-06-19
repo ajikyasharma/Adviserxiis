@@ -49,7 +49,7 @@ export default function Navbar() {
 
                 
 
-       <NavLink to="/login">
+       <NavLink to="/app">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
                <p>LOGIN</p>
               </div>
@@ -73,7 +73,7 @@ export default function Navbar() {
           <Disclosure.Panel className="sm:hidden">
             <div className="">
                 <Disclosure.Button>
-                  <NavLink to="/login" >
+                  <NavLink to="/app" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
                <p>LOGIN</p>
               </div>
