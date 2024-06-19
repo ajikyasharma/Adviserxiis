@@ -4,13 +4,59 @@ import image3 from '../assets/image3.png'
 import logo from '../assets/logo.png'
 import { Autocomplete, Button, Checkbox, TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import * as Yup from "yup";
+import { useFormik } from 'formik';
 
 const country = ['India', 'USA', 'Russia']
 const state = ['UttarPradesh', 'Gujrat', 'Uttrakhand']
 
+
 function SignUp() {
 
-   const navigate = useNavigate()
+  const navigate = useNavigate()
+
+  const initialValues ={
+    name:'',
+    email:'',
+    mobile_number:'',
+    password:'',
+    country:'',
+    state:'',
+    check:false
+    
+  }
+
+
+  const validationSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, 'Name must be at least 3 characters long')
+      .required('Name is required'),
+    email: Yup.string()
+      .email('Invalid email address')
+      .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/, 'Email must be a valid .com or .in domain')
+      .required('Email is required'),
+    mobile_number: Yup.string()
+      .matches(/^[0-9]{10}$/, 'Mobile number must be exactly 10 digits')
+      .required('Mobile number is required'),
+    password: Yup.string()
+      .min(6, 'Password must be at least 6 characters long')
+      .required('Password is required'),
+    country: Yup.string()
+      .required('Country is required'),
+    state: Yup.string()
+      .required('State is required'),
+    check: Yup.boolean()
+      .oneOf([true], 'You must accept the terms and conditions')
+      .required('Checkbox is required'),
+  });
+
+  const formik = useFormik({
+    initialValues:initialValues,
+    validationSchema:validationSchema,
+    onSubmit: handleSubmit
+  })
+
+   
 
   return (
     <div className='min-h-screen flex flex-col sm:flex-row'>
@@ -31,32 +77,56 @@ function SignUp() {
         <div style={{ marginTop: "15px" }}>
           <form className='flex flex-col mb-[100px] '>
             <TextField
+              name='name'
               id="outlined-basic"
               label="Full Name"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
               variant="outlined"
               margin="dense"
               className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
                />
 
             <TextField
+            name='email'
               id="outlined-basic"
               label="Email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
               variant="outlined"
               margin="dense"
               className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
                />
 
             <TextField
+            name='mobile_number'
               id="outlined-basic"
               label="Phone number"
+              value={formik.values.mobile_number}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.mobile_number && Boolean(formik.errors.mobile_number)}
+              helperText={formik.touched.mobile_number && formik.errors.mobile_number}
               variant="outlined"
               margin="dense"
               className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
                />
 
             <TextField
+            name='password'
               id="outlined-basic"
               label="Password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
               variant="outlined"
               margin="dense"
               className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
@@ -67,17 +137,33 @@ function SignUp() {
               id="combo-box-demo"
               options={country}
               className=' font-workSans w-[360px] sm:w-[380px]'
-              renderInput={(params) => <TextField {...params} label="Country" margin="dense" className='bg-[#F6F6F6]' />}
+              renderInput={(params) => <TextField {...params} name='country' label="Country" margin="dense" className='bg-[#F6F6F6]'
+              value={formik.values.country}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.country && Boolean(formik.errors.country)}
+              helperText={formik.touched.country && formik.errors.country}
+              />}
             />
             <Autocomplete
               disablePortal
               id="combo-box-demo"
               options={state}
               className=' font-workSans w-[360px] sm:w-[380px]'
-              renderInput={(params) => <TextField {...params} label="State" margin="dense" className='bg-[#F6F6F6]' />}
+              renderInput={(params) => <TextField {...params} name="state" label="State" margin="dense" className='bg-[#F6F6F6]'         value={formik.values.state}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.state && Boolean(formik.errors.state)}
+              helperText={formik.touched.state && formik.errors.state} />}
             />
             <div className='flex'>
-            <Checkbox  /> <p className='font-workSans text-md pt-2'>I Agree all <span className='text-[#489CFF]'>Term&Conditions</span></p>
+            <Checkbox 
+            name='check'
+                    value={formik.values.check}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.check && Boolean(formik.errors.check)}
+                    helperText={formik.touched.check && formik.errors.check}  /> <p className='font-workSans text-md pt-2'>I Agree all <span className='text-[#489CFF]'>Term&Conditions</span></p>
             </div>
 
             <Button
