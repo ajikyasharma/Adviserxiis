@@ -3,10 +3,12 @@ import background2 from '../assets/background2.png'
 import image3 from '../assets/image3.png'
 import logo from '../assets/logo.png'
 import { Autocomplete, Button, Checkbox, TextField } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 
 
 function ConfirmEmail() {
+  const navigate = useNavigate()
   return (
     <div className='min-h-screen flex flex-col sm:flex-row'>
       <div className=' w-full sm:w-3/6 bg-cover flex justify-center items-center ' style={{ backgroundImage: `url(${background2})` }} >
@@ -29,9 +31,6 @@ function ConfirmEmail() {
         </div>
 
         <div style={{ marginTop: "60px" }}>
-          <form className='flex flex-col mb-[100px] '>
-
-
             <Button
               variant="contained"
               // color="secondary"
@@ -39,13 +38,13 @@ function ConfirmEmail() {
               type="submit"
               margin="normal"
               // onClick={formik.handleSubmit}
+              onClick={()=>navigate('/professionaldetails')}
               size="large"
               className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
             style={{ margin: "0 auto", marginTop:"5px",height:"50px", backgroundColor:"#489CFF" }}
             >
               Login
             </Button>
-          </form>
         </div>
       </div>
 

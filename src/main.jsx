@@ -6,6 +6,9 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import Login from './Componenets/Login.jsx'
 import SignUp from './Componenets/SignUp.jsx'
 import ConfirmEmail from './Componenets/ConfirmEmail.jsx'
+import ProfessionalDetails from './Componenets/ProfessionalDetails.jsx'
+import BankDetails from './Componenets/BankDetails.jsx'
+import UploadDocuments from './Componenets/UploadDocuments.jsx'
 
 
 const router = createBrowserRouter(
@@ -15,6 +18,9 @@ const router = createBrowserRouter(
     <Route path="/login" element={<Login />} />,
     <Route path="/signup" element={<SignUp />} />,
     <Route path="/emailconfirmation" element={<ConfirmEmail />} />,
+    <Route path="/professionaldetails" element={<ProfessionalDetails />} />,
+    <Route path="/bankdetails" element={<BankDetails />} />,
+    <Route path="/documentupload" element={<UploadDocuments />} />
 
 
   </>
