@@ -66,15 +66,15 @@ function SignUp() {
               disablePortal
               id="combo-box-demo"
               options={country}
-              className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
-              renderInput={(params) => <TextField {...params} label="Country" margin="dense" />}
+              className=' font-workSans w-[360px] sm:w-[380px]'
+              renderInput={(params) => <TextField {...params} label="Country" margin="dense" className='bg-[#F6F6F6]' />}
             />
             <Autocomplete
               disablePortal
               id="combo-box-demo"
               options={state}
-              className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
-              renderInput={(params) => <TextField {...params} label="State" margin="dense" />}
+              className=' font-workSans w-[360px] sm:w-[380px]'
+              renderInput={(params) => <TextField {...params} label="State" margin="dense" className='bg-[#F6F6F6]' />}
             />
             <div className='flex'>
             <Checkbox  /> <p className='font-workSans text-md pt-2'>I Agree all <span className='text-[#489CFF]'>Term&Conditions</span></p>
