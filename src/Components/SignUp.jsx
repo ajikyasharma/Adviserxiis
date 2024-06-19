@@ -50,6 +50,11 @@ function SignUp() {
       .required('Checkbox is required'),
   });
 
+
+  const handleSubmit = () =>{
+    
+  }
+   
   const formik = useFormik({
     initialValues:initialValues,
     validationSchema:validationSchema,
