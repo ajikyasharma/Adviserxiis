@@ -6,10 +6,13 @@ import { Menu, Transition } from "@headlessui/react";
 
 const SideBar = forwardRef(({ showSideBar }, ref) => {
   return (
-    <div ref={ref} className="fixed w-[270px] h-full shadow-sm">
+    <div ref={ref} className="fixed w-[270px] h-full ">
             <div className="flex justify-center  ">
             <div className='flex items-center justify-center' style={{ marginTop: "70px" }}>
-          <img className="object-cover" src={logo} alt="" />
+              <Link to='/' className="cursor-pointer">
+              <img className="object-cover" src={logo} alt="" />
+              </Link>
+          
         </div>
       </div>
       <div className=" bg-[#489CFF] h-full rounded-tr-[100px]">

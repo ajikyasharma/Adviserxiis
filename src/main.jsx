@@ -3,18 +3,22 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
-import Login from './Components/Login.jsx'
-import SignUp from './Components/SignUp.jsx'
-import ConfirmEmail from './Components/ConfirmEmail.jsx'
-import ProfessionalDetails from './Components/ProfessionalDetails.jsx'
-import BankDetails from './Components/BankDetails.jsx'
-import UploadDocuments from './Components/UploadDocuments.jsx'
-import Services from './Components/Services.jsx'
-import Profile from './Components/Profile.jsx'
-import Logout from './Components/Logout.jsx'
+import Login from './Advisor-Components/Login.jsx'
+import SignUp from './Advisor-Components/SignUp.jsx'
+import ConfirmEmail from './Advisor-Components/ConfirmEmail.jsx'
+import ProfessionalDetails from './Advisor-Components/ProfessionalDetails.jsx'
+import BankDetails from './Advisor-Components/BankDetails.jsx'
+import UploadDocuments from './Advisor-Components/UploadDocuments.jsx'
+import Services from './Advisor-Components/Services.jsx'
+import Profile from './Advisor-Components/Profile.jsx'
+import Logout from './Advisor-Components/Logout.jsx'
 import Layout from './Layout.jsx'
-import Dashboard from './Components/Dashboard.jsx'
-import ServiceForm from './Components/ServiceForm.jsx'
+import Dashboard from './Advisor-Components/Dashboard.jsx'
+import ServiceForm from './Advisor-Components/ServiceForm.jsx'
+import UserLandingPage from './User-Components/UserLandingPage.jsx'
+import UserLayout from './UserLayout.jsx'
+import UserCategory from './User-Components/UserCategory.jsx'
+import AdviserProfile from './User-Components/AdviserProfile.jsx'
 
 
 const router = createBrowserRouter(
@@ -33,6 +37,14 @@ const router = createBrowserRouter(
       <Route path="/app/serviceform" element={<ServiceForm />} />
       <Route path="/app/profile" element={<Profile />} />
       <Route path="/app/logout" element={<Logout />} />
+     </Route>,
+
+
+     <Route path="/user" element={<UserLayout />} >
+            <Route path="/user" element={<UserLandingPage />} />
+            <Route path="/user/category" element={<UserCategory />} />
+            <Route path="/user/advisorprofile" element={<AdviserProfile />} />
+
      </Route>
 
 

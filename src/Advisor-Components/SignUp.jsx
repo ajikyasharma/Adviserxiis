@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import background2 from '../assets/background2.png'
 import image3 from '../assets/image3.png'
 import logo from '../assets/logo.png'
@@ -6,12 +6,17 @@ import { Autocomplete, Button, Checkbox, TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from "yup";
 import { useFormik } from 'formik';
+import { getDatabase, ref,set } from "firebase/database";
+import { app } from "../firebase";
+
+
 
 const country = ['India', 'USA', 'Russia']
 const state = ['UttarPradesh', 'Gujrat', 'Uttrakhand']
 
 
 function SignUp() {
+  const database = getDatabase(app);
 
   const navigate = useNavigate()
 
@@ -25,6 +30,14 @@ function SignUp() {
     check:false
     
   }
+
+  useEffect(()=>{
+    set(ref(database, 'users/' + '1234'), {
+      username: 'Ajikya Sharma',
+      email: 'ajikya@gmail.com',
+      // profile_picture : imageUrl
+    });
+  },[])
 
 
   const validationSchema = Yup.object().shape({

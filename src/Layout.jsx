@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "./Components/Header";
+import Header from "./Advisor-Components/Header";
 import { Transition } from "@headlessui/react";
-import SideBar from "./Components/SideBar";
+import SideBar from "./Advisor-Components/SideBar";
 
 function Layout() {
   const [showSideBar, setShowSideBar] = useState(true);
