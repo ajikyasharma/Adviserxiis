@@ -3,12 +3,25 @@ import insta from '../user-assets/insta.png'
 import fb from '../user-assets/fb.png'
 import twitter from '../user-assets/twitter.png'
 import profile from '../assets/profile.png'
+import backicon from '../user-assets/backicon.png';
 
-function AdviserProfile() {
+function UserAdviserProfile() {
   return (
-    <div className="container mx-auto px-4 ">
+    <div className="container mx-auto px-4 font-inter">
     <div className='min-h-screen'>
     <div className="flex  items-center my-8 ">
+
+        <div className='md:mx-[100px] hidden md:block'>
+        <button className="bg-[#489CFF] text-white py-2 px-4 rounded-full ">
+        <img 
+          src={backicon}
+          alt=""
+          className='h-8 w-4 rounded-full'
+          />
+      </button>
+        </div>
+
+      <div className='flex items-center'>
       <div className="mr-[30px] md:mr-[50px] ">
       <img
             src={profile}
@@ -20,22 +33,23 @@ function AdviserProfile() {
       <h1 className="text-2xl font-semibold">Utkarsh Pandey</h1>
       <p className="text-gray-500">Talent Acquisition Specialist at JindalX || Tech Mahindra || TCS</p>
       </div>
+      </div>
     </div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+    <div className=" md:ml-[250px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
       {Array.from({ length: 6 }).map((_, index) => (
         <div key={index} className="bg-gray-100 p-4 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-2">CV Review</h2>
           <p className="text-gray-500 mb-4">Talent Acquisition Specialist at JindalX || Tech Mahindra || TCS</p>
           <p className="text-lg font-bold mb-4">Rs 499/-</p>
-          <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Book</button>
+          <button className="bg-gradient-to-b from-[#0165E1] to-[#17A9FD] text-white py-2 px-4 rounded ">Book</button>
         </div>
       ))}
     </div>
-    <div className="flex justify-center my-8">
+    {/* <div className="flex justify-center my-8">
       <button className="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600">
         &larr;
       </button>
-    </div>
+    </div> */}
     </div>
     <footer className="bg-white py-4">
       <div className="container mx-auto px-4 text-center my-[20px]">
@@ -76,4 +90,4 @@ function AdviserProfile() {
   )
 }
 
-export default AdviserProfile
+export default UserAdviserProfile

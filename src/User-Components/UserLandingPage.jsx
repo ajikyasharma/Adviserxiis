@@ -56,7 +56,7 @@ function UserLandingPage() {
         <section className=" py-16 px-4 md:px-8">
           <div className="container mx-auto font-Poppins">
             <h2 className="text-3xl font-bold mb-4">What is Adviserxiis</h2>
-            <p className="text-lg leading-normal">
+            <p className="text-lg leading-loose">
             Adverxiis is your one-stop platform for connecting with<br />
              professional advisers. Whether you need expert advice,<br />
               coaching, or consulting services, Adverxiis makes it easy to find<br />

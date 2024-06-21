@@ -3,12 +3,13 @@ import React from 'react'
 import insta from '../user-assets/insta.png'
 import fb from '../user-assets/fb.png'
 import twitter from '../user-assets/twitter.png'
+import checkicon from '../user-assets/checkicon.png'
 
 const Categories= ["Career", "Business", "Health", "Technology", "Education", "Legal", "Marketing"]
 
 function UserCategory() {
   return (
-    <div className="min-h-screen flex flex-col font-Poppins">
+    <div className="min-h-screen flex flex-col font-inter">
 
     <div className="flex-grow bg-gray-50 py-8">
       <section className="container mx-auto px-4">
@@ -31,7 +32,7 @@ function UserCategory() {
           </button>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-        <div className="bg-white rounded-lg shadow p-4 flex items-center">
+        <div className="bg-white rounded-lg shadow p-4 flex ">
           <div className=' flex flex-col justify-center items-center'>
           <img
             src="https://via.placeholder.com/50"
@@ -44,8 +45,16 @@ function UserCategory() {
           <p className='text-center text-sm'>English, Hindi</p>
           <p className='text-center text-sm'>₹ 5/min</p>
           </div>
-          <div className="ml-4 ">
+          <div className="ml-4 mt-[10px] ">
+            <div>
             <h2 className="text-2xl font-bold mt-[10px] mb-[8px]">Utkarsh Pandey</h2>
+            {/* <img 
+          src={checkicon}
+          alt=""
+          className='h-8 w-8 rounded-full mt-[8px] bg-[#117D00]'
+          /> */}
+            </div>
+            
             <div className='flex justify-between' >
             <p className="text-md ">Business Consultant</p>
             <p className="text-md">Exp: 5 years</p>

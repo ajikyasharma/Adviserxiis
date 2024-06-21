@@ -9,7 +9,8 @@ export default {
       fontFamily:{
         Poppins:[ "Poppins", "sans-serif"],
         LondrinaOutline:["Londrina Outline", "sans-serif"],
-        workSans:[ "Work Sans", "sans-serif"]
+        workSans:[ "Work Sans", "sans-serif"],
+        inter:["Inter", "sans-serif"]
       },
     },
   },

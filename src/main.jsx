@@ -18,7 +18,8 @@ import ServiceForm from './Advisor-Components/ServiceForm.jsx'
 import UserLandingPage from './User-Components/UserLandingPage.jsx'
 import UserLayout from './UserLayout.jsx'
 import UserCategory from './User-Components/UserCategory.jsx'
-import AdviserProfile from './User-Components/AdviserProfile.jsx'
+import UserAdviserProfile from './User-Components/UserAdvisorProfile.jsx'
+import UserCheckoutPage from './User-Components/UserCheckoutPage.jsx'
 
 
 const router = createBrowserRouter(
@@ -43,7 +44,8 @@ const router = createBrowserRouter(
      <Route path="/user" element={<UserLayout />} >
             <Route path="/user" element={<UserLandingPage />} />
             <Route path="/user/category" element={<UserCategory />} />
-            <Route path="/user/advisorprofile" element={<AdviserProfile />} />
+            <Route path="/user/advisorprofile" element={<UserAdviserProfile />} />
+            <Route path="/user/checkout" element={<UserCheckoutPage />} />
 
      </Route>
 
