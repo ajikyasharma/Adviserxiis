@@ -7,9 +7,9 @@ function Dashboard() {
           <div>
     <p className='font-Poppins text-xl sm:text-3xl font-bold s my-2'>Dashboard</p>
     </div>
-    <div className="flex flex-col sm:flex-row justify-center items-center sm:justify-between sm:p-6 space-y-6 ">
+    <div className="flex flex-col md:flex-row justify-center items-center md:justify-between sm:p-6 space-y-6 ">
 
-    <div className="flex flex-col justify-center sm:justify-between items-center sm:items-start w-full sm:w-3/6 ">
+    <div className="flex flex-col justify-center sm:justify-between items-center md:items-start w-full md:w-3/6 ">
       <div className="flex items-center space-x-4 w-full my-4">
         <img 
           src={profile} 
@@ -21,14 +21,14 @@ function Dashboard() {
           <p className="text-lg font-bold font-Poppins">Utkarsh Pandey</p>
         </div>
       </div>
-      <div className="bg-[#489CFF] text-white rounded-xl p-6 w-full sm:w-3/5 my-4">
+      <div className="bg-[#489CFF] text-white rounded-xl w-full p-6 md:w-3/5 m-4">
         <p className="text-lg font-Poppins">Total Earning</p>
         <h2 className="text-4xl font-bold font-Poppins">₹ 80,000</h2>
         <button className="mt-4 bg-white text-[#489CFF] rounded-md py-2 px-4 font-Poppins">Request Withdraw</button>
       </div>
     </div>
 
-    <div className=" bg-white rounded-xl shadow-md  p-6 w-full  sm:w-2/6 my-4">
+    <div className=" bg-white rounded-xl shadow-md  p-6 w-full  md:w-2/6 my-4">
         <h2 className="text-xl font-bold font-Poppins">Upcoming Booking</h2>
         <div className="mt-4 space-y-4">
           <div className="bg-gray-100 p-4 rounded-md flex justify-between items-center">

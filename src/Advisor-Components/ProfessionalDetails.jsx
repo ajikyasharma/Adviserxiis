@@ -12,12 +12,12 @@ function ProfessionalDetails() {
  const navigate = useNavigate()
 
   return (
-    <div className='min-h-screen flex flex-col sm:flex-row'>
+    <div className='min-h-screen flex flex-col md:flex-row'>
       <div
         className="absolute top-0 right-0 w-full h-full bg-no-repeat bg-right-top"
         style={{ backgroundImage: `url(${background3})`, backgroundSize: '60% auto' }}
       ></div>
-      <div className='min-h-screen w-full sm:w-3/6 flex flex-col items-center  mt-[150px] sm:mt-[80px]'>
+      <div className='min-h-screen w-full md:w-3/6 flex flex-col items-center mt-[200px]  md:mt-[150px] '>
         <div className='flex items-center justify-center' >
           <img className="object-cover" src={logo} alt="" />
         </div>

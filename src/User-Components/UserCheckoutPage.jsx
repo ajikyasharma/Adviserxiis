@@ -42,7 +42,7 @@ function UserCheckoutPage() {
        <p className="text-gray-500">Talent Acquisition Specialist at JindalX || Tech Mahindra || TCS</p>
        </div>
 
-    <div className="w-full mt-[20px] md:mt-[0px] md:w-2/5 bg-gray-100 p-6 rounded-lg shadow-md">
+    <div className="w-full mt-[20px] md:mt-[0px]  md:w-3/5 lg:w-2/5 bg-gray-100 p-6 rounded-lg shadow-md">
           <form className="space-y-4">
             <div>
               <label className="block text-gray-700">Service</label>

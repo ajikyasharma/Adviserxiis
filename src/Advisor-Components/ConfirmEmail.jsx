@@ -10,11 +10,11 @@ import { useNavigate } from 'react-router-dom'
 function ConfirmEmail() {
   const navigate = useNavigate()
   return (
-    <div className='min-h-screen flex flex-col sm:flex-row'>
-      <div className=' w-full sm:w-3/6 bg-cover flex justify-center items-center ' style={{ backgroundImage: `url(${background2})` }} >
+    <div className='min-h-screen flex flex-col md:flex-row'>
+      <div className=' w-full md:w-3/6 bg-cover flex justify-center items-center ' style={{ backgroundImage: `url(${background2})` }} >
         <img className="object-contain h-auto max-w-full" style={{ paddingTop: "80px" }} src={image3} alt="" />
       </div>
-      <div className='min-h-screen w-full sm:w-3/6 flex flex-col items-center'>
+      <div className='min-h-screen w-full md:w-3/6 flex flex-col items-center'>
         <div className='flex items-center justify-center' style={{ marginTop: "70px" }}>
           <img className="object-cover" src={logo} alt="" />
         </div>

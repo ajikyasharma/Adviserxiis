@@ -18,7 +18,7 @@ function Profile() {
           <p className="text-lg font-medium font-Poppins">Edit Profile Image</p>
         </div>
       </div>
-    <form className="bg-[#D9D9D942] p-6 rounded-xl shadow-md space-y-6 sm:w-3/6 pb-[200px] sm:pb-[300px] ">
+    <form className="bg-[#D9D9D942] p-6 rounded-xl shadow-md space-y-6 md:w-3/6 pb-[200px] sm:pb-[300px] ">
       <div>
         <label className="block text-sm font-bold text-gray-700 font-Poppins">Name</label>
         <input

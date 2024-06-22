@@ -53,7 +53,7 @@ function LandingPage() {
           <p className='font-Poppins text-2xl sm:text-5xl font-bold  my-2'>Benefits to Join Adviserxiis</p>
         </div>
 
-        <div className='flex flex-col sm:flex-row ' style={{ marginTop: "50px" }}>
+        <div className='flex flex-col items-center md:flex-row ' style={{ marginTop: "50px" }}>
           <div className='h-full w-full sm:w-2/5 flex flex-col justify-center items-center'>
             <div className='bg-gradient-to-b from-[#0165E1] to-[#17A9FD] text-white font-Poppins w-64 h-12 p-3 rounded-lg my-2'>
               Personal Profile
@@ -71,7 +71,7 @@ function LandingPage() {
               Easy to Use
             </div>
           </div>
-          <div className=' w-full sm:w-3/5 h-full flex justify-center items-center'>
+          <div className=' mt-[10px] w-full md:w-3/5 h-full flex justify-center items-center'>
             <img className="object-cover h-96" src={image2} alt="" />
           </div>
         </div>
