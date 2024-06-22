@@ -1,12 +1,55 @@
 import React, { useState } from 'react';
+import * as Yup from "yup";
+import { useFormik } from 'formik';
 
 const ServiceForm = () => {
-  const [serviceName, setServiceName] = useState('');
-  const [aboutService, setAboutService] = useState('');
-  const [duration, setDuration] = useState('');
-  const [price, setPrice] = useState('');
-  const [bookingDays, setBookingDays] = useState('');
-  const [bookingTime, setBookingTime] = useState('');
+
+  const initialValues = {
+    service_name: '',
+    about_service: '',
+    duration: '',
+    price: '',
+    booking_days: '',
+    booking_time:''
+  }
+
+  const validationSchema = Yup.object().shape({
+    service_name: Yup.string()
+      .required('Service name is required')
+      .min(2, 'Service name must be at least 2 characters long')
+      .max(50, 'Service name cannot be more than 50 characters long'),
+    about_service: Yup.string()
+      .required('About service is required')
+      .min(10, 'About service must be at least 10 characters long')
+      .max(500, 'About service cannot be more than 500 characters long'),
+    duration: Yup.string()
+      .required('Duration is required'),
+    price: Yup.number()
+      .required('Price is required')
+      .typeError('Price must be a number')
+      .positive('Price must be a positive number')
+      .integer('Price must be an integer'),
+    booking_days: Yup.string()
+      .required('Booking days is required'),
+    booking_time: Yup.string()
+      .required('Booking time is required')
+  });
+  
+
+  const handleSubmit = () => {
+    alert('sab shi hai')
+  }
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: handleSubmit
+  })
+
+
+  const deleteHandler = () =>{
+    formik.resetForm()
+  }
 
   return (
     <div className="flex flex-col p-6 space-y-6">
@@ -15,66 +58,150 @@ const ServiceForm = () => {
         <div>
           <label className="block text-sm font-bold text-gray-700 font-Poppins">Service Name</label>
           <input
+            name="service_name"
+            value={formik.values.service_name}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             type="text"
-            value={serviceName}
             placeholder='CV Review'
-            onChange={(e) => setServiceName(e.target.value)}
             className="mt-1 block w-full h-12 p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 font-Poppins"
           />
+                        {formik.touched.service_name &&
+                formik.errors.service_name && (
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      padding: "",
+                      color: "red",
+                    }}
+                  >
+                    {formik.errors.service_name}
+                  </p>
+                )}
         </div>
         <div>
           <label className="block text-sm font-bold text-gray-700 font-Poppins ">About Service</label>
           <textarea
-            value={aboutService}
+            name="about_service"
+            value={formik.values.about_service}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             placeholder='Talent Acquisition Specialist at JindalX || Tech Mahindra || TCS'
-            onChange={(e) => setAboutService(e.target.value)}
             className="mt-1 block w-full h-12 p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 font-Poppins"
             rows="3"
           />
+                        {formik.touched.about_service &&
+                formik.errors.about_service && (
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      padding: "",
+                      color: "red",
+                    }}
+                  >
+                    {formik.errors.about_service}
+                  </p>
+                )}
         </div>
         <div>
           <label className="block text-sm font-bold text-gray-700 font-Poppins">Duration</label>
           <input
+            name="duration"
+            value={formik.values.duration}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             type="text"
             placeholder='1 hour'
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
             className="mt-1 block w-full h-12 p-2 rounded-md border-gray-300 font-Poppins shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
           />
+                        {formik.touched.duration &&
+                formik.errors.duration && (
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      padding: "",
+                      color: "red",
+                    }}
+                  >
+                    {formik.errors.duration}
+                  </p>
+                )}
         </div>
         <div>
           <label className="block text-sm font-bold text-gray-700 font-Poppins">Price</label>
           <input
-            type="text"
+            name="price"
+            value={formik.values.price}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            type="number"
             placeholder='499'
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
             className="mt-1 block w-full h-12 p-2 rounded-md border-gray-300 font-Poppins shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
           />
+                        {formik.touched.price &&
+                formik.errors.price && (
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      padding: "",
+                      color: "red",
+                    }}
+                  >
+                    {formik.errors.price}
+                  </p>
+                )}
         </div>
         <div>
           <label className="block text-sm font-bold text-gray-700 font-Poppins">Booking Days</label>
           <input
+            name="booking_days"
+            value={formik.values.booking_days}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             type="text"
             placeholder='Mon, Wed, Fri'
-            value={bookingDays}
-            onChange={(e) => setBookingDays(e.target.value)}
             className="mt-1 block w-full h-12 p-2 rounded-md border-gray-300 shadow-sm font-Poppins focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
           />
+                        {formik.touched.booking_days &&
+                formik.errors.booking_days && (
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      padding: "",
+                      color: "red",
+                    }}
+                  >
+                    {formik.errors.booking_days}
+                  </p>
+                )}
         </div>
         <div>
           <label className="block text-sm font-bold text-gray-700 font-Poppins">Booking Time</label>
           <input
+            name="booking_time"
+            value={formik.values.booking_time}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             type="text"
             placeholder='8:00pm - 9:00pm, 10:00pm - 12:00pm'
-            value={bookingTime}
-            onChange={(e) => setBookingTime(e.target.value)}
             className="mt-1 block w-full h-12 p-2 rounded-md border-gray-300 font-Poppins shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
           />
+                        {formik.touched.booking_time &&
+                formik.errors.booking_time && (
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      padding: "",
+                      color: "red",
+                    }}
+                  >
+                    {formik.errors.booking_time}
+                  </p>
+                )}
         </div>
         <div className="flex space-x-4">
-          <button className="bg-[#489CFF] text-white rounded-md py-2 px-4 font-Poppins">Publish</button>
-          <button className="bg-[#FF5348] text-white rounded-md py-2 px-4 font-Poppins">Delete</button>
+          <button className="bg-[#489CFF] text-white rounded-md py-2 px-4 font-Poppins" onClick={formik.handleSubmit}>Publish</button>
+          <button className="bg-[#FF5348] text-white rounded-md py-2 px-4 font-Poppins" onClick={deleteHandler}>Delete</button>
         </div>
       </form>
     </div>

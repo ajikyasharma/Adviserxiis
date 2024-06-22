@@ -88,7 +88,7 @@ function UploadDocuments() {
                     </p>
                     <form>
                         <div className="mb-4">
-                            <label className="block text-gray-700">Upload Image:</label>
+                            <label className="block text-gray-700">Upload Profile Photo:</label>
 
                             <div className='my-4'>
                                 <label class="block">
@@ -170,6 +170,10 @@ function UploadDocuments() {
                                         )}
                                 </div>
                             </div>
+                            <p style={{ fontSize: "15px", paddingTop:"10px" }}>
+                  PNG, JPG, or JPEG (Must be a clear images).
+                  {/* <span style={{ color: "red", fontSize: "1.8rem" }}>*</span> */}
+                </p>
                         </div>
                         <button
                             type="submit"
