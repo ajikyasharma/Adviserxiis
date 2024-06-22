@@ -77,6 +77,7 @@ function SignUp() {
 
     formik.resetForm()
     alert("Your data saved successfully.")
+    navigate('/emailconfirmation')
      
 
      
