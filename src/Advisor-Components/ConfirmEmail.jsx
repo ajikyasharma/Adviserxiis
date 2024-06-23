@@ -1,14 +1,77 @@
-import React from 'react'
+import React, { useState } from 'react'
 import background2 from '../assets/background2.png'
 import image3 from '../assets/image3.png'
 import logo from '../assets/logo.png'
-import { Autocomplete, Button, Checkbox, TextField } from '@mui/material'
+import { Autocomplete, Button, Checkbox, CircularProgress, TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { get, getDatabase, ref, set } from "firebase/database";
+import { app } from "../firebase";
 
 
 
 function ConfirmEmail() {
+  const database = getDatabase(app);
+
   const navigate = useNavigate()
+  const [otp, setOtp]= useState('')
+ const [otpSent, setOtpSent] = useState(false)
+ const [verified, setVerified] = useState(false)
+ const [loading, setLoading] = useState(false)
+
+ const userId = JSON.parse(localStorage.getItem('userid'))
+
+  const sendOTP = async() =>{
+      setLoading(true)
+   fetch(`http://localhost:8000/sendemail/${userId}`)
+        .then((res)=>{
+          if(res.status == 200)
+            {
+              alert("Otp send successfully !!")
+              setOtpSent(true)
+              setLoading(false)
+            }
+        }).catch((error)=>{
+          console.log("error in otp send", error)
+          setLoading(false)
+        })
+  }
+
+  async function getUser(userId) {
+    const nodeRef = ref(database, `advisors/${userId}`);
+    try {
+      const snapshot = await get(nodeRef);
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log('No data available');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error fetching node details:', error);
+      return null;
+    }
+  }
+
+  const verifyOTP = async () =>{
+     setLoading(true)
+    const user = await getUser(userId);
+
+    if( otp == user.otp)
+      {
+             setVerified(true)
+             alert("OTP verified successfully!!")
+             setOtp('')
+              setLoading(false)
+      }
+
+      else{
+        alert ("Wrong OTP !!")
+        setLoading(false)
+        setOtp('')
+      }
+
+  }
+
   return (
     <div className='min-h-screen flex flex-col md:flex-row'>
       <div className=' w-full md:w-3/6 bg-cover flex justify-center items-center ' style={{ backgroundImage: `url(${background2})` }} >
@@ -21,21 +84,68 @@ function ConfirmEmail() {
 
         <div style={{ marginTop: "60px" }}>
           <p className='font-workSans text-3xl font-bold text-center'>Confirm your email<br /> address</p>
-          <p className='font-workSans text-md mt-4 text-center text-[#03014C]' style={{marginTop:"50px"}}>We sent a confirmation email to<br/>
-          ayush2142@gmail.com
+          <p className='font-workSans text-md mt-4 text-center text-[#03014C]' style={{marginTop:"50px"}}>We will send a OTP to your email address <br />after click on button below
           </p>
             
-          <p className='font-workSans text-md mt-4 text-center text-[#489CFF]' style={{marginTop:"50px"}}>check your email and click on the<br /> confirmation link to login
-          </p>
+
           
         </div>
 
-        <div style={{ marginTop: "60px" }}>
-            <Button
-              variant="contained"
+        <div className='flex flex-col' style={{ marginTop: "30px" }}>
+
+
+ 
+ {otpSent &&  
+           <TextField
+           name='OTP'
+           id="outlined-basic"
+           type="number"
+           label="Enter OTP"
+            value={otp}
+            onChange={(e)=> setOtp(e.target.value)}
+           variant="outlined"
+           margin="dense"
+           className=' font-workSans w-[360px] sm:w-[380px]'
+         />}
+
+ {
+  (!otpSent && !verified)  &&  <Button
+  variant="contained"
+  // color="secondary"
+  aria-label="Register"
+
+  margin="normal"
+  // onClick={formik.handleSubmit}
+  onClick={sendOTP}
+  size="large"
+  className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
+style={{ margin: "0 auto", marginTop:"5px",height:"50px", backgroundColor:"#489CFF" }}
+>
+{ !loading ? 'Send OTP' : <CircularProgress  color="inherit"  />}
+</Button>
+ }
+
+
+            {
+              (otpSent && !verified) &&        <Button         variant="contained"
               // color="secondary"
               aria-label="Register"
-              type="submit"
+              margin="normal"
+              // onClick={formik.handleSubmit}
+              onClick={verifyOTP}
+              size="large"
+              className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
+            style={{ margin: "0 auto", marginTop:"5px",height:"50px", backgroundColor:"#489CFF" }}
+            >
+               { !loading ? 'Verify' : <CircularProgress  color="inherit"  />}
+            </Button>
+            }
+
+
+            {
+              verified &&    <Button         variant="contained"
+              // color="secondary"
+              aria-label="Register"
               margin="normal"
               // onClick={formik.handleSubmit}
               onClick={()=>navigate('/professionaldetails')}
@@ -43,8 +153,12 @@ function ConfirmEmail() {
               className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
             style={{ margin: "0 auto", marginTop:"5px",height:"50px", backgroundColor:"#489CFF" }}
             >
-              Login
+             { !loading ? 'Next' : <CircularProgress  color="inherit"  />}
             </Button>
+            }
+
+          
+
         </div>
       </div>
 
