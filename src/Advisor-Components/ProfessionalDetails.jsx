@@ -1,17 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import background2 from '../assets/background2.png'
 import image3 from '../assets/image3.png'
 import logo from '../assets/logo.png'
 import background3 from '../assets/background3.png'
-import { Autocomplete, Button, Checkbox, TextField } from '@mui/material'
+import { Autocomplete, Button, Checkbox, CircularProgress, TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from "yup";
 import { useFormik } from 'formik';
+import { getDatabase, ref, update } from "firebase/database";
+import { app } from "../firebase";
 
 
 
 function ProfessionalDetails() {
+
+  const database = getDatabase(app);
   const navigate = useNavigate()
+
+  const [loading, setLoading] = useState(false)
 
   const initialValues = {
     professional_title: '',
@@ -44,7 +50,22 @@ function ProfessionalDetails() {
   });
 
   const handleSubmit = () => {
-    alert("sab shi hai")
+     setLoading(true)
+    const userid = JSON.parse(localStorage.getItem('userid'))
+
+    update(ref(database, 'advisors/' + userid),{
+      professional_title:formik.values.professional_title,
+      years_of_experience:formik.values.experience,
+      education:formik.values.education,
+      industry:formik.values.industry,
+      professional_bio:formik.values.professional_bio
+
+    });
+
+    alert('Your data saved successfully!!');
+       setLoading(false)
+    formik.resetForm();
+
     navigate('/bankdetails')
 
   }
@@ -208,7 +229,7 @@ function ProfessionalDetails() {
               // onClick={()=> navigate('/bankdetails')}
               onClick={formik.handleSubmit}
             >
-              Next
+              { !loading ? 'Next' : <CircularProgress  color="inherit"  />}
             </button>
           </form>
         </div>

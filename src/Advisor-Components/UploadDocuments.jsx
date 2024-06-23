@@ -1,16 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import background2 from '../assets/background2.png'
 import image3 from '../assets/image3.png'
 import logo from '../assets/logo.png'
 import background3 from '../assets/background3.png'
-import { Autocomplete, Button, Checkbox, TextField } from '@mui/material'
+import { Autocomplete, Button, Checkbox, CircularProgress, TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from "yup";
 import { useFormik } from 'formik';
+import { getDatabase, ref, update } from 'firebase/database'
+import { ref as sRef } from 'firebase/storage';
+import { app } from "../firebase";
+import { v1 as uuidv1 } from 'uuid';
+import { getDownloadURL, getStorage, uploadBytes } from 'firebase/storage'
 
 
 
 function UploadDocuments() {
+    const imgDB= getStorage(app)
+    const database = getDatabase(app);
+
+    const [profileUrl, setProfileUrl] = useState('')
+    const [aadharFrontUrl, setAadharFrontUrl] = useState('')
+    const [aadharBackUrl, setAadharBackUrl] = useState('')
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     const initialValues = {
@@ -60,10 +72,92 @@ function UploadDocuments() {
         .required("Image is required"),
     });
 
-    const handleSubmit = () => {
-        alert("sab shi hai")
+    // const handleSubmit = async() => {
+    //     console.log("Hello")
+    //     const userid = JSON.parse(localStorage.getItem('userid'))
 
-    }
+
+    //     const userid_profile = uuidv1()
+        
+    //     const imgs1 = sRef(imgDB, `images/${userid_profile}`)
+    //     uploadBytes(imgs1, formik.values.profile_photo).then(data =>{
+    //         getDownloadURL(data.ref).then(val =>{
+    //             setProfileUrl(val)
+    //         })
+    //     })
+
+
+    //     const userid_aadharfront = uuidv1()
+        
+    //     const imgs2 = sRef(imgDB, `images/${userid_aadharfront}`)
+    //     uploadBytes(imgs2, formik.values.aadhar_front).then(data =>{
+    //         getDownloadURL(data.ref).then(val =>{
+    //             setAadharFrontUrl(val)
+    //         })
+    //     })
+
+    //     const userid_aadharback = uuidv1()
+        
+    //     const imgs3 = sRef(imgDB, `images/${userid_aadharback}`)
+    //     uploadBytes(imgs3, formik.values.aadhar_back).then(data =>{
+    //         getDownloadURL(data.ref).then(val =>{
+    //             setAadharBackUrl(val)
+    //         })
+    //     })
+
+    //     while(profileUrl == '' || aadharFrontUrl == '' || aadharBackUrl == '')
+    //         {
+
+    //         }
+
+    //     if( profileUrl !== '' && aadharFrontUrl !== '' && aadharBackUrl !== '')
+    //         {
+    //             console.log("hi")
+    //             update(ref(database, 'advisors/' + userid),{
+    //                 profile_photo:profileUrl,
+    //                 aadhar_front:aadharFrontUrl,
+    //                 aadhar_back:aadharBackUrl,
+
+    //               });
+    //         }
+
+           
+    //     alert("Images Uploaded Successfully ")
+    // }
+
+    const handleSubmit = async () => {
+        setLoading(true)
+        const userid = JSON.parse(localStorage.getItem('userid'));
+        const storage = getStorage();
+      
+        const files = [
+          { file: formik.values.profile_photo, ref: `images/${uuidv1()}` },
+          { file: formik.values.aadhar_front, ref: `images/${uuidv1()}` },
+          { file: formik.values.aadhar_back, ref: `images/${uuidv1()}` },
+        ];
+      
+        try {
+          const uploadPromises = files.map(({ file, ref }) => {
+            const imgRef = sRef(storage, ref);
+            return uploadBytes(imgRef, file).then(data => getDownloadURL(data.ref));
+          });
+      
+          const [profileUrl, aadharFrontUrl, aadharBackUrl] = await Promise.all(uploadPromises);
+      
+          await update(ref(database, 'advisors/' + userid), {
+            profile_photo: profileUrl,
+            aadhar_front: aadharFrontUrl,
+            aadhar_back: aadharBackUrl,
+          });
+          alert("Images Uploaded Successfully");
+          setLoading(false)
+          formik.resetForm()
+          navigate('/app')
+        } catch (error) {
+          console.error("Error uploading images: ", error);
+          setLoading(false)
+        }
+      };
 
 
     const formik = useFormik({
@@ -180,7 +274,7 @@ function UploadDocuments() {
                             className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 h-[50px]"
                             onClick={formik.handleSubmit}
                         >
-                            Submit
+                        { !loading ? 'Upload' : <CircularProgress  color="inherit"  />}
                         </button>
                     </form>      </div>
             </div>

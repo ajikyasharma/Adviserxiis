@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import * as Yup from "yup";
 import { useFormik } from 'formik';
+import { getDatabase, ref, set, update } from "firebase/database";
+import { app } from "../firebase";
+import { v1 as uuidv1 } from 'uuid';
+import { CircularProgress } from '@mui/material';
 
 const ServiceForm = () => {
+
+  const database = getDatabase(app);
+  const [loading, setLoading] = useState(false)
 
   const initialValues = {
     service_name: '',
@@ -37,7 +44,27 @@ const ServiceForm = () => {
   
 
   const handleSubmit = () => {
-    alert('sab shi hai')
+    
+    setLoading(true)
+    const serviceid = uuidv1();
+    const userid = JSON.parse(localStorage.getItem('userid'))
+
+    set(ref(database, 'advisors_service/' + serviceid),{
+
+      advisorid:userid,
+      service_name:formik.values.service_name,
+      about_service:formik.values.about_service,
+      duration:formik.values.duration,
+      price:formik.values.price,
+      booking_days:formik.values.booking_days,
+      booking_time:formik.values.booking_time
+
+    });
+
+    alert('Your service added successfully!!');
+       setLoading(false)
+    formik.resetForm();
+
   }
 
   const formik = useFormik({
@@ -200,7 +227,9 @@ const ServiceForm = () => {
                 )}
         </div>
         <div className="flex space-x-4">
-          <button className="bg-[#489CFF] text-white rounded-md py-2 px-4 font-Poppins" onClick={formik.handleSubmit}>Publish</button>
+          <button className="bg-[#489CFF] text-white rounded-md py-2 px-4 font-Poppins" onClick={formik.handleSubmit}>
+          { !loading ? 'Publish' : <CircularProgress  color="inherit"  />}
+          </button>
           <button className="bg-[#FF5348] text-white rounded-md py-2 px-4 font-Poppins" onClick={deleteHandler}>Delete</button>
         </div>
       </form>

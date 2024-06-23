@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import background2 from '../assets/background2.png'
 import image3 from '../assets/image3.png'
 import logo from '../assets/logo.png'
-import { Autocomplete, Button, Checkbox, TextField } from '@mui/material'
+import { Autocomplete, Button, Checkbox, IconButton, InputAdornment, TextField } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import * as Yup from "yup";
 import { useFormik } from 'formik';
-import { getDatabase, ref,set } from "firebase/database";
+import { getDatabase, ref, set } from "firebase/database";
 import { app } from "../firebase";
 import { v1 as uuidv1 } from 'uuid';
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 
 
@@ -19,21 +20,23 @@ const state = ['UttarPradesh', 'Gujrat', 'Uttrakhand']
 
 function SignUp() {
   const database = getDatabase(app);
+  const [showPassword, setShowPassword] = useState(false)
+  const [ loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
-  const initialValues ={
-    name:'',
-    email:'',
-    mobile_number:'',
-    password:'',
-    country:'',
-    state:'',
-    check:false
-    
+  const initialValues = {
+    name: '',
+    email: '',
+    mobile_number: '',
+    password: '',
+    // country: '',
+    state: '',
+    check: false
+
   }
 
-  
+
 
 
   const validationSchema = Yup.object().shape({
@@ -50,8 +53,8 @@ function SignUp() {
     password: Yup.string()
       .min(6, 'Password must be at least 6 characters long')
       .required('Password is required'),
-    country: Yup.string()
-      .required('Country is required'),
+    // country: Yup.string()
+    //   .required('Country is required'),
     state: Yup.string()
       .required('State is required'),
     check: Yup.boolean()
@@ -60,36 +63,36 @@ function SignUp() {
   });
 
 
-  const handleSubmit = () =>{
-    //  console.log("values", formik.values)
+  const handleSubmit = () => {
+     setLoading(true)
+    const userid = uuidv1();
 
-     const userid = uuidv1();
-    //  console.log("unique id", userid)
-
-     set(ref(database, 'advisors/' + userid), {
+    set(ref(database, 'advisors/' + userid), {
       username: formik.values.name,
       email: formik.values.email,
       mobile_number: formik.values.mobile_number,
       password: formik.values.password,
-      country: formik.values.country,
+      // country: formik.values.country,
       state: formik.values.state
     });
 
     formik.resetForm()
+    localStorage.setItem("userid",JSON.stringify(userid))
     alert("Your data saved successfully.")
+    setLoading(true)
     navigate('/emailconfirmation')
-     
 
-     
+
+
   }
-   
+
   const formik = useFormik({
-    initialValues:initialValues,
-    validationSchema:validationSchema,
+    initialValues: initialValues,
+    validationSchema: validationSchema,
     onSubmit: handleSubmit
   })
 
-   
+
 
   return (
     <div className='min-h-screen flex flex-col md:flex-row'>
@@ -109,10 +112,11 @@ function SignUp() {
 
         <div style={{ marginTop: "15px" }}>
           <form className='flex flex-col mb-[100px] '>
-            
+
             <TextField
               name='name'
               id="outlined-basic"
+              type="text"
               label="Full Name"
               value={formik.values.name}
               onChange={formik.handleChange}
@@ -122,11 +126,12 @@ function SignUp() {
               variant="outlined"
               margin="dense"
               className=' font-workSans w-[360px] sm:w-[380px]'
-               />
+            />
 
             <TextField
-            name='email'
+              name='email'
               id="outlined-basic"
+              type="text"
               label="Email"
               value={formik.values.email}
               onChange={formik.handleChange}
@@ -136,12 +141,13 @@ function SignUp() {
               variant="outlined"
               margin="dense"
               className=' font-workSans w-[360px] sm:w-[380px]'
-               />
+            />
 
             <TextField
-            name='mobile_number'
+              name='mobile_number'
               id="outlined-basic"
               label="Phone number"
+              type="number"
               value={formik.values.mobile_number}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -150,12 +156,13 @@ function SignUp() {
               variant="outlined"
               margin="dense"
               className=' font-workSans w-[360px] sm:w-[380px]'
-               />
+            />
 
             <TextField
-            name='password'
+              name='password'
               id="outlined-basic"
               label="Password"
+              type={showPassword ? 'text' : 'password'}
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -164,79 +171,88 @@ function SignUp() {
               variant="outlined"
               margin="dense"
               className=' font-workSans w-[360px] sm:w-[380px]'
-               />
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={() => setShowPassword(!showPassword)}>
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
 
 
 
-<Autocomplete
-                options={country}
-                value={formik.values.country}
-                onChange={(event, newValue) => {
-                  formik.setFieldValue("country", newValue);
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    margin='dense'
-                    label="Country"
-                    name="country"
-                    className=' font-workSans w-[360px] sm:w-[380px]'
-                    variant="outlined"
-                    required
-                    onBlur={formik.handleBlur}
-                    error={
-                      formik.touched.country && Boolean(formik.errors.country)
-                    }
-                    helperText={formik.touched.country && formik.errors.country}
-                  />
+            {/* <Autocomplete
+              options={country}
+              value={formik.values.country}
+              onChange={(event, newValue) => {
+                formik.setFieldValue("country", newValue);
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  margin='dense'
+                  label="Country"
+                  name="country"
+                  className=' font-workSans w-[360px] sm:w-[380px]'
+                  variant="outlined"
+                  required
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.country && Boolean(formik.errors.country)
+                  }
+                  helperText={formik.touched.country && formik.errors.country}
+                />
+              )}
+            /> */}
+            <Autocomplete
+              options={state}
+              value={formik.values.state}
+              onChange={(event, newValue) => {
+                formik.setFieldValue("state", newValue);
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  margin='dense'
+                  label="State"
+                  name="state"
+                  className=' font-workSans w-[360px] sm:w-[380px]'
+                  variant="outlined"
+                  required
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.state && Boolean(formik.errors.state)
+                  }
+                  helperText={formik.touched.state && formik.errors.state}
+                />
+              )}
+            />
+            <div>
+              <div className='flex'>
+                <Checkbox
+                  name='check'
+                  value={formik.values.check}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.check && Boolean(formik.errors.check)}
+                  helperText={formik.touched.check && formik.errors.check} /> <p className='font-workSans text-md pt-2'>I Agree all <span className='text-[#489CFF]'>Term&Conditions</span></p>
+              </div>
+              {formik.touched.check &&
+                formik.errors.check && (
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      padding: "",
+                      color: "red",
+                    }}
+                  >
+                    {formik.errors.check}
+                  </p>
                 )}
-              />
-<Autocomplete
-                options={state}
-                value={formik.values.state}
-                onChange={(event, newValue) => {
-                  formik.setFieldValue("state", newValue);
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    margin='dense'
-                    label="Country"
-                    name="state"
-                    className=' font-workSans w-[360px] sm:w-[380px]'
-                    variant="outlined"
-                    required
-                    onBlur={formik.handleBlur}
-                    error={
-                      formik.touched.state && Boolean(formik.errors.state)
-                    }
-                    helperText={formik.touched.state && formik.errors.state}
-                  />
-                )}
-              />
-              <div>
-            <div className='flex'>
-            <Checkbox 
-            name='check'
-                    value={formik.values.check}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.touched.check && Boolean(formik.errors.check)}
-                    helperText={formik.touched.check && formik.errors.check}  /> <p className='font-workSans text-md pt-2'>I Agree all <span className='text-[#489CFF]'>Term&Conditions</span></p>
             </div>
-            {formik.touched.check &&
-                  formik.errors.check && (
-                    <p
-                      style={{
-                        fontSize: "13px",
-                        padding: "",
-                        color: "red",
-                      }}
-                    >
-                      {formik.errors.check}
-                    </p>
-                  )}
-                </div>
             <Button
               variant="contained"
               // color="secondary"
@@ -247,9 +263,9 @@ function SignUp() {
               // onClick={()=>navigate('/emailconfirmation') }
               size="large"
               className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
-            style={{ margin: "0 auto", marginTop:"5px",height:"50px", backgroundColor:"#489CFF" }}
+              style={{ margin: "0 auto", marginTop: "5px", height: "50px", backgroundColor: "#489CFF" }}
             >
-              Create Account
+                { !loading ? 'Create Account' : <CircularProgress  color="inherit"  />}
             </Button>
           </form>
         </div>
