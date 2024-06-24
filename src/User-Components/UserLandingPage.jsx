@@ -205,29 +205,29 @@ function UserLandingPage() {
       </div>
 
       <div className="text-white bg-[#407BFF] font-Poppins ">
-<div className="container mx-auto py-4 flex flex-col md:flex-row justify-between">
-  <div className="flex justify-center items-center">
-        <p className="text-xl text-center pb-2 sm:pb-0">Copyright © 2023. Advsierxiis</p>
-        </div>
-        <div className="flex justify-center ">
-              <img src={insta1} 
-                   alt=""
-                   className=" h-12 mx-2"
-                  
-              />
+        <div className="container mx-auto py-4 flex flex-col md:flex-row justify-between">
+          <div className="flex justify-center items-center">
+            <p className="text-xl text-center pb-2 sm:pb-0">Copyright © 2023. Advsierxiis</p>
+          </div>
+          <div className="flex justify-center ">
+            <img src={insta1}
+              alt=""
+              className=" h-12 mx-2"
 
-<img src={fb1} 
-                   alt=""
-                   className=" h-12 mx-2"
-                  
-              />
+            />
 
-<img src={linkedin1} 
-                   alt=""
-                   className="h-12 mx-2"
-                  
-              />
-        </div>
+            <img src={fb1}
+              alt=""
+              className=" h-12 mx-2"
+
+            />
+
+            <img src={linkedin1}
+              alt=""
+              className="h-12 mx-2"
+
+            />
+          </div>
         </div>
       </div>
     </div>

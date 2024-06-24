@@ -128,7 +128,7 @@ setLoading(false)
             <div className="bg-white flex justify-center items-center p-4 py-[30px] md:py-[50px]">
               <div className="sm:flex sm:items-center">
 
-                <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                <div className="mt-3 text-center sm:ml-4 p-4  py-4 sm:mt-0 sm:text-left">
                   <DialogTitle as="h3" className=" text-center text-xl font-semibold leading-6 text-gray-900 ">
                     SignUp
                   </DialogTitle>
@@ -146,7 +146,7 @@ setLoading(false)
               helperText={formik.touched.mobile_number && formik.errors.mobile_number}
               variant="outlined"
               margin="dense"
-              className=' font-workSans w-[360px] sm:w-[380px]'
+              className=' font-workSans w-[300px] sm:w-[380px]'
             />
 
             { (otpSent && !verified) &&            <TextField
@@ -158,7 +158,7 @@ setLoading(false)
             onChange={(e)=> setOtp(e.target.value)}
            variant="outlined"
            margin="dense"
-           className=' font-workSans w-[360px] sm:w-[380px]'
+           className=' font-workSans w-[300px] sm:w-[380px]'
          />}       
 
 {
@@ -175,7 +175,7 @@ setLoading(false)
               onClick={sendOTP}
               // onClick={()=>navigate('/emailconfirmation') }
               size="large"
-              className=' text-white font-workSans w-[360px] sm:w-[380px] rounded-xl'
+              className=' text-white font-workSans w-[300px] sm:w-[380px] rounded-xl'
               style={{ margin: "0 auto", marginTop: "5px", height: "50px", backgroundColor: "#489CFF" }}
             >
                 { !loading ? 'Send OTP' : <CircularProgress  color="inherit"  />}
@@ -207,7 +207,7 @@ setLoading(false)
               onClick={formik.handleSubmit}
               // onClick={()=>navigate('/emailconfirmation') }
               size="large"
-              className=' text-white font-workSans w-[360px] sm:w-[380px] rounded-xl'
+              className=' text-white font-workSans w-[300px] sm:w-[380px] rounded-xl'
               style={{ margin: "0 auto", marginTop: "5px", height: "50px", backgroundColor: "#489CFF" }}
             >
                 { !loading ? 'SignUp' : <CircularProgress  color="inherit"  />}
@@ -221,6 +221,8 @@ setLoading(false)
                 </div>
               </div>
             </div>
+
+
 
           </DialogPanel>
         </div>
