@@ -20,6 +20,8 @@ import UserLayout from './UserLayout.jsx'
 import UserCategory from './User-Components/UserCategory.jsx'
 import UserAdviserProfile from './User-Components/UserAdvisorProfile.jsx'
 import UserCheckoutPage from './User-Components/UserCheckoutPage.jsx'
+import UserSignUp from './User-Components/UserSignUp.jsx'
+import UserLogin from './User-Components/UserLogin.jsx'
 
 
 const router = createBrowserRouter(
@@ -46,6 +48,8 @@ const router = createBrowserRouter(
             <Route path="/user/category" element={<UserCategory />} />
             <Route path="/user/advisorprofile" element={<UserAdviserProfile />} />
             <Route path="/user/checkout" element={<UserCheckoutPage />} />
+            <Route path="/user/signup" element={<UserSignUp />} />
+            <Route path="/user/login" element={<UserLogin />} />
 
      </Route>
 

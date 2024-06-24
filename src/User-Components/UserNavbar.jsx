@@ -51,19 +51,25 @@ export default function UserNavbar() {
 
        <NavLink to="/user">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
-               <p>Home</p>
+               <p>HOME</p>
               </div>
         </NavLink> 
 
         <NavLink to="/user/category">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
-               <p>Category</p>
+               <p>CATEGORY</p>
               </div>
         </NavLink>
 
-        <NavLink to="/">
+        <NavLink to="/user/signup">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
-               <p>Login</p>
+               <p>SIGNUP</p>
+              </div>
+        </NavLink>
+
+        <NavLink to="/user/login">
+             <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
+               <p>LOGIN</p>
               </div>
         </NavLink>
 
@@ -81,19 +87,25 @@ export default function UserNavbar() {
                 <Disclosure.Button>
                   <NavLink to="/user" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
-               <p>Home</p>
+               <p>HOME</p>
               </div>
         </NavLink>
 
         <NavLink to="/user/category" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
-               <p>Category</p>
+               <p>CATEGORY</p>
               </div>
         </NavLink>
 
-        <NavLink to="/" >
+        <NavLink to="/user/signup" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
-               <p>Login</p>
+               <p>SIGNUP</p>
+              </div>
+        </NavLink>
+
+        <NavLink to="/user/login" >
+             <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
+               <p>LOGIN</p>
               </div>
         </NavLink>
             
