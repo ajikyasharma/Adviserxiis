@@ -199,7 +199,7 @@ style={{ margin: "0 auto", marginTop:"5px",height:"50px", backgroundColor:"#489C
               aria-label="Register"
               margin="normal"
               // onClick={formik.handleSubmit}
-              onClick={()=>navigate('/professionaldetails')}
+              onClick={()=>navigate('/adviser/professionaldetails')}
               size="large"
               className='bg-[#F6F6F6] font-workSans w-[360px] sm:w-[380px]'
             style={{ margin: "0 auto", marginTop:"5px",height:"50px", backgroundColor:"#489CFF" }}

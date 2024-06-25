@@ -33,7 +33,7 @@ export default function UserNavbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <Link  to="/user">
+                  <Link  to="/">
                   <img
                     className="h-8 w-auto"
                     src={logo}
@@ -52,27 +52,33 @@ export default function UserNavbar() {
 
                 
 
-       <NavLink to="/user">
+       <NavLink to="/">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
                <p>HOME</p>
               </div>
         </NavLink> 
 
-        <NavLink to="/user/category">
+        <NavLink to="/category">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
                <p>CATEGORY</p>
               </div>
         </NavLink>
 
-        <NavLink to="/user/signup">
+        <NavLink to="/signup">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
                <p>SIGNUP</p>
               </div>
         </NavLink>
 
-        <NavLink to="/user/login">
+        <NavLink to="/login">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
                <p>LOGIN</p>
+              </div>
+        </NavLink>
+
+        <NavLink to="/adviser">
+             <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
+               <p>ADVISER</p>
               </div>
         </NavLink>
 
@@ -88,27 +94,33 @@ export default function UserNavbar() {
           <Disclosure.Panel className="sm:hidden">
             <div className="">
                 <Disclosure.Button>
-                  <NavLink to="/user" >
+                  <NavLink to="/" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
                <p>HOME</p>
               </div>
         </NavLink>
 
-        <NavLink to="/user/category" >
+        <NavLink to="/category" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
                <p>CATEGORY</p>
               </div>
         </NavLink>
 
-        <NavLink to="/user/signup" >
+        <NavLink to="/signup" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
                <p>SIGNUP</p>
               </div>
         </NavLink>
 
-        <NavLink to="/user/login" >
+        <NavLink to="/login" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
                <p>LOGIN</p>
+              </div>
+        </NavLink>
+
+        <NavLink to="/adviser" >
+             <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
+               <p>ADVISER</p>
               </div>
         </NavLink>
             

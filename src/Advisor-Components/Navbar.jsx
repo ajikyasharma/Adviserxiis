@@ -33,7 +33,7 @@ export default function Navbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <Link to='/'>
+                  <Link to='/adviser'>
                   <img
                     className="h-8 w-auto"
                     src={logo}
@@ -52,19 +52,19 @@ export default function Navbar() {
 
                 
 
-       <NavLink to="/app">
+       <NavLink to="/adviser/login">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
                <p>LOGIN</p>
               </div>
         </NavLink> 
 
-        <NavLink to="/signup">
+        <NavLink to="/adviser/signup">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
                <p>SIGNUP</p>
               </div>
         </NavLink>
 
-        <NavLink to="/user">
+        <NavLink to="/">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
                <p>USER</p>
               </div>
@@ -73,6 +73,12 @@ export default function Navbar() {
         <NavLink to="/videocall">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
                <p>VIDEO CALL</p>
+              </div>
+        </NavLink>
+
+        <NavLink to="/payment">
+             <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
+               <p>PAYMENT</p>
               </div>
         </NavLink>
 
@@ -100,7 +106,7 @@ export default function Navbar() {
               </div>
         </NavLink>
 
-        <NavLink to="/user" >
+        <NavLink to="/" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
                <p>USER</p>
               </div>
@@ -109,6 +115,12 @@ export default function Navbar() {
         <NavLink to="/videocall" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
                <p>VIDEO CALL</p>
+              </div>
+        </NavLink>
+
+        <NavLink to="/payment" >
+             <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
+               <p>PAYMENT</p>
               </div>
         </NavLink>
             

@@ -25,39 +25,45 @@ import UserLogin from './User-Components/UserLogin.jsx'
 import VideoCall from './Advisor-Components/VideoCall.jsx'
 import { MeetingRoom } from '@mui/icons-material'
 import Room from './Advisor-Components/Room.jsx'
+import Payment from './Advisor-Components/Payment.jsx'
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-    <Route path ="/" element={<App />} />,
-    <Route path="/login" element={<Login />} />,
-    <Route path="/signup" element={<SignUp />} />,
-    <Route path="/emailconfirmation" element={<ConfirmEmail />} />,
-    <Route path="/professionaldetails" element={<ProfessionalDetails />} />,
-    <Route path="/bankdetails" element={<BankDetails />} />,
-    <Route path="/documentupload" element={<UploadDocuments />} />,
-    <Route path='/app' element={<Layout />}>
-      <Route path="/app" element={<Dashboard />} />
-      <Route path="/app/services" element={<Services />} />
-      <Route path="/app/serviceform" element={<ServiceForm />} />
-      <Route path="/app/profile" element={<Profile />} />
-      <Route path="/app/logout" element={<Logout />} />
-     </Route>,
 
+<Route path="/" element={<UserLayout />} >
+            <Route path="/" element={<UserLandingPage />} />
+            <Route path="/signup" element={<UserSignUp />} />
+            <Route path="/login" element={<UserLogin />} />
+            <Route path="/category" element={<UserCategory />} />
+            <Route path="/category/:advisor" element={<UserAdviserProfile />} />
+            <Route path="/category/:advisor/checkout" element={<UserCheckoutPage />} />
 
-     <Route path="/user" element={<UserLayout />} >
-            <Route path="/user" element={<UserLandingPage />} />
-            <Route path="/user/category" element={<UserCategory />} />
-            <Route path="/user/advisorprofile" element={<UserAdviserProfile />} />
-            <Route path="/user/checkout" element={<UserCheckoutPage />} />
-            <Route path="/user/signup" element={<UserSignUp />} />
-            <Route path="/user/login" element={<UserLogin />} />
      </Route>
 
 
+    <Route path ="/adviser" element={<App />} />,
+    <Route path="/adviser/login" element={<Login />} />,
+    <Route path="/adviser/signup" element={<SignUp />} />,
+    <Route path="/adviser/emailconfirmation" element={<ConfirmEmail />} />,
+    <Route path="/adviser/professionaldetails" element={<ProfessionalDetails />} />,
+    <Route path="/adviser/bankdetails" element={<BankDetails />} />,
+    <Route path="/adviser/documentupload" element={<UploadDocuments />} />,
+
+
+    <Route path='/adviser' element={<Layout />}>
+      <Route path="/adviser/dashboard" element={<Dashboard />} />
+      <Route path="/adviser/services" element={<Services />} />
+      <Route path="/adviser/createservice" element={<ServiceForm />} />
+      <Route path="/adviser/profile" element={<Profile />} />
+      <Route path="/adviser/logout" element={<Logout />} />
+     </Route>,
+
      <Route path="/videocall" element={<VideoCall />} />,
      <Route path="/room/:meetingid" element={<Room />} />,
+
+     <Route path="/payment" element={<Payment />} />,
 
 
   </>

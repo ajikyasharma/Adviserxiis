@@ -9,7 +9,7 @@ const SideBar = forwardRef(({ showSideBar }, ref) => {
     <div ref={ref} className="fixed w-[270px] h-full ">
             <div className="flex justify-center  ">
             <div className='flex items-center justify-center' style={{ marginTop: "70px" }}>
-              <Link to='/' className="cursor-pointer">
+              <Link to='/adviser' className="cursor-pointer">
               <img className="object-cover" src={logo} alt="" />
               </Link>
           
@@ -21,7 +21,7 @@ const SideBar = forwardRef(({ showSideBar }, ref) => {
       <div className="flex flex-col pt-[20px]">
 
         <NavLink
-          to="/app"
+          to="/adviser/dashboard"
           className={({ isActive }) =>
             ` ${
               isActive
@@ -40,7 +40,7 @@ const SideBar = forwardRef(({ showSideBar }, ref) => {
           </div>
         </NavLink>
         <NavLink
-          to="/app/services"
+          to="/adviser/services"
           className={({ isActive }) =>
             ` ${
               isActive
@@ -60,7 +60,7 @@ const SideBar = forwardRef(({ showSideBar }, ref) => {
         </NavLink>
 
         <NavLink
-          to="/app/profile"
+          to="/adviser/profile"
           className={({ isActive }) =>
             ` ${
               isActive
@@ -80,7 +80,7 @@ const SideBar = forwardRef(({ showSideBar }, ref) => {
         </NavLink>
 
         <NavLink
-          to="/app/logout"
+          to="/adviser/logout"
           className={({ isActive }) =>
             ` ${
               isActive

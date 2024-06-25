@@ -119,14 +119,14 @@ function SignUp() {
    
     localStorage.setItem("userid",JSON.stringify(userid))
     // alert("Your data saved successfully.")
-    await Swal.fire({
-      title: "Success",
-      text: "Your Data Saved Successfullly!!",
-      icon: "success"
-    });
+    // await Swal.fire({
+    //   title: "Success",
+    //   text: "Your Data Saved Successfullly!!",
+    //   icon: "success"
+    // });
     setLoading(true)
     formik.resetForm()
-    navigate('/emailconfirmation')
+    navigate('/adviser/emailconfirmation')
 
 
 

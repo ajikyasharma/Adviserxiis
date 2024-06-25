@@ -64,15 +64,15 @@ function ProfessionalDetails() {
     });
 
     // alert('Your data saved successfully!!');
-    await Swal.fire({
-      title: "Success",
-      text: "Your Data Saved Successfully!!",
-      icon: "success"
-    });
+    // await Swal.fire({
+    //   title: "Success",
+    //   text: "Your Data Saved Successfully!!",
+    //   icon: "success"
+    // });
        setLoading(false)
     formik.resetForm();
 
-    navigate('/bankdetails')
+    navigate('/adviser/bankdetails')
 
   }
 

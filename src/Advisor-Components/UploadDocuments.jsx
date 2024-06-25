@@ -49,6 +49,7 @@ function UploadDocuments() {
         .required("Image is required"),
         aadhar_front: Yup
         .mixed()
+        .nullable()
         .test("fileType", "Unsupported file type", (value) => {
           if (!value) return true;
           const allowedTypes = ["image/png", "image/jpeg", "image/jpg"];
@@ -57,10 +58,10 @@ function UploadDocuments() {
         .test("fileSize", "File size is too large (max 10MB)", (value) => {
           if (!value) return true;
           return value.size <= 5 * 1024 * 1024; // 10MB in bytes
-        })
-        .required("Image is required"),
+        }),
         aadhar_back: Yup
         .mixed()
+        .nullable()
         .test("fileType", "Unsupported file type", (value) => {
           if (!value) return true;
           const allowedTypes = ["image/png", "image/jpeg", "image/jpg"];
@@ -69,8 +70,7 @@ function UploadDocuments() {
         .test("fileSize", "File size is too large (max 10MB)", (value) => {
           if (!value) return true;
           return value.size <= 5 * 1024 * 1024; // 10MB in bytes
-        })
-        .required("Image is required"),
+        }),
     });
 
     // const handleSubmit = async() => {
@@ -151,14 +151,14 @@ function UploadDocuments() {
             aadhar_back: aadharBackUrl,
           });
         //   alert("Images Uploaded Successfully");
-        await Swal.fire({
-            title: "Success",
-            text: "Images Uploaded Successfully!!",
-            icon: "success"
-          });
+        // await Swal.fire({
+        //     title: "Success",
+        //     text: "Images Uploaded Successfully!!",
+        //     icon: "success"
+        //   });
           setLoading(false)
           formik.resetForm()
-          navigate('/app')
+          navigate('/adviser/dashboard')
         } catch (error) {
         //   console.error("Error uploading images: ", error);
         await Swal.fire({

@@ -62,15 +62,15 @@ function BankDetails() {
     });
 
     // alert('Your data saved successfully!!');
-    await Swal.fire({
-      title: "Success",
-      text: "Your Data Saved Successfully!!",
-      icon: "success"
-    });
+    // await Swal.fire({
+    //   title: "Success",
+    //   text: "Your Data Saved Successfully!!",
+    //   icon: "success"
+    // });
 
     formik.resetForm();
      setLoading(false);
-    navigate('/documentupload')
+    navigate('/adviser/documentupload')
   }
 
   const formik = useFormik({

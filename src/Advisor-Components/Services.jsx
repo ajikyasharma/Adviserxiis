@@ -8,7 +8,7 @@ function Services() {
 
     <div className="flex justify-between items-center">
     <p className='font-Poppins text-xl sm:text-3xl font-bold s my-2'>Services</p>
-      <button className="bg-[#489CFF] text-white rounded-md py-2 px-4" onClick={()=> navigate('/app/serviceform')}>Create New Service</button>
+      <button className="bg-[#489CFF] text-white rounded-md py-2 px-4" onClick={()=> navigate('/adviser/createservice')}>Create New Service</button>
     </div>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
