@@ -18,7 +18,7 @@ export default function UserLogin() {
 
   const [open, setOpen] = useState(true)
   const [loading, setLoading] = useState(false)
-  const [otp, setOtp]= useState('')
+  const [otp, setOtp] = useState('')
   const [otpSent, setOtpSent] = useState(false)
   const [verified, setVerified] = useState(false)
 
@@ -33,8 +33,8 @@ export default function UserLogin() {
   });
 
 
-  const onCapchaVerify = ()=>{
-       setLoading(true)
+  const onCapchaVerify = () => {
+    setLoading(true)
     window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
       'size': 'normal',
       'callback': (response) => {
@@ -43,7 +43,7 @@ export default function UserLogin() {
         // ...
       },
       'expired-callback': () => {
-          setLoading(false)
+        setLoading(false)
         // Response expired. Ask user to solve reCAPTCHA again.
         // ...
       }
@@ -51,109 +51,109 @@ export default function UserLogin() {
   }
 
 
-//   const sendOTP = async () =>{
+  //   const sendOTP = async () =>{
 
-//     onCapchaVerify()
+  //     onCapchaVerify()
 
-//     setLoading(true)
-//   const phoneNumber = "+91"+ formik.values.mobile_number
-// const appVerifier = window.recaptchaVerifier;
-//   signInWithPhoneNumber(auth, phoneNumber, appVerifier)
-//   .then((confirmationResult) => {
-//     // SMS sent. Prompt user to type the code from the message, then sign the
-//     // user in with confirmationResult.confirm(code).
-//     window.confirmationResult = confirmationResult;
-//     alert("OTP has been sent")
-//     setOtpSent(true)
-//     setLoading(false)
+  //     setLoading(true)
+  //   const phoneNumber = "+91"+ formik.values.mobile_number
+  // const appVerifier = window.recaptchaVerifier;
+  //   signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+  //   .then((confirmationResult) => {
+  //     // SMS sent. Prompt user to type the code from the message, then sign the
+  //     // user in with confirmationResult.confirm(code).
+  //     window.confirmationResult = confirmationResult;
+  //     alert("OTP has been sent")
+  //     setOtpSent(true)
+  //     setLoading(false)
 
-//     // ...
-//   }).catch((error) => {
-//     setLoading(false)
-//     // Error; SMS not sent
-//     // ...
-//   });
-// }
+  //     // ...
+  //   }).catch((error) => {
+  //     setLoading(false)
+  //     // Error; SMS not sent
+  //     // ...
+  //   });
+  // }
 
 
-const sendOTP = async () => {
-  onCapchaVerify();
-  setLoading(true);
+  const sendOTP = async () => {
+    onCapchaVerify();
+    setLoading(true);
 
-  const phoneNumber = "+91" + formik.values.mobile_number;
-  const appVerifier = window.recaptchaVerifier;
+    const phoneNumber = "+91" + formik.values.mobile_number;
+    const appVerifier = window.recaptchaVerifier;
 
-  try {
-    const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
-    // SMS sent. Prompt user to type the code from the message, then sign the
-    // user in with confirmationResult.confirm(code).
-    window.confirmationResult = confirmationResult;
-    // alert("OTP has been sent")
-    await Swal.fire({
-      title: "Success",
-      text: "OTP Sent Successfully!!",
-      icon: "success"
-    });
-    setOtpSent(true);
-  } catch (error) {
-    // Error; SMS not sent
-    // console.error("Error in sending OTP:", error);
-    await Swal.fire({
-      title: "Error",
-      text: "Something Went Wrong!!",
-      icon: "error"
-    });
-  } finally {
-    setLoading(false);
+    try {
+      const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
+      // SMS sent. Prompt user to type the code from the message, then sign the
+      // user in with confirmationResult.confirm(code).
+      window.confirmationResult = confirmationResult;
+      // alert("OTP has been sent")
+      await Swal.fire({
+        title: "Success",
+        text: "OTP Sent Successfully!!",
+        icon: "success"
+      });
+      setOtpSent(true);
+    } catch (error) {
+      // Error; SMS not sent
+      // console.error("Error in sending OTP:", error);
+      await Swal.fire({
+        title: "Error",
+        text: "Something Went Wrong!!",
+        icon: "error"
+      });
+    } finally {
+      setLoading(false);
+    }
   }
-}
 
 
-// const verifyOTP =  async () =>{
-//   setLoading(true)
-//   const code = otp;
-//  await window.confirmationResult.confirm(code).then((result) => {
-// // User signed in successfully.
-// const user = result.user;
-// alert("verification done")
-// setVerified(true)
-// setLoading(false)
-// // ...
-// }).catch((error) => {
-// alert("invalid OTP")
-// setLoading(false)
-// // User couldn't sign in (bad verification code?)
-// // ...
-// });
-// }
+  // const verifyOTP =  async () =>{
+  //   setLoading(true)
+  //   const code = otp;
+  //  await window.confirmationResult.confirm(code).then((result) => {
+  // // User signed in successfully.
+  // const user = result.user;
+  // alert("verification done")
+  // setVerified(true)
+  // setLoading(false)
+  // // ...
+  // }).catch((error) => {
+  // alert("invalid OTP")
+  // setLoading(false)
+  // // User couldn't sign in (bad verification code?)
+  // // ...
+  // });
+  // }
 
 
-const verifyOTP = async () => {
-  setLoading(true);
-  const code = otp;
+  const verifyOTP = async () => {
+    setLoading(true);
+    const code = otp;
 
-  try {
-    const result = await window.confirmationResult.confirm(code);
-    // User signed in successfully.
-    const user = result.user;
-    await Swal.fire({
-      title: "Success",
-      text: "Verification done!",
-      icon: "success"
-    });
-    setVerified(true);
-  } catch (error) {
-    await Swal.fire({
-      title: "Error",
-      text: "Invalid OTP",
-      icon: "error"
-    });
-  } finally {
-    setLoading(false);
+    try {
+      const result = await window.confirmationResult.confirm(code);
+      // User signed in successfully.
+      const user = result.user;
+      await Swal.fire({
+        title: "Success",
+        text: "Verification done!",
+        icon: "success"
+      });
+      setVerified(true);
+    } catch (error) {
+      await Swal.fire({
+        title: "Error",
+        text: "Invalid OTP",
+        icon: "error"
+      });
+    } finally {
+      setLoading(false);
+    }
   }
-}
 
-   const handleSubmit = async () =>{
+  const handleSubmit = async () => {
 
 
 
@@ -165,7 +165,7 @@ const verifyOTP = async () => {
     });
 
 
-   }
+  }
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -197,84 +197,84 @@ const verifyOTP = async () => {
                   <p className='mt-4 text-center'>Don't have account?  <span className='text-blue-500'><Link to='/user/signup'>SignUp Here</Link></span></p>
                   <div className="mt-2">
                     <form className='flex flex-col'>
-                    <TextField
-              name='mobile_number'
-              id="outlined-basic"
-              label="Phone number"
-              type="number"
-              value={formik.values.mobile_number}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.mobile_number && Boolean(formik.errors.mobile_number)}
-              helperText={formik.touched.mobile_number && formik.errors.mobile_number}
-              variant="outlined"
-              margin="dense"
-              className=' font-workSans w-[300px] sm:w-[380px]'
-            />
+                      <TextField
+                        name='mobile_number'
+                        id="outlined-basic"
+                        label="Phone number"
+                        type="number"
+                        value={formik.values.mobile_number}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.mobile_number && Boolean(formik.errors.mobile_number)}
+                        helperText={formik.touched.mobile_number && formik.errors.mobile_number}
+                        variant="outlined"
+                        margin="dense"
+                        className=' font-workSans w-[300px] sm:w-[380px]'
+                      />
 
-            { (otpSent && !verified) &&            <TextField
-           name='OTP'
-           id="outlined-basic"
-           type="number"
-           label="Enter OTP"
-            value={otp}
-            onChange={(e)=> setOtp(e.target.value)}
-           variant="outlined"
-           margin="dense"
-           className=' font-workSans w-[300px] sm:w-[380px]'
-         />}       
+                      {(otpSent && !verified) && <TextField
+                        name='OTP'
+                        id="outlined-basic"
+                        type="number"
+                        label="Enter OTP"
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value)}
+                        variant="outlined"
+                        margin="dense"
+                        className=' font-workSans w-[300px] sm:w-[380px]'
+                      />}
 
-{
-  (!verified && !otpSent) && <div id ="recaptcha-container" style={{width:"100%", marginTop:"10px",}}  className='sm:mt-4'></div>
-}
-
-
-   
-   { (!otpSent && !verified) &&        <Button
-              variant="contained"
-              // color="secondary"
-              aria-label="Register"
-              margin="normal"
-              onClick={sendOTP}
-              // onClick={()=>navigate('/emailconfirmation') }
-              size="large"
-              className=' text-white font-workSans w-[300px] sm:w-[380px] rounded-xl'
-              style={{ margin: "0 auto", marginTop: "5px", height: "50px", backgroundColor: "#489CFF" }}
-            >
-                { !loading ? 'Send OTP' : <CircularProgress  color="inherit"  />}
-            </Button> }
+                      {
+                        (!verified && !otpSent) && <div id="recaptcha-container" style={{ width: "100%", marginTop: "10px", }} className='sm:mt-4'></div>
+                      }
 
 
 
+                      {(!otpSent && !verified) && <Button
+                        variant="contained"
+                        // color="secondary"
+                        aria-label="Register"
+                        margin="normal"
+                        onClick={sendOTP}
+                        // onClick={()=>navigate('/emailconfirmation') }
+                        size="large"
+                        className=' text-white font-workSans w-[300px] sm:w-[380px] rounded-xl'
+                        style={{ margin: "0 auto", marginTop: "5px", height: "50px", backgroundColor: "#489CFF" }}
+                      >
+                        {!loading ? 'Send OTP' : <CircularProgress color="inherit" />}
+                      </Button>}
 
 
-         { (otpSent && !verified) && <Button
-              variant="contained"
-              // color="secondary"
-              aria-label="Register"
-              margin="normal"
-              onClick={verifyOTP}
-              // onClick={()=>navigate('/emailconfirmation') }
-              size="large"
-              className=' text-white font-workSans w-[300px] sm:w-[380px] rounded-xl'
-              style={{ margin: "0 auto", marginTop: "5px", height: "50px", backgroundColor: "#489CFF" }}
-            >
-                { !loading ? 'Verify' : <CircularProgress  color="inherit"  />}
-            </Button>}
 
-            { (otpSent && verified) && <Button
-              variant="contained"
-              // color="secondary"
-              aria-label="Register"
-              margin="normal"
-              onClick={formik.handleSubmit}
-              // onClick={()=>navigate('/emailconfirmation') }
-              size="large"
-              className=' text-white font-workSans w-[300px] sm:w-[380px] rounded-xl'
-              style={{ margin: "0 auto", marginTop: "5px", height: "50px", backgroundColor: "#489CFF" }}
-            >
-                { !loading ? 'Login' : <CircularProgress  color="inherit"  />}
-            </Button>}
+
+
+                      {(otpSent && !verified) && <Button
+                        variant="contained"
+                        // color="secondary"
+                        aria-label="Register"
+                        margin="normal"
+                        onClick={verifyOTP}
+                        // onClick={()=>navigate('/emailconfirmation') }
+                        size="large"
+                        className=' text-white font-workSans w-[300px] sm:w-[380px] rounded-xl'
+                        style={{ margin: "0 auto", marginTop: "5px", height: "50px", backgroundColor: "#489CFF" }}
+                      >
+                        {!loading ? 'Verify' : <CircularProgress color="inherit" />}
+                      </Button>}
+
+                      {(otpSent && verified) && <Button
+                        variant="contained"
+                        // color="secondary"
+                        aria-label="Register"
+                        margin="normal"
+                        onClick={formik.handleSubmit}
+                        // onClick={()=>navigate('/emailconfirmation') }
+                        size="large"
+                        className=' text-white font-workSans w-[300px] sm:w-[380px] rounded-xl'
+                        style={{ margin: "0 auto", marginTop: "5px", height: "50px", backgroundColor: "#489CFF" }}
+                      >
+                        {!loading ? 'Login' : <CircularProgress color="inherit" />}
+                      </Button>}
 
 
 
