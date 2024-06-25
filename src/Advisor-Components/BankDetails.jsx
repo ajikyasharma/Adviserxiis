@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import { useFormik } from 'formik';
 import { getDatabase, ref, update } from "firebase/database";
 import { app } from "../firebase";
+import Swal from 'sweetalert2'
 
 
 
@@ -47,11 +48,11 @@ function BankDetails() {
       .max(50, 'Branch name must be at most 50 characters long'),
   });
 
-  const handleSubmit = () => {
+  const handleSubmit =  async () => {
      setLoading(true)
     const userid = JSON.parse(localStorage.getItem('userid'))
 
-    update(ref(database, 'advisors/' + userid),{
+   await update(ref(database, 'advisors/' + userid),{
       bank_name:formik.values.bank_name,
       account_holder_name:formik.values.account_holder_name,
       account_number:formik.values.account_number,
@@ -60,7 +61,12 @@ function BankDetails() {
 
     });
 
-    alert('Your data saved successfully!!');
+    // alert('Your data saved successfully!!');
+    await Swal.fire({
+      title: "Success",
+      text: "Your Data Saved Successfully!!",
+      icon: "success"
+    });
 
     formik.resetForm();
      setLoading(false);

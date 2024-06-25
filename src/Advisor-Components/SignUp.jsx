@@ -10,12 +10,52 @@ import { getDatabase, ref, set } from "firebase/database";
 import { app } from "../firebase";
 import { v1 as uuidv1 } from 'uuid';
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import Swal from 'sweetalert2'
+
+
 
 
 
 
 const country = ['India', 'USA', 'Russia']
-const state = ['UttarPradesh', 'Gujrat', 'Uttrakhand']
+const states = [
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chhattisgarh",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+  "Andaman and Nicobar Islands",
+  "Chandigarh",
+  "Dadra and Nagar Haveli and Daman and Diu",
+  "Lakshadweep",
+  "Delhi",
+  "Puducherry",
+  "Ladakh",
+  "Jammu and Kashmir"
+];
 
 
 function SignUp() {
@@ -63,11 +103,11 @@ function SignUp() {
   });
 
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
      setLoading(true)
     const userid = uuidv1();
 
-    set(ref(database, 'advisors/' + userid), {
+   await set(ref(database, 'advisors/' + userid), {
       username: formik.values.name,
       email: formik.values.email,
       mobile_number: formik.values.mobile_number,
@@ -76,10 +116,16 @@ function SignUp() {
       state: formik.values.state
     });
 
-    formik.resetForm()
+   
     localStorage.setItem("userid",JSON.stringify(userid))
-    alert("Your data saved successfully.")
+    // alert("Your data saved successfully.")
+    await Swal.fire({
+      title: "Success",
+      text: "Your Data Saved Successfullly!!",
+      icon: "success"
+    });
     setLoading(true)
+    formik.resetForm()
     navigate('/emailconfirmation')
 
 
@@ -208,7 +254,7 @@ function SignUp() {
               )}
             /> */}
             <Autocomplete
-              options={state}
+              options={states}
               value={formik.values.state}
               onChange={(event, newValue) => {
                 formik.setFieldValue("state", newValue);
@@ -270,7 +316,8 @@ function SignUp() {
           </form>
         </div>
       </div>
-
+       
+  
     </div>
   )
 }

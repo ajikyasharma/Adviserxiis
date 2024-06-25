@@ -9,6 +9,7 @@ import { app } from "../firebase";
 import { RecaptchaVerifier, getAuth, signInWithPhoneNumber } from 'firebase/auth';
 import { v1 as uuidv1 } from 'uuid';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function UserLogin() {
 
@@ -50,54 +51,118 @@ export default function UserLogin() {
   }
 
 
-  const sendOTP = () =>{
+//   const sendOTP = async () =>{
 
-    onCapchaVerify()
+//     onCapchaVerify()
 
-    setLoading(true)
-  const phoneNumber = "+91"+ formik.values.mobile_number
-const appVerifier = window.recaptchaVerifier;
-  signInWithPhoneNumber(auth, phoneNumber, appVerifier)
-  .then((confirmationResult) => {
+//     setLoading(true)
+//   const phoneNumber = "+91"+ formik.values.mobile_number
+// const appVerifier = window.recaptchaVerifier;
+//   signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+//   .then((confirmationResult) => {
+//     // SMS sent. Prompt user to type the code from the message, then sign the
+//     // user in with confirmationResult.confirm(code).
+//     window.confirmationResult = confirmationResult;
+//     alert("OTP has been sent")
+//     setOtpSent(true)
+//     setLoading(false)
+
+//     // ...
+//   }).catch((error) => {
+//     setLoading(false)
+//     // Error; SMS not sent
+//     // ...
+//   });
+// }
+
+
+const sendOTP = async () => {
+  onCapchaVerify();
+  setLoading(true);
+
+  const phoneNumber = "+91" + formik.values.mobile_number;
+  const appVerifier = window.recaptchaVerifier;
+
+  try {
+    const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
     // SMS sent. Prompt user to type the code from the message, then sign the
     // user in with confirmationResult.confirm(code).
     window.confirmationResult = confirmationResult;
-    alert("OTP has been sent")
-    setOtpSent(true)
-    setLoading(false)
-
-    // ...
-  }).catch((error) => {
-    setLoading(false)
+    // alert("OTP has been sent")
+    await Swal.fire({
+      title: "Success",
+      text: "OTP Sent Successfully!!",
+      icon: "success"
+    });
+    setOtpSent(true);
+  } catch (error) {
     // Error; SMS not sent
-    // ...
-  });
+    // console.error("Error in sending OTP:", error);
+    await Swal.fire({
+      title: "Error",
+      text: "Something Went Wrong!!",
+      icon: "error"
+    });
+  } finally {
+    setLoading(false);
+  }
 }
 
 
-const verifyOTP = () =>{
-  setLoading(true)
+// const verifyOTP =  async () =>{
+//   setLoading(true)
+//   const code = otp;
+//  await window.confirmationResult.confirm(code).then((result) => {
+// // User signed in successfully.
+// const user = result.user;
+// alert("verification done")
+// setVerified(true)
+// setLoading(false)
+// // ...
+// }).catch((error) => {
+// alert("invalid OTP")
+// setLoading(false)
+// // User couldn't sign in (bad verification code?)
+// // ...
+// });
+// }
+
+
+const verifyOTP = async () => {
+  setLoading(true);
   const code = otp;
-window.confirmationResult.confirm(code).then((result) => {
-// User signed in successfully.
-const user = result.user;
-alert("verification done")
-setVerified(true)
-setLoading(false)
-// ...
-}).catch((error) => {
-alert("invalid OTP")
-setLoading(false)
-// User couldn't sign in (bad verification code?)
-// ...
-});
+
+  try {
+    const result = await window.confirmationResult.confirm(code);
+    // User signed in successfully.
+    const user = result.user;
+    await Swal.fire({
+      title: "Success",
+      text: "Verification done!",
+      icon: "success"
+    });
+    setVerified(true);
+  } catch (error) {
+    await Swal.fire({
+      title: "Error",
+      text: "Invalid OTP",
+      icon: "error"
+    });
+  } finally {
+    setLoading(false);
+  }
 }
 
-   const handleSubmit = () =>{
+   const handleSubmit = async () =>{
 
 
 
-    alert('Login Successfully !!')
+    // alert('Login Successfully !!')
+    await Swal.fire({
+      title: "Success",
+      text: "Login Successfully!!",
+      icon: "success"
+    });
 
 
    }

@@ -12,6 +12,7 @@ import { ref as sRef } from 'firebase/storage';
 import { app } from "../firebase";
 import { v1 as uuidv1 } from 'uuid';
 import { getDownloadURL, getStorage, uploadBytes } from 'firebase/storage'
+import Swal from 'sweetalert2'
 
 
 
@@ -149,12 +150,22 @@ function UploadDocuments() {
             aadhar_front: aadharFrontUrl,
             aadhar_back: aadharBackUrl,
           });
-          alert("Images Uploaded Successfully");
+        //   alert("Images Uploaded Successfully");
+        await Swal.fire({
+            title: "Success",
+            text: "Images Uploaded Successfully!!",
+            icon: "success"
+          });
           setLoading(false)
           formik.resetForm()
           navigate('/app')
         } catch (error) {
-          console.error("Error uploading images: ", error);
+        //   console.error("Error uploading images: ", error);
+        await Swal.fire({
+            title: "Error",
+            text: "Something Went Wrong!!",
+            icon: "error"
+          });
           setLoading(false)
         }
       };

@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import { useFormik } from 'formik';
 import { getDatabase, ref, update } from "firebase/database";
 import { app } from "../firebase";
+import Swal from 'sweetalert2'
 
 
 
@@ -49,11 +50,11 @@ function ProfessionalDetails() {
       .max(1000, 'Professional bio must be at most 1000 characters'),
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
      setLoading(true)
     const userid = JSON.parse(localStorage.getItem('userid'))
 
-    update(ref(database, 'advisors/' + userid),{
+   await update(ref(database, 'advisors/' + userid),{
       professional_title:formik.values.professional_title,
       years_of_experience:formik.values.experience,
       education:formik.values.education,
@@ -62,7 +63,12 @@ function ProfessionalDetails() {
 
     });
 
-    alert('Your data saved successfully!!');
+    // alert('Your data saved successfully!!');
+    await Swal.fire({
+      title: "Success",
+      text: "Your Data Saved Successfully!!",
+      icon: "success"
+    });
        setLoading(false)
     formik.resetForm();
 

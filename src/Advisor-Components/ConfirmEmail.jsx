@@ -6,6 +6,7 @@ import { Autocomplete, Button, Checkbox, CircularProgress, TextField } from '@mu
 import { useNavigate } from 'react-router-dom'
 import { get, getDatabase, ref, set } from "firebase/database";
 import { app } from "../firebase";
+import Swal from 'sweetalert2'
 
 
 
@@ -20,20 +21,60 @@ function ConfirmEmail() {
 
  const userId = JSON.parse(localStorage.getItem('userid'))
 
-  const sendOTP = async() =>{
-      setLoading(true)
-   fetch(`http://localhost:8000/sendemail/${userId}`)
-        .then((res)=>{
-          if(res.status == 200)
-            {
-              alert("Otp send successfully !!")
-              setOtpSent(true)
-              setLoading(false)
-            }
-        }).catch((error)=>{
-          console.log("error in otp send", error)
-          setLoading(false)
-        })
+  // const sendOTP = async () =>{
+  //     setLoading(true)
+  //  fetch(`https://adviserxiis-backend.vercel.app/sendemail/${userId}`)
+  //       .then((res)=>{
+  //         if(res.status == 200)
+  //           {
+  //             // alert("Otp send successfully !!")
+  //              Swal.fire({
+  //               title: "Success",
+  //               text: "OTP Sent Successfullly!!",
+  //               icon: "success"
+  //             });
+  //             setOtpSent(true)
+  //             setLoading(false)
+  //           }
+  //       }).catch((error)=>{
+  //         // console.log("error in otp send", error)
+  //        await Swal.fire({
+  //           title: "Success",
+  //           text: "Something went wrong!!",
+  //           icon: "error"
+  //         });          
+
+  //         setLoading(false)
+  //       })
+  // }
+
+  const sendOTP = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(`https://adviserxiis-backend.vercel.app/sendemail/${userId}`);
+      if (res.status === 200) {
+        await Swal.fire({
+          title: "Success",
+          text: "OTP Sent Successfully!!",
+          icon: "success"
+        });
+        setOtpSent(true);
+      } else {
+        await Swal.fire({
+          title: "Error",
+          text: "Failed to send OTP.",
+          icon: "error"
+        });
+      }
+    } catch (error) {
+      await Swal.fire({
+        title: "Error",
+        text: "Something went wrong!!",
+        icon: "error"
+      });
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function getUser(userId) {
@@ -59,13 +100,23 @@ function ConfirmEmail() {
     if( otp == user.otp)
       {
              setVerified(true)
-             alert("OTP verified successfully!!")
+            //  alert("OTP verified successfully!!")
+            await Swal.fire({
+              title: "Success",
+              text: "OTP Verified Successfully!!",
+              icon: "success"
+            });
              setOtp('')
               setLoading(false)
       }
 
       else{
-        alert ("Wrong OTP !!")
+        // alert ("Wrong OTP !!")
+        await Swal.fire({
+          title: "Success",
+          text: "Wrong OTP!!",
+          icon: "error"
+        });
         setLoading(false)
         setOtp('')
       }

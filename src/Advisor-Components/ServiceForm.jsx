@@ -5,6 +5,7 @@ import { getDatabase, ref, set, update } from "firebase/database";
 import { app } from "../firebase";
 import { v1 as uuidv1 } from 'uuid';
 import { CircularProgress } from '@mui/material';
+import Swal from 'sweetalert2';
 
 const ServiceForm = () => {
 
@@ -43,13 +44,13 @@ const ServiceForm = () => {
   });
   
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     
     setLoading(true)
     const serviceid = uuidv1();
     const userid = JSON.parse(localStorage.getItem('userid'))
 
-    set(ref(database, 'advisors_service/' + serviceid),{
+   await set(ref(database, 'advisors_service/' + serviceid),{
 
       advisorid:userid,
       service_name:formik.values.service_name,
@@ -61,7 +62,13 @@ const ServiceForm = () => {
 
     });
 
-    alert('Your service added successfully!!');
+    // alert('Your service added successfully!!');
+
+     await Swal.fire({
+      title: "Success",
+      text: "Your Service Added Successfully!!",
+      icon: "success"
+    });
        setLoading(false)
     formik.resetForm();
 
