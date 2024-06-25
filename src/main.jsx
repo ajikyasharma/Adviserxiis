@@ -22,6 +22,9 @@ import UserAdviserProfile from './User-Components/UserAdvisorProfile.jsx'
 import UserCheckoutPage from './User-Components/UserCheckoutPage.jsx'
 import UserSignUp from './User-Components/UserSignUp.jsx'
 import UserLogin from './User-Components/UserLogin.jsx'
+import VideoCall from './Advisor-Components/VideoCall.jsx'
+import { MeetingRoom } from '@mui/icons-material'
+import Room from './Advisor-Components/Room.jsx'
 
 
 const router = createBrowserRouter(
@@ -50,8 +53,11 @@ const router = createBrowserRouter(
             <Route path="/user/checkout" element={<UserCheckoutPage />} />
             <Route path="/user/signup" element={<UserSignUp />} />
             <Route path="/user/login" element={<UserLogin />} />
-
      </Route>
+
+
+     <Route path="/videocall" element={<VideoCall />} />,
+     <Route path="/room/:meetingid" element={<Room />} />,
 
 
   </>
