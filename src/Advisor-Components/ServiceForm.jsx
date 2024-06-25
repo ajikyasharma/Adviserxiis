@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as Yup from "yup";
 import { useFormik } from 'formik';
-import { getDatabase, ref, set, update } from "firebase/database";
+import { get, getDatabase, ref, set, update } from "firebase/database";
 import { app } from "../firebase";
 import { v1 as uuidv1 } from 'uuid';
 import { CircularProgress } from '@mui/material';
@@ -42,13 +42,29 @@ const ServiceForm = () => {
     booking_time: Yup.string()
       .required('Booking time is required')
   });
+
+  async function getUser(userId) {
+    const nodeRef = ref(database, `advisors/${userId}`);
+    try {
+      const snapshot = await get(nodeRef);
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log('No data available');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error fetching node details:', error);
+      return null;
+    }
+  }
   
 
   const handleSubmit = async () => {
     
     setLoading(true)
     const serviceid = uuidv1();
-    const userid = JSON.parse(localStorage.getItem('userid'))
+    const userid = JSON.parse(localStorage.getItem('adviserid'))
 
    await set(ref(database, 'advisors_service/' + serviceid),{
 
@@ -62,7 +78,17 @@ const ServiceForm = () => {
 
     });
 
-    // alert('Your service added successfully!!');
+
+    
+    const advisorData = await getUser(userid)
+    const currentServices = advisorData.services || []; // Retrieve existing IDs or initialize to an empty array
+  
+    // Add the new ID to the array
+    const updatedServices = [...currentServices, serviceid];
+  
+    // Update the array field in the database
+    await update(ref(database, 'advisors/' + userid), { services : updatedServices });
+  
 
      await Swal.fire({
       title: "Success",

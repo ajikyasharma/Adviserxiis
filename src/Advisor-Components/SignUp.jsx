@@ -117,7 +117,7 @@ function SignUp() {
     });
 
    
-    localStorage.setItem("userid",JSON.stringify(userid))
+   localStorage.setItem("adviserid",JSON.stringify(userid))
     // alert("Your data saved successfully.")
     // await Swal.fire({
     //   title: "Success",

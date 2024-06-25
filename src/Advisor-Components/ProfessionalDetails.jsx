@@ -52,7 +52,7 @@ function ProfessionalDetails() {
 
   const handleSubmit = async () => {
      setLoading(true)
-    const userid = JSON.parse(localStorage.getItem('userid'))
+    const userid = JSON.parse(localStorage.getItem('adviserid'))
 
    await update(ref(database, 'advisors/' + userid),{
       professional_title:formik.values.professional_title,

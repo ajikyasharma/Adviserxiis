@@ -73,100 +73,97 @@ function UploadDocuments() {
         }),
     });
 
-    // const handleSubmit = async() => {
-    //     console.log("Hello")
-    //     const userid = JSON.parse(localStorage.getItem('userid'))
 
 
-    //     const userid_profile = uuidv1()
-        
-    //     const imgs1 = sRef(imgDB, `images/${userid_profile}`)
-    //     uploadBytes(imgs1, formik.values.profile_photo).then(data =>{
-    //         getDownloadURL(data.ref).then(val =>{
-    //             setProfileUrl(val)
-    //         })
-    //     })
+    // const handleSubmit = async () => {
+    //     setLoading(true)
+    //     const userid = JSON.parse(localStorage.getItem('adviserid'));
+    //     const storage = getStorage();
+      
+    //     const files = [
+    //       { file: formik.values.profile_photo, ref: `images/${uuidv1()}` },
+    //       { file: formik.values.aadhar_front, ref: `images/${uuidv1()}` },
+    //       { file: formik.values.aadhar_back, ref: `images/${uuidv1()}` },
+    //     ];
+      
+    //     try {
+    //       const uploadPromises = files.map(({ file, ref }) => {
+    //         const imgRef = sRef(storage, ref);
+    //         return uploadBytes(imgRef, file).then(data => getDownloadURL(data.ref));
+    //       });
+      
+    //       const [profileUrl, aadharFrontUrl, aadharBackUrl] = await Promise.all(uploadPromises);
+      
+    //       await update(ref(database, 'advisors/' + userid), {
+    //         profile_photo: profileUrl,
+    //         aadhar_front: aadharFrontUrl,
+    //         aadhar_back: aadharBackUrl,
+    //       });
+    //     //   alert("Images Uploaded Successfully");
+    //     // await Swal.fire({
+    //     //     title: "Success",
+    //     //     text: "Images Uploaded Successfully!!",
+    //     //     icon: "success"
+    //     //   });
+    //       setLoading(false)
+    //       formik.resetForm()
+    //       navigate('/adviser/dashboard')
+    //     } catch (error) {
+    //     //   console.error("Error uploading images: ", error);
+    //     await Swal.fire({
+    //         title: "Error",
+    //         text: "Something Went Wrong!!",
+    //         icon: "error"
+    //       });
+    //       setLoading(false)
+    //     }
+    //   };
 
-
-    //     const userid_aadharfront = uuidv1()
-        
-    //     const imgs2 = sRef(imgDB, `images/${userid_aadharfront}`)
-    //     uploadBytes(imgs2, formik.values.aadhar_front).then(data =>{
-    //         getDownloadURL(data.ref).then(val =>{
-    //             setAadharFrontUrl(val)
-    //         })
-    //     })
-
-    //     const userid_aadharback = uuidv1()
-        
-    //     const imgs3 = sRef(imgDB, `images/${userid_aadharback}`)
-    //     uploadBytes(imgs3, formik.values.aadhar_back).then(data =>{
-    //         getDownloadURL(data.ref).then(val =>{
-    //             setAadharBackUrl(val)
-    //         })
-    //     })
-
-    //     while(profileUrl == '' || aadharFrontUrl == '' || aadharBackUrl == '')
-    //         {
-
-    //         }
-
-    //     if( profileUrl !== '' && aadharFrontUrl !== '' && aadharBackUrl !== '')
-    //         {
-    //             console.log("hi")
-    //             update(ref(database, 'advisors/' + userid),{
-    //                 profile_photo:profileUrl,
-    //                 aadhar_front:aadharFrontUrl,
-    //                 aadhar_back:aadharBackUrl,
-
-    //               });
-    //         }
-
-           
-    //     alert("Images Uploaded Successfully ")
-    // }
 
     const handleSubmit = async () => {
-        setLoading(true)
-        const userid = JSON.parse(localStorage.getItem('userid'));
+        setLoading(true);
+        const userid = JSON.parse(localStorage.getItem('adviserid'));
         const storage = getStorage();
-      
+        
         const files = [
-          { file: formik.values.profile_photo, ref: `images/${uuidv1()}` },
-          { file: formik.values.aadhar_front, ref: `images/${uuidv1()}` },
-          { file: formik.values.aadhar_back, ref: `images/${uuidv1()}` },
+          { file: formik.values.profile_photo, ref: `images/${uuidv1()}`, key: 'profile_photo' },
+          { file: formik.values.aadhar_front, ref: `images/${uuidv1()}`, key: 'aadhar_front' },
+          { file: formik.values.aadhar_back, ref: `images/${uuidv1()}`, key: 'aadhar_back' },
         ];
-      
+    
+        // Filter out null files
+        const nonNullFiles = files.filter(({ file }) => file !== null);
+    
         try {
-          const uploadPromises = files.map(({ file, ref }) => {
+          const uploadPromises = nonNullFiles.map(({ file, ref }) => {
             const imgRef = sRef(storage, ref);
             return uploadBytes(imgRef, file).then(data => getDownloadURL(data.ref));
           });
-      
-          const [profileUrl, aadharFrontUrl, aadharBackUrl] = await Promise.all(uploadPromises);
-      
-          await update(ref(database, 'advisors/' + userid), {
-            profile_photo: profileUrl,
-            aadhar_front: aadharFrontUrl,
-            aadhar_back: aadharBackUrl,
+    
+          const urls = await Promise.all(uploadPromises);
+    
+          // Construct the update object with only the uploaded file URLs
+          const updateData = {};
+          nonNullFiles.forEach(({ key }, index) => {
+            updateData[key] = urls[index];
           });
-        //   alert("Images Uploaded Successfully");
-        // await Swal.fire({
-        //     title: "Success",
-        //     text: "Images Uploaded Successfully!!",
-        //     icon: "success"
-        //   });
-          setLoading(false)
-          formik.resetForm()
-          navigate('/adviser/dashboard')
+    
+          await update(ref(getDatabase(), 'advisors/' + userid), updateData);
+          await Swal.fire({
+            title: "Success",
+            text: "SignUp Successfully!!",
+            icon: "success"
+          });
+          setLoading(false);
+          formik.resetForm();
+          navigate('/adviser/dashboard');
         } catch (error) {
-        //   console.error("Error uploading images: ", error);
-        await Swal.fire({
+          await Swal.fire({
             title: "Error",
             text: "Something Went Wrong!!",
             icon: "error"
           });
-          setLoading(false)
+          setLoading(false);
         }
       };
 

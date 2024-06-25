@@ -19,7 +19,8 @@ function ConfirmEmail() {
  const [verified, setVerified] = useState(false)
  const [loading, setLoading] = useState(false)
 
- const userId = JSON.parse(localStorage.getItem('userid'))
+ const userId = JSON.parse(localStorage.getItem('adviserid'))
+ console.log("userID", userId)
 
   // const sendOTP = async () =>{
   //     setLoading(true)
@@ -67,6 +68,7 @@ function ConfirmEmail() {
         });
       }
     } catch (error) {
+
       await Swal.fire({
         title: "Error",
         text: "Something went wrong!!",

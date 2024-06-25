@@ -50,7 +50,7 @@ function BankDetails() {
 
   const handleSubmit =  async () => {
      setLoading(true)
-    const userid = JSON.parse(localStorage.getItem('userid'))
+    const userid = JSON.parse(localStorage.getItem('adviserid'))
 
    await update(ref(database, 'advisors/' + userid),{
       bank_name:formik.values.bank_name,
