@@ -6,7 +6,7 @@ import { Autocomplete, Button, Checkbox, CircularProgress, IconButton, InputAdor
 import { useNavigate } from 'react-router-dom'
 import * as Yup from "yup";
 import { useFormik } from 'formik';
-import { getDatabase, ref, set } from "firebase/database";
+import { child, get, getDatabase, ref, set } from "firebase/database";
 import { app } from "../firebase";
 import { v1 as uuidv1 } from 'uuid';
 import { Visibility, VisibilityOff } from '@mui/icons-material'
@@ -103,8 +103,62 @@ function SignUp() {
   });
 
 
+  const isUserExist = async () =>{
+    let userFound = false;
+    try {
+      // Search for user by email
+      const snapshot = await get(child(ref(database), `advisers`));
+      if (snapshot.exists()) {
+    
+        snapshot.forEach((childSnapshot) => {
+          const userData = childSnapshot.val();
+          if (userData.email === formik.values.email) {
+            userFound = true;
+            Swal.fire({
+              title: "Error",
+              text: "Adviser with this email already exist!!",
+              icon: "error"
+            });
+          }
+          else if( userData.mobile_number === formik.values.mobile_number)
+            {
+              userFound = true;
+              Swal.fire({
+                title: "Error",
+                text: "Adviser with this mobile number already exist!!",
+                icon: "error"
+              });
+            }
+        });
+      } 
+    } catch (error) {
+     await Swal.fire({
+        title: "Error",
+        text: "Something Went Wrong!!",
+        icon: "error"
+      });
+    }
+
+    return userFound
+  }
+
+
   const handleSubmit = async() => {
      setLoading(true)
+     
+     const isUser = await isUserExist()
+
+     if(isUser)
+      {
+        // await Swal.fire({
+        //   title: "Error",
+        //   text: "User alredy exist with this email or mobile number",
+        //   icon: "error"
+        // });
+        setLoading(false)
+        return
+      }
+
     const userid = uuidv1();
 
    await set(ref(database, 'advisers/' + userid), {

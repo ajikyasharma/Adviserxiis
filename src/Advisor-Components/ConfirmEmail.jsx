@@ -20,7 +20,6 @@ function ConfirmEmail() {
  const [loading, setLoading] = useState(false)
 
  const userId = JSON.parse(localStorage.getItem('adviserid'))
- console.log("userID", userId)
 
   // const sendOTP = async () =>{
   //     setLoading(true)

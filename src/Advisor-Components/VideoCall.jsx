@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { v1 as uuidv1 } from 'uuid';
 
 function VideoCall() {
 
@@ -13,6 +14,11 @@ function VideoCall() {
       navigate(`/room/${meetingId}`)
  }
 
+ useEffect(()=>{
+    const meetingID = uuidv1();
+    setMeetingId(meetingID)
+ },[])
+
   return (
     <div className='h-screen flex justify-center items-center'>
         <div className='py-[30px] px-[10px] md:px-[30px] roundex-xl shadow-xl bg-gray-200'>
@@ -22,15 +28,18 @@ function VideoCall() {
             </div>
 
             <div className='flex flex-col justify-center items-center'>
-                <input 
+                {/* <label className='w-[300px] sm:-[w-380px]'><p className='text-left'>Meeting ID</p></label> */}
+                {/* <input 
                 type="text"
                 placeholder='Enter meeting Id'
                 value={meetingId}
-                onChange={(e)=>setMeetingId(e.target.value)}
-                className='h-16 p-2 w-[300px] sm:w-[380px] border border-black rounded-xl text-xl'
-                />
+                // onChange={(e)=>setMeetingId(e.target.value)}
+                className='h-12 p-2 w-[300px] sm:w-[380px] border border-black rounded-xl text-lg text-center'
+                readOnly
+                /> */}
+                <p className='text-lg'>Meeting ID - {meetingId}</p>
 
-                <button className='bg-blue-500 text-white h-16 mt-4 w-[300px] sm:w-[380px] rounded-xl' onClick={handleClick}>
+                <button className='bg-blue-500 text-white h-12 mt-4 w-[300px] sm:w-[380px] rounded-xl' onClick={handleClick}>
                     Join Metting
                 </button>
             </div>

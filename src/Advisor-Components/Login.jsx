@@ -89,7 +89,6 @@ export default function Login() {
         formik.resetForm();
       }
     } catch (error) {
-      console.log("error", error)
       Swal.fire({
         title: "Error",
         text: "An error occurred while fetching user data",
