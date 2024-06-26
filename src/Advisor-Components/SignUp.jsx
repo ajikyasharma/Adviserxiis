@@ -107,7 +107,7 @@ function SignUp() {
      setLoading(true)
     const userid = uuidv1();
 
-   await set(ref(database, 'advisors/' + userid), {
+   await set(ref(database, 'advisers/' + userid), {
       username: formik.values.name,
       email: formik.values.email,
       mobile_number: formik.values.mobile_number,

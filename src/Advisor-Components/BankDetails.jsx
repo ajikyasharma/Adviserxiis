@@ -52,7 +52,7 @@ function BankDetails() {
      setLoading(true)
     const userid = JSON.parse(localStorage.getItem('adviserid'))
 
-   await update(ref(database, 'advisors/' + userid),{
+   await update(ref(database, 'advisers/' + userid),{
       bank_name:formik.values.bank_name,
       account_holder_name:formik.values.account_holder_name,
       account_number:formik.values.account_number,

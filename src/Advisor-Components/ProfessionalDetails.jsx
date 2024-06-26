@@ -54,7 +54,7 @@ function ProfessionalDetails() {
      setLoading(true)
     const userid = JSON.parse(localStorage.getItem('adviserid'))
 
-   await update(ref(database, 'advisors/' + userid),{
+   await update(ref(database, 'advisers/' + userid),{
       professional_title:formik.values.professional_title,
       years_of_experience:formik.values.experience,
       education:formik.values.education,

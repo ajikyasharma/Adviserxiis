@@ -80,7 +80,7 @@ function ConfirmEmail() {
   }
 
   async function getUser(userId) {
-    const nodeRef = ref(database, `advisors/${userId}`);
+    const nodeRef = ref(database, `advisers/${userId}`);
     try {
       const snapshot = await get(nodeRef);
       if (snapshot.exists()) {

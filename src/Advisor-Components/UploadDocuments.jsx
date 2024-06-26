@@ -94,7 +94,7 @@ function UploadDocuments() {
       
     //       const [profileUrl, aadharFrontUrl, aadharBackUrl] = await Promise.all(uploadPromises);
       
-    //       await update(ref(database, 'advisors/' + userid), {
+    //       await update(ref(database, 'advisers/' + userid), {
     //         profile_photo: profileUrl,
     //         aadhar_front: aadharFrontUrl,
     //         aadhar_back: aadharBackUrl,
@@ -148,7 +148,7 @@ function UploadDocuments() {
             updateData[key] = urls[index];
           });
     
-          await update(ref(getDatabase(), 'advisors/' + userid), updateData);
+          await update(ref(getDatabase(), 'advisers/' + userid), updateData);
           await Swal.fire({
             title: "Success",
             text: "SignUp Successfully!!",

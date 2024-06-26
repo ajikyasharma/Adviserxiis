@@ -44,7 +44,7 @@ const ServiceForm = () => {
   });
 
   async function getUser(userId) {
-    const nodeRef = ref(database, `advisors/${userId}`);
+    const nodeRef = ref(database, `advisers/${userId}`);
     try {
       const snapshot = await get(nodeRef);
       if (snapshot.exists()) {
@@ -66,9 +66,9 @@ const ServiceForm = () => {
     const serviceid = uuidv1();
     const userid = JSON.parse(localStorage.getItem('adviserid'))
 
-   await set(ref(database, 'advisors_service/' + serviceid),{
+   await set(ref(database, 'advisers_service/' + serviceid),{
 
-      advisorid:userid,
+      adviserid:userid,
       service_name:formik.values.service_name,
       about_service:formik.values.about_service,
       duration:formik.values.duration,
@@ -80,14 +80,14 @@ const ServiceForm = () => {
 
 
     
-    const advisorData = await getUser(userid)
-    const currentServices = advisorData.services || []; // Retrieve existing IDs or initialize to an empty array
+    const adviserData = await getUser(userid)
+    const currentServices = adviserData.services || []; // Retrieve existing IDs or initialize to an empty array
   
     // Add the new ID to the array
     const updatedServices = [...currentServices, serviceid];
   
     // Update the array field in the database
-    await update(ref(database, 'advisors/' + userid), { services : updatedServices });
+    await update(ref(database, 'advisers/' + userid), { services : updatedServices });
   
 
      await Swal.fire({

@@ -1,7 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import profile from '../assets/profile.png'
+import { get, getDatabase, ref, set, update } from "firebase/database";
+import { app } from "../firebase";
+import { CircularProgress } from '@mui/material';
 
 function Dashboard() {
+  const database = getDatabase(app);
+
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  async function getUser(userId) {
+    const nodeRef = ref(database, `advisers/${userId}`);
+    try {
+      const snapshot = await get(nodeRef);
+      if (snapshot.exists()) {
+        console.log("User photo:", snapshot.val().profile_photo);
+        return snapshot.val();
+      } else {
+        console.log('No data available');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error fetching node details:', error);
+      return null;
+    }
+  }
+
+  useEffect(() => {
+    const userId = JSON.parse(localStorage.getItem('adviserid'));
+    if (userId) {
+      getUser(userId).then((userData) => {
+        setUser(userData);
+        setLoading(false); // Update loading state after fetching the user data
+      });
+    } else {
+      setLoading(false); // Update loading state even if there's no user ID in localStorage
+    }
+  }, []);
+
+  if (loading) {
+    return <div className='h-screen flex justify-center items-center'><CircularProgress  /></div>; // Show a loading message or spinner while fetching data
+  }
   return (
     <div className=''>
           <div>
@@ -11,14 +51,15 @@ function Dashboard() {
 
     <div className="flex flex-col justify-center sm:justify-between items-center md:items-start w-full md:w-3/6 ">
       <div className="flex items-center space-x-4 w-full my-4">
+
         <img 
-          src={profile} 
+           src={user && user.profile_photo ? user.profile_photo : profile}
           alt="" 
           className="rounded-full w-32 h-32"
         />
         <div>
           <h1 className="text-xl font-bold font-Poppins">Welcome !!</h1>
-          <p className="text-lg font-bold font-Poppins">Utkarsh Pandey</p>
+          <p className="text-lg font-bold font-Poppins">{user.username}</p>
         </div>
       </div>
       <div className="bg-[#489CFF] text-white rounded-xl w-full p-6 md:w-3/5 m-4">
