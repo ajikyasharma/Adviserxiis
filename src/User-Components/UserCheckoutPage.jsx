@@ -296,7 +296,7 @@ function UserCheckoutPage() {
               </div>
               <div>
                 <label className="block text-gray-700">Whatsapp number</label>
-                <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm h-12 p-2" placeholder={user && user.mobile_number ? user.mobile_number : ''} />
+                <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm h-12 p-2" placeholder={user && user.mobile_number ? user.mobile_number : ''}  readOnly/>
                 <small className="text-gray-500">Will update you the booking details on this number</small>
               </div>
               <div>
@@ -341,7 +341,7 @@ function UserCheckoutPage() {
               </div>
               <div>
                 <label className="block text-gray-700">Price</label>
-                <input type="number" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm h-12 p-2" value={service && service.price ? service.price : ''} readOnly />
+                <input type="number" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm h-12 p-2" value={service && service.price ? service.price : ''} readOnly  />
               </div>
               <button type="submit" className="bg-[#489CFF] text-white py-2 px-4 rounded  h-12 p-2" onClick={formik.handleSubmit}>{ !loading1 ? 'Book' : <CircularProgress  color="inherit"  />}</button>
             </form>
