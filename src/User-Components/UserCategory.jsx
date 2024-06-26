@@ -1,13 +1,64 @@
-import { Rating } from '@mui/material'
-import React from 'react'
+import { CircularProgress, Rating } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import insta from '../user-assets/insta.png'
 import fb from '../user-assets/fb.png'
 import twitter from '../user-assets/twitter.png'
 import checkicon from '../user-assets/checkicon.png'
+import { child, get, getDatabase, ref, set } from "firebase/database";
+import { app } from "../firebase";
+import { useNavigate } from 'react-router-dom'
 
 const Categories= ["Career", "Business", "Health", "Technology", "Education", "Legal", "Marketing"]
 
 function UserCategory() {
+  const database = getDatabase(app);
+  const navigate = useNavigate()
+
+  const [advisers, setAdvisers] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  async function getAllAdvisers() {
+    const nodeRef = ref(database, 'advisers');
+    try {
+      const snapshot = await get(nodeRef);
+      if (snapshot.exists()) {
+        const advisers = [];
+        snapshot.forEach(childSnapshot => {
+          advisers.push({data:childSnapshot.val(),id:childSnapshot.key});
+        });
+        return advisers;
+      } else {
+        console.log('No data available');
+        return [];
+      }
+    } catch (error) {
+      console.error('Error fetching node details:', error);
+      return [];
+    }
+  }
+
+  useEffect(() => {
+      getAllAdvisers().then((advisersData) => {
+        setAdvisers(advisersData)
+        setLoading(false); // Update loading state after fetching the user data
+      });
+
+  }, []);
+
+
+  const handleClick = (adviserId) =>{
+        navigate(`/category/${adviserId}`)
+  }
+
+
+
+
+  if (loading) {
+    return <div className='h-screen flex justify-center items-center'><CircularProgress  /></div>; // Show a loading message or spinner while fetching data
+  }
+
+
+
   return (
     <div className="min-h-screen flex flex-col font-inter">
 
@@ -32,37 +83,42 @@ function UserCategory() {
           </button>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-        <div className="bg-white rounded-lg shadow p-4 flex ">
-          <div className=' flex flex-col justify-center items-center'>
-          <img
-            src="https://via.placeholder.com/50"
-            alt="Consultant"
-            className="rounded-full h-24 w-24"
-          />
-          <div>
-          <Rating name="read-only" value={5} readOnly />
-          </div>
-          <p className='text-center text-sm'>English, Hindi</p>
-          <p className='text-center text-sm'>₹ 5/min</p>
-          </div>
-          <div className="ml-4 mt-[10px] ">
-            <div>
-            <h2 className="text-2xl font-bold mt-[10px] mb-[8px]">Utkarsh Pandey</h2>
-            {/* <img 
-          src={checkicon}
-          alt=""
-          className='h-8 w-8 rounded-full mt-[8px] bg-[#117D00]'
-          /> */}
-            </div>
-            
-            <div className='flex justify-between' >
-            <p className="text-md ">Business Consultant</p>
-            <p className="text-md">Exp: 5 years</p>
-            </div>
+           
+           {advisers.map((adviser, idx) => (
 
-            <p >Founder : P&C, Ex Mckinskey, consulted more than 100 members</p>
-          </div>
-        </div>
+<div className="bg-white rounded-lg shadow p-4 px-[20px] flex cursor-pointer" key={idx}  onClick={()=> handleClick(adviser.id)}>
+<div className=' flex flex-col justify-center items-center'>
+<img
+  src={adviser.data.profile_photo}
+  alt="Consultant"
+  className="rounded-full h-24 w-24"
+/>
+<div>
+<Rating name="read-only" value={5} readOnly />
+</div>
+<p className='text-center text-sm'>English, Hindi</p>
+{/* <p className='text-center text-sm'>₹ 5/min</p> */}
+</div>
+<div className="ml-4 mt-[10px] ">
+  <div>
+  <h2 className="text-2xl font-bold mt-[10px] mb-[8px]">{adviser.data.username}</h2>
+  </div>
+  
+  <div className='flex justify-between' >
+  <p className="text-md ">{adviser.data.professional_title}</p>
+  <p className="text-md">Exp: <span>{adviser.data.years_of_experience
+  }</span> years</p>
+  </div>
+
+  <p className='text-gray-500' >{adviser.data.professional_bio }</p>
+</div>
+</div>
+
+           ))}
+
+
+
+
         </div>
 
       </section>

@@ -1,22 +1,92 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import insta from '../user-assets/insta.png'
 import fb from '../user-assets/fb.png'
 import twitter from '../user-assets/twitter.png'
 import profile from '../assets/profile.png'
 import backicon from '../user-assets/backicon.png';
+import { useNavigate, useParams } from 'react-router-dom'
+import { child, get, getDatabase, ref, set } from "firebase/database";
+import { app } from "../firebase";
+import { CircularProgress } from '@mui/material'
 
 function UserAdviserProfile() {
+
+  const database = getDatabase(app);
+  const { adviserid } = useParams()
+  const naviagte = useNavigate()
+
+
+  const [adviser, setAdviser] = useState(null)
+  const [services, setServices] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  
+
+  async function getUser(userId) {
+    const nodeRef = ref(database, `advisers/${userId}`);
+    try {
+      const snapshot = await get(nodeRef);
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        console.log('No data available');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error fetching node details:', error);
+      return null;
+    }
+  }
+
+
+  async function getServiceDetails(serviceIds) {
+    const serviceDetails = [];
+  
+    for (const serviceId of serviceIds) {
+      const serviceRef = ref(database, `advisers_service/${serviceId}`);
+      try {
+        const snapshot = await get(serviceRef);
+        if (snapshot.exists()) {
+          serviceDetails.push({data:snapshot.val(),id:snapshot.key});
+        } else {
+          console.log(`No data available for service ID: ${serviceId}`);
+        }
+      } catch (error) {
+        console.error(`Error fetching service details for service ID: ${serviceId}`, error);
+      }
+    }
+  
+    return serviceDetails;
+  }
+
+  useEffect(()=>{
+    getUser(adviserid).then((adviserData) => {
+      setAdviser(adviserData)
+      getServiceDetails(adviserData.services).then((servicesData) => {
+        setServices(servicesData)
+      });
+      setLoading(false); // Update loading state after fetching the user data
+    });
+
+  },[])
+
+
+  if (loading) {
+    return <div className='h-screen flex justify-center items-center'><CircularProgress  /></div>; // Show a loading message or spinner while fetching data
+  }
+
+
   return (
     <div className="container mx-auto px-4 font-inter">
     <div className='min-h-screen'>
     <div className="flex  items-center my-8 ">
 
         <div className='md:mx-[100px] hidden md:block'>
-        <button className="bg-[#489CFF] text-white py-2 px-4 rounded-full ">
+        <button className="bg-[#489CFF] text-white py-2 px-4 rounded-full cursor-pointer" onClick={()=> naviagte('/category')} >
         <img 
           src={backicon}
           alt=""
-          className='h-8 w-4 rounded-full'
+          className='h-8 w-4 rounded-full '
           />
       </button>
         </div>
@@ -24,24 +94,25 @@ function UserAdviserProfile() {
       <div className='flex items-center'>
       <div className="mr-[30px] md:mr-[50px] ">
       <img
-            src={profile}
+            src={adviser && adviser.profile_photo ? adviser.profile_photo : ''}
             alt=""
             className="h-32 w-32 rounded-full"
           />
       </div>
       <div>
-      <h1 className="text-2xl font-semibold">Utkarsh Pandey</h1>
-      <p className="text-gray-500">Talent Acquisition Specialist at JindalX || Tech Mahindra || TCS</p>
+      <h1 className="text-2xl font-semibold">{adviser.username}</h1>
+      <p className="text-gray-500">{adviser.professional_bio
+      }</p>
       </div>
       </div>
     </div>
     <div className=" md:ml-[250px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-      {Array.from({ length: 6 }).map((_, index) => (
+      {services.map((service, index) => (
         <div key={index} className="bg-gray-100 p-4 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-2">CV Review</h2>
-          <p className="text-gray-500 mb-4">Talent Acquisition Specialist at JindalX || Tech Mahindra || TCS</p>
-          <p className="text-lg font-bold mb-4">Rs 499/-</p>
-          <button className="bg-gradient-to-b from-[#0165E1] to-[#17A9FD] text-white py-2 px-4 rounded ">Book</button>
+          <h2 className="text-xl font-semibold mb-2">{service.data.service_name}</h2>
+          <p className="text-gray-500 mb-4">{service.data.about_service}</p>
+          <p className="text-lg font-bold mb-4">Rs {service.data.price}/-</p>
+          <button className="bg-gradient-to-b from-[#0165E1] to-[#17A9FD] text-white py-2 px-4 rounded cursor-pointer " onClick={()=>naviagte(`/category/${adviserid}/checkout/${service.id}`)}>Book</button>
         </div>
       ))}
     </div>

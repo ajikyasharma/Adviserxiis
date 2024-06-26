@@ -4,17 +4,18 @@ import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import { CircularProgress, TextField } from '@mui/material'
 import * as Yup from "yup";
 import { useFormik } from 'formik';
-import { getDatabase, ref, set } from "firebase/database";
+import { child, get, getDatabase, ref, set } from "firebase/database";
 import { app } from "../firebase";
 import { RecaptchaVerifier, getAuth, signInWithPhoneNumber } from 'firebase/auth';
 import { v1 as uuidv1 } from 'uuid';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 export default function UserLogin() {
 
   const auth = getAuth(app);
   const database = getDatabase(app);
+  const navigate = useNavigate()
 
   const [open, setOpen] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -155,15 +156,54 @@ export default function UserLogin() {
 
   const handleSubmit = async () => {
 
+    try {
+      // Search for user by email
+      const snapshot = await get(child(ref(database), `users`));
+      if (snapshot.exists()) {
+        let userFound = false;
+        snapshot.forEach((childSnapshot) => {
+          const userData = childSnapshot.val();
+          if (userData.mobile_number === formik.values.mobile_number) {
+            userFound = true;
 
+            localStorage.setItem('userid',  JSON.stringify(childSnapshot.key));
+            formik.resetForm();
+            navigate('/category');
+
+          }
+        });
+  
+        if (!userFound) {
+          Swal.fire({
+            title: "Error",
+            text: "User not found",
+            icon: "error"
+          });
+          setLoading(false);
+          formik.resetForm();
+        }
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "User not found",
+          icon: "error"
+        });
+        setLoading(false);
+        formik.resetForm();
+      }
+    } catch (error) {
+      console.log("error", error)
+      Swal.fire({
+        title: "Error",
+        text: "An error occurred while fetching user data",
+        icon: "error"
+      });
+      setLoading(false);
+      formik.resetForm();
+    }
 
     // alert('Login Successfully !!')
-    await Swal.fire({
-      title: "Success",
-      text: "Login Successfully!!",
-      icon: "success"
-    });
-
+ 
 
   }
 

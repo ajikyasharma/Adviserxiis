@@ -64,7 +64,7 @@ function Dashboard() {
       </div>
       <div className="bg-[#489CFF] text-white rounded-xl w-full p-6 md:w-3/5 m-4">
         <p className="text-lg font-Poppins">Total Earning</p>
-        <h2 className="text-4xl font-bold font-Poppins">₹ 80,000</h2>
+        <h2 className="text-4xl font-bold font-Poppins">₹ {user && user.earnings ? user.earnings : 0}</h2>
         <button className="mt-4 bg-white text-[#489CFF] rounded-md py-2 px-4 font-Poppins">Request Withdraw</button>
       </div>
     </div>

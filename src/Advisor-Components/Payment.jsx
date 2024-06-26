@@ -90,6 +90,8 @@ function Payment() {
     });
     rzp1.open();
     e.prventDefault()
+
+    console.log("hiiii")
   };
 
   return (

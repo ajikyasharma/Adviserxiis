@@ -9,11 +9,13 @@ import { app } from "../firebase";
 import { RecaptchaVerifier, getAuth, signInWithPhoneNumber } from 'firebase/auth';
 import { v1 as uuidv1 } from 'uuid';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserSignUp() {
 
   const auth = getAuth(app);
   const database = getDatabase(app);
+  const navigate = useNavigate()
 
   const [open, setOpen] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -123,7 +125,10 @@ export default function UserSignUp() {
       text: "SignUp Successfully!!",
       icon: "success"
     });
+    localStorage.setItem("userid",JSON.stringify(userid))
     setLoading(false)
+    navigate('/category')
+    
 
   }
 
