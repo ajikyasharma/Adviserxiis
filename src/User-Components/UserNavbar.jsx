@@ -64,17 +64,12 @@ export default function UserNavbar() {
               </div>
         </NavLink>
 
-        <NavLink to="/signup">
+        <NavLink to="/createaccount">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
-               <p>SIGNUP</p>
+               <p>LOGIN/SIGNUP</p>
               </div>
         </NavLink>
 
-        <NavLink to="/login">
-             <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
-               <p>LOGIN</p>
-              </div>
-        </NavLink>
 
         <NavLink to="/adviser">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
@@ -106,17 +101,13 @@ export default function UserNavbar() {
               </div>
         </NavLink>
 
-        <NavLink to="/signup" >
+        <NavLink to="/createaccount" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
-               <p>SIGNUP</p>
+               <p>LOGIN/SIGNUP</p>
               </div>
         </NavLink>
 
-        <NavLink to="/login" >
-             <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
-               <p>LOGIN</p>
-              </div>
-        </NavLink>
+
 
         <NavLink to="/adviser" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>

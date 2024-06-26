@@ -98,6 +98,7 @@ function UserCheckoutPage() {
                     serviceid:serviceid,
                     userid:userid,
                     adviserid: adviserid,
+                    username:`${user.username? user.username: formik.values.name}`,
                     scheduled_date:formik.values.date,
                     scheduled_time:formik.values.time,
                   });
@@ -154,7 +155,8 @@ function UserCheckoutPage() {
 
   const initialValues = {
     date: '',
-    time: ''
+    time: '',
+    name:'',
   }
 
   const validationSchema = Yup.object().shape({
@@ -169,10 +171,24 @@ function UserCheckoutPage() {
         /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])$/,
         'Time must be in HH:mm format'
       ),
+      name: Yup.string()
+      .min(2, 'Name must be at least 2 characters')
   });
 
 
   const handleSubmit = async () => {
+   
+    if( !user.username && formik.values.name == '')
+      {
+         Swal.fire({
+          title: "Error",
+          text: "Please fill the name",
+          icon: "error"
+        }); 
+
+        return
+      }
+
     setLoading1(true)
     createOrder()
 
@@ -299,6 +315,28 @@ function UserCheckoutPage() {
                 <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm h-12 p-2" placeholder={user && user.mobile_number ? user.mobile_number : ''}  readOnly/>
                 <small className="text-gray-500">Will update you the booking details on this number</small>
               </div>
+
+              {  !user.username &&   <div>
+                                <label className="block text-gray-700">Name</label>
+                                <input name="name" type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm h-12 p-2" placeholder='Enter Name'
+                                  value={formik.values.name}
+                                  onChange={formik.handleChange}
+                                  onBlur={formik.handleBlur}
+                                />
+                                {formik.touched.name &&
+                                  formik.errors.name && (
+                                    <p
+                                      style={{
+                                        fontSize: "13px",
+                                        padding: "",
+                                        color: "red",
+                                      }}
+                                    >
+                                      {formik.errors.name}
+                                    </p>
+                                  )}
+                              </div>
+              }
               <div>
                 <label className="block text-gray-700">Schedule date</label>
                 <input name="date" type="date" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm h-12 p-2" placeholder='Enter Data'
@@ -319,6 +357,8 @@ function UserCheckoutPage() {
                     </p>
                   )}
               </div>
+
+
               <div>
                 <label  className="block text-gray-700">Select Time</label>
                 <input name="time" type="time" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm h-12 p-2" placeholder="Enter Time"

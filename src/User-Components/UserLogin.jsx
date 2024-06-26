@@ -154,58 +154,109 @@ export default function UserLogin() {
     }
   }
 
-  const handleSubmit = async () => {
+  // const handleSubmit = async () => {
+  //      setLoading(true)
+  //   try {
+  //     // Search for user by email
+  //     const snapshot = await get(child(ref(database), `users`));
+  //     if (snapshot.exists()) {
+  //       snapshot.forEach((childSnapshot) => {
+  //         const userData = childSnapshot.val();
+  //         if (userData.mobile_number === formik.values.mobile_number) {
+  //           console.log("hi")
+  //           localStorage.setItem('userid',  JSON.stringify(childSnapshot.key));
+  //           formik.resetForm();
+  //           navigate('/category');
+  //         }
+  //         else{
+  //           console.log("Hello")
+  //            const userid = uuidv1();
+  //            set(ref(database, 'users/' + userid), {
+  //             mobile_number: formik.values.mobile_number,
+  //           });
+  //           localStorage.setItem("userid",JSON.stringify(userid))
+  //           setLoading(false)
+  //           formik.resetForm();
+  //           navigate('/category')
+  //         }
+  //       });
+  
+  //     } else {
+  //       console.log("bye")
+  //       const userid = uuidv1();
+  //       set(ref(database, 'users/' + userid), {
+  //        mobile_number: formik.values.mobile_number,
+  //      });
+  //      localStorage.setItem("userid",JSON.stringify(userid))
+  //      setLoading(false)
+  //      formik.resetForm();
+  //      navigate('/category')
+  //     }
+  //   } catch (error) {
+  //     console.log("error", error)
+  //     Swal.fire({
+  //       title: "Error",
+  //       text: "Something Went wrong!!",
+  //       icon: "error"
+  //     });
+  //     setLoading(false);
+  //     formik.resetForm();
+  //   }
 
+  //   // alert('Login Successfully !!')
+ 
+
+  // }
+
+
+  const handleSubmit = async () => {
+    setLoading(true);
     try {
-      // Search for user by email
+      // Search for user by mobile number
       const snapshot = await get(child(ref(database), `users`));
+      let userExists = false;
+      
       if (snapshot.exists()) {
-        let userFound = false;
         snapshot.forEach((childSnapshot) => {
           const userData = childSnapshot.val();
           if (userData.mobile_number === formik.values.mobile_number) {
-            userFound = true;
-
-            localStorage.setItem('userid',  JSON.stringify(childSnapshot.key));
-            formik.resetForm();
-            navigate('/category');
-
+            localStorage.setItem('userid', JSON.stringify(childSnapshot.key));
+            userExists = true;
+            return true; // Exit loop early
           }
         });
-  
-        if (!userFound) {
-          Swal.fire({
-            title: "Error",
-            text: "User not found",
-            icon: "error"
+        
+        if (!userExists) {
+          const userid = uuidv1();
+          set(ref(database, 'users/' + userid), {
+            mobile_number: formik.values.mobile_number,
           });
-          setLoading(false);
-          formik.resetForm();
+          localStorage.setItem("userid", JSON.stringify(userid));
         }
+  
       } else {
-        Swal.fire({
-          title: "Error",
-          text: "User not found",
-          icon: "error"
+        const userid = uuidv1();
+        set(ref(database, 'users/' + userid), {
+          mobile_number: formik.values.mobile_number,
         });
-        setLoading(false);
-        formik.resetForm();
+        localStorage.setItem("userid", JSON.stringify(userid));
       }
+      
+      formik.resetForm();
+      setLoading(false);
+      navigate('/category');
     } catch (error) {
-      console.log("error", error)
+      console.log("error", error);
       Swal.fire({
         title: "Error",
-        text: "An error occurred while fetching user data",
-        icon: "error"
+        text: "Something Went wrong!!",
+        icon: "error",
       });
       setLoading(false);
       formik.resetForm();
     }
-
-    // alert('Login Successfully !!')
- 
-
-  }
+  };
+  
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -231,16 +282,16 @@ export default function UserLogin() {
 
                 <div className="mt-3 text-center sm:ml-4 p-4 sm:mt-0 sm:text-left">
                   <DialogTitle as="h3" className=" text-center text-xl font-semibold leading-6 text-gray-900 ">
-                    Login Here
+                    Login/SignUp
                   </DialogTitle>
 
-                  <p className='mt-4 text-center'>Don't have account?  <span className='text-blue-500'><Link to='/user/signup'>SignUp Here</Link></span></p>
+                  {/* <p className='mt-4 text-center'>Don't have account?  <span className='text-blue-500'><Link to='/user/signup'>SignUp Here</Link></span></p> */}
                   <div className="mt-2">
                     <form className='flex flex-col'>
                       <TextField
                         name='mobile_number'
                         id="outlined-basic"
-                        label="Phone number"
+                        label="Whatsapp Number"
                         type="number"
                         value={formik.values.mobile_number}
                         onChange={formik.handleChange}
@@ -313,7 +364,7 @@ export default function UserLogin() {
                         className=' text-white font-workSans w-[300px] sm:w-[380px] rounded-xl'
                         style={{ margin: "0 auto", marginTop: "5px", height: "50px", backgroundColor: "#489CFF" }}
                       >
-                        {!loading ? 'Login' : <CircularProgress color="inherit" />}
+                        {!loading ? 'Create Account' : <CircularProgress color="inherit" />}
                       </Button>}
 
 
