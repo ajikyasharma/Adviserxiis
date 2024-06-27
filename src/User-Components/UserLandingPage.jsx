@@ -77,7 +77,7 @@ function UserLandingPage() {
                   and book the right adviser for you.
                 </p>
               </div>
-              <div className="mx-4 w-full md:w-2/ flex justify-center items-center">
+              <div className="mx-4 w-full md:w-2/5 flex justify-center items-center">
                 <img src={image1} alt="" className="" />
               </div>
             </div>

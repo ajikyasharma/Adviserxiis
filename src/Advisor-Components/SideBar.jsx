@@ -80,7 +80,7 @@ const SideBar = forwardRef(({ showSideBar }, ref) => {
         </NavLink>
 
         <NavLink
-          to="/adviser/logout"
+          to="/adviser"
           className={({ isActive }) =>
             ` ${
               isActive

@@ -228,7 +228,7 @@ function BankDetails() {
             <button
               // type="submit"
               className="w-full py-2 mt-4 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 h-[50px] font-workSans"
-              onClick={()=> navigate('/documentupload')}
+              onClick={()=> navigate('/adviser/documentupload')}
             >
               Skip
             </button>

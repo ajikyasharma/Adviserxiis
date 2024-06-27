@@ -98,7 +98,7 @@ export default function UserLogin() {
       setOtpSent(true);
     } catch (error) {
       // Error; SMS not sent
-      // console.error("Error in sending OTP:", error);
+      console.error("Error in sending OTP:", error);
       await Swal.fire({
         title: "Error",
         text: "Something Went Wrong!!",
@@ -316,7 +316,7 @@ export default function UserLogin() {
                       />}
 
                       {
-                        (!verified && !otpSent) && <div id="recaptcha-container" style={{ width: "100%", marginTop: "10px", }} className='sm:mt-4'></div>
+                        (!verified && !otpSent) && <div id="recaptcha-container"  style={{ width: "100%", marginTop: "10px", }} className='sm:mt-4 w-[300px] sm:w-[380px]'></div>
                       }
 
 

@@ -53,11 +53,11 @@ function ConfirmEmail() {
       setLoading(true);
       const res = await fetch(`https://adviserxiis-backend.vercel.app/sendemail/${userId}`);
       if (res.status === 200) {
-        await Swal.fire({
-          title: "Success",
-          text: "OTP Sent Successfully!!",
-          icon: "success"
-        });
+        // await Swal.fire({
+        //   title: "Success",
+        //   text: "OTP Sent Successfully!!",
+        //   icon: "success"
+        // });
         setOtpSent(true);
       } else {
         await Swal.fire({
