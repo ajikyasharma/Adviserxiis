@@ -182,9 +182,9 @@ function Dashboard() {
           <div>
     <p className='font-Poppins text-xl sm:text-3xl font-bold s my-2'>Dashboard</p>
     </div>
-    <div className="flex flex-col md:flex-row justify-center items-center md:justify-between sm:p-6 space-y-6 ">
+    <div className="flex flex-col md:flex-row justify-center md:justify-between sm:p-6 space-y-6 ">
 
-    <div className="flex flex-col  sm:justify-between items-center md:items-start w-full md:w-3/6 ">
+    <div className="flex flex-col  sm:justify-between  md:items-start w-full md:w-3/6  ">
       <div className="flex items-center space-x-4 w-full my-4">
 
         <img 
@@ -197,6 +197,7 @@ function Dashboard() {
           <p className="text-lg font-bold font-Poppins">{user && user.username ? user.username : 'User'}</p>
         </div>
       </div>
+
       {/* <div className="bg-[#489CFF] text-white rounded-xl w-full p-6 md:w-3/5 m-4">
         <p className="text-lg font-Poppins">Total Earning</p>
         <h2 className="text-4xl font-bold font-Poppins">₹ {user && user.earnings ? user.earnings : 0}</h2>
@@ -204,11 +205,15 @@ function Dashboard() {
       </div> */}
     </div>
 
+  
     <div className="bg-[#489CFF] text-white rounded-xl  p-6 w-[350px] m-4">
         <p className="text-lg font-Poppins">Total Earning</p>
         <h2 className="text-4xl font-bold font-Poppins">₹ {user && user.earnings ? user.earnings : 0}</h2>
         <button className="mt-4 bg-white text-[#489CFF] rounded-md py-2 px-4 font-Poppins">Request Withdraw</button>
       </div>
+
+     
+
 
     {/* <div className=" bg-white rounded-xl shadow-md  p-6 w-full  md:w-2/6 my-4">
         <h2 className="text-xl font-bold font-Poppins">Upcoming Booking</h2>
@@ -235,18 +240,18 @@ function Dashboard() {
 
 
   </div>
-  <div className="flex justify-between space-x-6">
-      <div className="flex-1 bg-white rounded-xl shadow-md p-6">
+  <div className="flex  space-x-6 mt-[50px] sm:mt-[0px]">
+      <div className="flex-1 bg-white rounded-xl shadow-md p-6 ">
         <h2 className="text-xl font-bold font-Poppins">Appointments</h2>
-        <table className="min-w-full mt-4 text-left font-Poppins">
+        <table className="min-w-full mt-4 text-left font-Poppins overflow-x-auto">
           <thead>
             <tr>
-              <th className="py-2">Purchase Date</th>
-              <th className="py-2">Name</th>
-              <th className="py-2">Service</th>
-              <th className="py-2">Booking date</th>
-              <th className="py-2">Time</th>
-              <th className="py-2">Price</th>
+              <th className="py-2 min-w-[150px]">Purchase Date</th>
+              <th className="py-2 min-w-[150px]">Name</th>
+              <th className="py-2 min-w-[150px]">Service</th>
+              <th className="py-2 min-w-[150px]">Booking date</th>
+              <th className="py-2 min-w-[150px]">Time</th>
+              <th className="py-2 min-w-[150px]">Price</th>
             </tr>
           </thead>
           <tbody>

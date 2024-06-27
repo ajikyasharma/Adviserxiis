@@ -147,7 +147,7 @@ function Profile() {
       </div>
  
       <div className="flex space-x-4">
-        <button type="submit" className="bg-[#489CFF] text-white rounded-md py-2 px-4" >Publish</button>
+        <button type="submit" className="bg-[#489CFF] text-white rounded-md py-2 px-4" disabled >Publish</button>
       </div>
     </form>
   </div>
