@@ -90,11 +90,11 @@ export default function UserLogin() {
       // user in with confirmationResult.confirm(code).
       window.confirmationResult = confirmationResult;
       // alert("OTP has been sent")
-      await Swal.fire({
-        title: "Success",
-        text: "OTP Sent Successfully!!",
-        icon: "success"
-      });
+      // await Swal.fire({
+      //   title: "Success",
+      //   text: "OTP Sent Successfully!!",
+      //   icon: "success"
+      // });
       setOtpSent(true);
     } catch (error) {
       // Error; SMS not sent
