@@ -206,7 +206,7 @@ function Dashboard() {
     </div>
 
   
-    <div className="bg-[#489CFF] text-white rounded-xl  p-6 w-[350px] m-4">
+    <div className="bg-[#489CFF] text-white rounded-xl  p-6 w-[300px] sm:w-[350px] m-4">
         <p className="text-lg font-Poppins">Total Earning</p>
         <h2 className="text-4xl font-bold font-Poppins">₹ {user && user.earnings ? user.earnings : 0}</h2>
         <button className="mt-4 bg-white text-[#489CFF] rounded-md py-2 px-4 font-Poppins">Request Withdraw</button>
@@ -246,12 +246,12 @@ function Dashboard() {
         <table className="min-w-full mt-4 text-left font-Poppins overflow-x-auto">
           <thead>
             <tr>
-              <th className="py-2 min-w-[150px]">Purchase Date</th>
-              <th className="py-2 min-w-[150px]">Name</th>
-              <th className="py-2 min-w-[150px]">Service</th>
-              <th className="py-2 min-w-[150px]">Booking date</th>
-              <th className="py-2 min-w-[150px]">Time</th>
-              <th className="py-2 min-w-[150px]">Price</th>
+              <th className="py-2 ">Purchase Date</th>
+              <th className="py-2 ">Name</th>
+              <th className="py-2">Service</th>
+              <th className="py-2">Booking date</th>
+              <th className="py-2">Time</th>
+              <th className="py-2">Price</th>
             </tr>
           </thead>
           <tbody>
