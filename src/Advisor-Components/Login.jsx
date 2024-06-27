@@ -10,7 +10,7 @@ import { RecaptchaVerifier, getAuth, signInWithPhoneNumber } from 'firebase/auth
 import { v1 as uuidv1 } from 'uuid';
 import Swal from 'sweetalert2';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login() {
 
@@ -128,7 +128,7 @@ export default function Login() {
                   </DialogTitle>
                   <div className="mt-2">
                     <form className='flex flex-col'>
-
+                  <p className='mt-4 text-center'>Don't have account?  <span className='text-blue-500'><Link to='/adviser/signup'>SignUp Here</Link></span></p>
 
 <TextField
               name='email'

@@ -7,6 +7,7 @@ import checkicon from '../user-assets/checkicon.png'
 import { child, get, getDatabase, ref, set } from "firebase/database";
 import { app } from "../firebase";
 import { useNavigate } from 'react-router-dom'
+import User from '../assets/User.png'
 
 const Categories= ["Career", "Business", "Health", "Technology", "Education", "Legal", "Marketing"]
 
@@ -36,6 +37,8 @@ function UserCategory() {
       return [];
     }
   }
+
+
 
   useEffect(() => {
       getAllAdvisers().then((advisersData) => {
@@ -89,7 +92,7 @@ function UserCategory() {
 <div className="bg-white rounded-lg shadow p-4 px-[20px] flex cursor-pointer" key={idx}  onClick={()=> handleClick(adviser.id)}>
 <div className=' flex flex-col justify-center items-center'>
 <img
-  src={adviser.data.profile_photo}
+  src={adviser && adviser.data.profile_photo ? adviser.data.profile_photo : User }
   alt="Consultant"
   className="rounded-full h-24 w-24"
 />

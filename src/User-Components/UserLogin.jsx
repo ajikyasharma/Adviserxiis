@@ -143,6 +143,7 @@ export default function UserLogin() {
         icon: "success"
       });
       setVerified(true);
+      handleSubmit()
     } catch (error) {
       await Swal.fire({
         title: "Error",
@@ -353,7 +354,7 @@ export default function UserLogin() {
                         {!loading ? 'Verify' : <CircularProgress color="inherit" />}
                       </Button>}
 
-                      {(otpSent && verified) && <Button
+                      {/* {(otpSent && verified) && <Button
                         variant="contained"
                         // color="secondary"
                         aria-label="Register"
@@ -365,7 +366,7 @@ export default function UserLogin() {
                         style={{ margin: "0 auto", marginTop: "5px", height: "50px", backgroundColor: "#489CFF" }}
                       >
                         {!loading ? 'Create Account' : <CircularProgress color="inherit" />}
-                      </Button>}
+                      </Button>} */}
 
 
 

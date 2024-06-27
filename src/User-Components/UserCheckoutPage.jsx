@@ -12,6 +12,7 @@ import * as Yup from "yup";
 import { useFormik } from 'formik';
 import { isBefore, startOfDay } from 'date-fns';
 import Swal from 'sweetalert2'
+import User from '../assets/User.png'
 
 function UserCheckoutPage() {
   const database = getDatabase(app);
@@ -36,13 +37,21 @@ function UserCheckoutPage() {
     {
        Swal.fire({
         title: "Oops!!",
-        text: "You need to be login.",
+        text: "You need to be loggedin.",
         icon: "error"
       });
           navigate('/createaccount')
 
     } 
   },[])
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Add 1 because months are zero-indexed
+    const day = String(today.getDate()).padStart(2, '0');
+  
+    return `${year}-${month}-${day}`;
+  };
 
 
 
@@ -116,12 +125,39 @@ function UserCheckoutPage() {
                     adviserid: adviserid,
                     scheduled_date:formik.values.date,
                     scheduled_time:formik.values.time,
+                    purchased_date:getCurrentDate()
                   });
 
                   await update(ref(database, 'users/' + userid), {
                       name:`${user.name? user.name: formik.values.name}`,
                       email:formik.values.email
                   });
+
+                  try {
+                    const userRef = ref(database, `advisers/${adviserid}`);
+              
+                    // Fetch current data
+                    const snapshot = await get(userRef);
+              
+                    if (snapshot.exists()) {
+                      const userData = snapshot.val();
+              
+                      // Calculate new earnings
+                      const currentEarnings = userData.earnings || 0;
+                      const updatedEarnings = currentEarnings + service.price;
+              
+                      // Update earnings
+                      await update(userRef, {
+                        earnings: updatedEarnings
+                      });
+              
+                      console.log('Earnings updated successfully');
+                    } else {
+                      console.error('No data available for the specified user');
+                    }
+                  } catch (error) {
+                    console.error('Error updating earnings:', error);
+                  } 
 
                   await Swal.fire({
                     title: "Success",
@@ -330,7 +366,7 @@ function UserCheckoutPage() {
           <div className='flex items-center'>
             <div className=" w-2/6 md:w-1/6 mr-[30px] md:mr-[50px] ">
               <img
-                src={adviser && adviser.profile_photo ? adviser.profile_photo : ''}
+                src={adviser && adviser.profile_photo ? adviser.profile_photo : User}
                 alt=""
                 className="h-32 w-32 rounded-full"
               />

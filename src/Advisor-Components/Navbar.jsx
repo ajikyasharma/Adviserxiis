@@ -70,11 +70,11 @@ export default function Navbar() {
               </div>
         </NavLink>
 
-        <NavLink to="/videocall">
+        {/* <NavLink to="/videocall">
              <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
                <p>VIDEO CALL</p>
               </div>
-        </NavLink>
+        </NavLink> */}
 
 
 
@@ -108,11 +108,11 @@ export default function Navbar() {
               </div>
         </NavLink>
 
-        <NavLink to="/videocall" >
+        {/* <NavLink to="/videocall" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
                <p>VIDEO CALL</p>
               </div>
-        </NavLink>
+        </NavLink> */}
 
             
                 </Disclosure.Button>

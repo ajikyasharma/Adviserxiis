@@ -8,6 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { child, get, getDatabase, ref, set } from "firebase/database";
 import { app } from "../firebase";
 import { CircularProgress } from '@mui/material'
+import User from '../assets/User.png'
 
 function UserAdviserProfile() {
 
@@ -94,7 +95,7 @@ function UserAdviserProfile() {
       <div className='flex items-center'>
       <div className="  w-2/6 md:w-1/6 mr-[30px] md:mr-[50px] ">
       <img
-            src={adviser && adviser.profile_photo ? adviser.profile_photo : ''}
+            src={adviser && adviser.profile_photo ? adviser.profile_photo : User}
             alt=""
             className="h-32 w-32 rounded-full"
           />
