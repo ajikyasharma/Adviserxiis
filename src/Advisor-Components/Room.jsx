@@ -10,7 +10,7 @@ function Room() {
    const myMeeting = async (element) =>{
       const appID = 734135390;
       const serverSecret = "575e59b76d631b27911ff95b6fcd67d2"
-      const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, meetingid, Date.now().toString(), "Ajikya Sharma");
+      const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, meetingid, Date.now().toString(), "Name");
 
       const zc = ZegoUIKitPrebuilt.create(kitToken)
       zc.joinRoom({

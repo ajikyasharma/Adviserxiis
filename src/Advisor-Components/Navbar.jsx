@@ -76,11 +76,7 @@ export default function Navbar() {
               </div>
         </NavLink>
 
-        <NavLink to="/payment">
-             <div className={`font-Poppins text-lg  h-full flex items-center mx-3`}>
-               <p>PAYMENT</p>
-              </div>
-        </NavLink>
+
 
                   </div>
                 </div>
@@ -118,11 +114,6 @@ export default function Navbar() {
               </div>
         </NavLink>
 
-        <NavLink to="/payment" >
-             <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
-               <p>PAYMENT</p>
-              </div>
-        </NavLink>
             
                 </Disclosure.Button>
 

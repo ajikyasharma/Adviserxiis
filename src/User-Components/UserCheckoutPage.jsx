@@ -5,7 +5,7 @@ import twitter from '../user-assets/twitter.png'
 import profile from '../assets/profile.png'
 import backicon from '../user-assets/backicon.png';
 import { useNavigate, useParams } from 'react-router-dom'
-import { child, get, getDatabase, ref, set } from "firebase/database";
+import { child, get, getDatabase, ref, set, update } from "firebase/database";
 import { app } from "../firebase";
 import { CircularProgress } from '@mui/material'
 import * as Yup from "yup";
@@ -15,9 +15,9 @@ import Swal from 'sweetalert2'
 
 function UserCheckoutPage() {
   const database = getDatabase(app);
+  const navigate = useNavigate()
 
   const { adviserid, serviceid } = useParams()
-  const navigate = useNavigate()
   const userid = JSON.parse(localStorage.getItem('userid'))
 
 
@@ -27,6 +27,22 @@ function UserCheckoutPage() {
   const [loading, setLoading] = useState(true)
   const [loading1, setLoading1] = useState(false)
   const [paymentId, setPaymentId] = useState(null)
+
+
+
+
+  useEffect(()=>{
+  if( JSON.parse(localStorage.getItem('userid')) == null)
+    {
+       Swal.fire({
+        title: "Oops!!",
+        text: "You need to be login.",
+        icon: "error"
+      });
+          navigate('/createaccount')
+
+    } 
+  },[])
 
 
 
@@ -98,9 +114,13 @@ function UserCheckoutPage() {
                     serviceid:serviceid,
                     userid:userid,
                     adviserid: adviserid,
-                    username:`${user.username? user.username: formik.values.name}`,
                     scheduled_date:formik.values.date,
                     scheduled_time:formik.values.time,
+                  });
+
+                  await update(ref(database, 'users/' + userid), {
+                      name:`${user.name? user.name: formik.values.name}`,
+                      email:formik.values.email
                   });
 
                   await Swal.fire({
@@ -123,6 +143,25 @@ function UserCheckoutPage() {
                 setLoading1(false)
         
               }
+              const payload = {
+                userid:userid,
+                adviserid:adviserid,
+                serviceid:serviceid,
+                paymentid:jsonRes.paymentId,
+              };
+
+
+    try {
+      const response = await fetch('https://adviserxiis-backend.vercel.app/sendconfirmationemail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+    } catch (error) {
+      console.error('Error in sending emails', error);
+    }
 
         },
 
@@ -157,6 +196,7 @@ function UserCheckoutPage() {
     date: '',
     time: '',
     name:'',
+    email:''
   }
 
   const validationSchema = Yup.object().shape({
@@ -172,13 +212,17 @@ function UserCheckoutPage() {
         'Time must be in HH:mm format'
       ),
       name: Yup.string()
-      .min(2, 'Name must be at least 2 characters')
+      .min(2, 'Name must be at least 2 characters'),
+      email: Yup.string()
+      .email('Invalid email address')
+      .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in)$/, 'Email must be a valid .com or .in domain')
+      .required('Email is required'),
   });
 
 
   const handleSubmit = async () => {
    
-    if( !user.username && formik.values.name == '')
+    if( !user.name && formik.values.name == '')
       {
          Swal.fire({
           title: "Error",
@@ -284,14 +328,14 @@ function UserCheckoutPage() {
           </div>
 
           <div className='flex items-center'>
-            <div className="mr-[30px] md:mr-[50px] ">
+            <div className=" w-2/6 md:w-1/6 mr-[30px] md:mr-[50px] ">
               <img
                 src={adviser && adviser.profile_photo ? adviser.profile_photo : ''}
                 alt=""
                 className="h-32 w-32 rounded-full"
               />
             </div>
-            <div>
+            <div className='w-4/6 md:w-5/6'>
               <h1 className="text-2xl font-semibold">{adviser && adviser.username ? adviser.username : ''}</h1>
               <p className="text-gray-500">{adviser && adviser.professional_bio ? adviser.professional_bio : ''}</p>
             </div>
@@ -316,7 +360,29 @@ function UserCheckoutPage() {
                 <small className="text-gray-500">Will update you the booking details on this number</small>
               </div>
 
-              {  !user.username &&   <div>
+               <div>
+                                <label className="block text-gray-700">Email</label>
+                                <input name="email" type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm h-12 p-2" placeholder='Enter Your Email'
+                                  value={formik.values.email}
+                                  onChange={formik.handleChange}
+                                  onBlur={formik.handleBlur}
+                                />
+                                {formik.touched.email &&
+                                  formik.errors.email && (
+                                    <p
+                                      style={{
+                                        fontSize: "13px",
+                                        padding: "",
+                                        color: "red",
+                                      }}
+                                    >
+                                      {formik.errors.email}
+                                    </p>
+                                  )}
+                              </div>
+              
+
+              { user && !user.name &&   <div>
                                 <label className="block text-gray-700">Name</label>
                                 <input name="name" type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm h-12 p-2" placeholder='Enter Name'
                                   value={formik.values.name}
