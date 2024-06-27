@@ -158,7 +158,7 @@ export default function Login() {
               helperText={formik.touched.password && formik.errors.password}
               variant="outlined"
               margin="dense"
-              className=' font-workSans w-[360px] sm:w-[380px]'
+              className=' font-workSans w-[300px] sm:w-[380px]'
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
