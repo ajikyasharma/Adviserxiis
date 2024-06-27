@@ -90,13 +90,13 @@ export default function Navbar() {
           <Disclosure.Panel className="sm:hidden">
             <div className="">
                 <Disclosure.Button>
-                  <NavLink to="/app" >
+                  <NavLink to="/adviser/login" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
                <p>LOGIN</p>
               </div>
         </NavLink>
 
-        <NavLink to="/signup" >
+        <NavLink to="/adviser/signup" >
              <div className={`py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors`}>
                <p>SIGNUP</p>
               </div>

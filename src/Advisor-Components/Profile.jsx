@@ -129,7 +129,7 @@ function Profile() {
           placeholder=''
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          className="mt-1 block w-full h-12 p-2 rounded-md border-gray-300 shadow-sm font-Poppins focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          className="mt-1 block w-full h-16 p-2 rounded-md border-gray-300 shadow-sm font-Poppins focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
           rows="3"
         />
                               {formik.touched.professional_bio &&
