@@ -4,21 +4,24 @@ import { useFormik } from 'formik';
 import { get, getDatabase, ref, set, update } from "firebase/database";
 import { app } from "../firebase";
 import { v1 as uuidv1 } from 'uuid';
-import { CircularProgress } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import Swal from 'sweetalert2';
+import AvailabilitySchedule from './AvailabilitySchedule';
 
 const ServiceForm = () => {
 
   const database = getDatabase(app);
   const [loading, setLoading] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const initialValues = {
     service_name: '',
     about_service: '',
     duration: '',
     price: '',
-    booking_days: '',
-    booking_time:''
+    // booking_days: '',
+    // booking_time:''
+    availability:null
   }
 
   const validationSchema = Yup.object().shape({
@@ -37,11 +40,22 @@ const ServiceForm = () => {
       .typeError('Price must be a number')
       .positive('Price must be a positive number')
       .integer('Price must be an integer'),
-    booking_days: Yup.string()
-      .required('Booking days is required'),
-    booking_time: Yup.string()
-      .required('Booking time is required')
+    // booking_days: Yup.string()
+    //   .required('Booking days is required'),
+    // booking_time: Yup.string()
+    //   .required('Booking time is required'),
+    availability: Yup.mixed()
+      .nullable()
+      .required('You have to set your availability')
   });
+
+  const handleDialogOpen = () => {
+    setDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
 
   async function getUser(userId) {
     const nodeRef = ref(database, `advisers/${userId}`);
@@ -61,7 +75,9 @@ const ServiceForm = () => {
   
 
   const handleSubmit = async () => {
-    
+          
+    console.log("values", formik.values)
+    console.log("ava", formik.values.availability)
     setLoading(true)
     const serviceid = uuidv1();
     const userid = JSON.parse(localStorage.getItem('adviserid'))
@@ -73,8 +89,9 @@ const ServiceForm = () => {
       about_service:formik.values.about_service,
       duration:formik.values.duration,
       price:formik.values.price,
-      booking_days:formik.values.booking_days,
-      booking_time:formik.values.booking_time
+      // booking_days:formik.values.booking_days,
+      // booking_time:formik.values.booking_time
+      availability:formik.values.availability
 
     });
 
@@ -211,7 +228,7 @@ const ServiceForm = () => {
                   </p>
                 )}
         </div>
-        <div>
+        {/* <div>
           <label className="block text-sm font-bold text-gray-700 font-Poppins">Booking Days</label>
           <input
             name="booking_days"
@@ -258,9 +275,26 @@ const ServiceForm = () => {
                     {formik.errors.booking_time}
                   </p>
                 )}
+        </div> */}
+
+        <div>
+        <Button onClick={handleDialogOpen} variant="contained" color="primary">Set Availability</Button>
+        <AvailabilitySchedule open={dialogOpen} handleClose={handleDialogClose} formik={formik}/>
+        {formik.touched.availability &&
+                formik.errors.availability && (
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      padding: "",
+                      color: "red",
+                    }}
+                  >
+                    {formik.errors.availability}
+                  </p>
+                )}
         </div>
         <div className="flex space-x-4">
-          <button className="bg-[#489CFF] text-white rounded-md py-2 px-4 font-Poppins" onClick={formik.handleSubmit}>
+          <button className="bg-[#489CFF] text-white rounded-md py-2 px-4 font-Poppins" onClick={formik.handleSubmit} type="submit">
           { !loading ? 'Publish' : <CircularProgress  color="inherit"  />}
           </button>
           <button className="bg-[#FF5348] text-white rounded-md py-2 px-4 font-Poppins" onClick={deleteHandler}>Delete</button>
