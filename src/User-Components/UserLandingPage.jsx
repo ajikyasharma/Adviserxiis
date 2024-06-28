@@ -15,7 +15,7 @@ import linkedin1 from '../user-assets/linkedin1.png'
 
 function UserLandingPage() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col pt-[80px]">
       <div className=" container mx-auto flex-grow">
         <section className="relative bg-[#489CFF] text-white py-16 px-4 md:px-8">
           <div className="container mx-auto flex flex-col md:flex-row items-center">

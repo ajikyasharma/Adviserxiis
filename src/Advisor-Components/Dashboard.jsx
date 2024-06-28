@@ -71,7 +71,6 @@ function Dashboard() {
     try {
       const snapshot = await get(userRef);
       if (snapshot.exists()) {
-        console.log(snapshot.val())
         return snapshot.val();
 
       } else {

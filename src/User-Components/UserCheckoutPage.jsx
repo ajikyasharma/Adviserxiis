@@ -349,7 +349,7 @@ function UserCheckoutPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 font-inter">
+    <div className="container mx-auto px-4 font-inter pt-[80px]">
       <div className='min-h-screen'>
         <div className="flex  items-center my-8 ">
 

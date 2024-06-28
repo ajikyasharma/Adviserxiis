@@ -14,7 +14,7 @@ export default function UserNavbar() {
 
   const navigate= useNavigate()
   return (
-    <Disclosure as="nav" className="bg-[#A9A9A91A]">
+    <Disclosure as="nav" className="bg-[#A9A9A91A] fixed z-50 h-[80px]  w-full">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -35,7 +35,7 @@ export default function UserNavbar() {
                 <div className="flex flex-shrink-0 items-center">
                   <Link  to="/">
                   <img
-                    className="h-8 w-auto"
+                    className="h-16 w-auto pt-4"
                     src={logo}
                     alt=""
                   />
@@ -48,7 +48,7 @@ export default function UserNavbar() {
 
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-4 pt-4">
 
                 
 
