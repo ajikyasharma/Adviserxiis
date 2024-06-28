@@ -78,11 +78,11 @@ function UserAdviserProfile() {
 
 
   return (
-    <div className="container mx-auto px-4 font-inter pt-[80px]">
+    <div className="container mx-auto font-inter pt-[80px]">
     <div className='min-h-screen'>
     <div className="flex  items-center my-8 ">
 
-        <div className='md:mx-[100px] hidden md:block'>
+        <div className='md:mr-[100px] md:ml-[20px] hidden md:block'>
         <button className="bg-[#489CFF] text-white py-2 px-4 rounded-full cursor-pointer" onClick={()=> naviagte('/category')} >
         <img 
           src={backicon}
@@ -97,17 +97,17 @@ function UserAdviserProfile() {
       <img
             src={adviser && adviser.profile_photo ? adviser.profile_photo : User}
             alt=""
-            className="h-32 w-32 rounded-full"
+            className="h-32 w-32 rounded-full object-cover"
           />
       </div>
       <div className='w-4/6 md:w-5/6'>
-      <h1 className="text-2xl font-semibold">{adviser.username}</h1>
+      <h1 className="text-2xl font-semibold mb-[10px]">{adviser.username}</h1>
       <p className="text-gray-500">{adviser.professional_bio
       }</p>
       </div>
       </div>
     </div>
-    <div className=" md:ml-[250px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+    <div className=" md:ml-[150px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
       {services.map((service, index) => (
         <div key={index} className="bg-gray-100 p-4 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-2">{service.data.service_name}</h2>

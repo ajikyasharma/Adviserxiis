@@ -139,14 +139,14 @@ function Profile() {
   }
 
   return (
-    <div className="flex flex-col p-6 space-y-6">
-    <p className='font-Poppins text-xl sm:text-3xl font-bold s my-2'>Profile</p>
+    <div className="flex flex-col p-6 lg:pt-0 space-y-6">
+    <p className='font-Poppins text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold s my-2'>Profile</p>
 
     <div className="flex items-center space-x-4 w-full my-4">
         <img 
           src={user && user.profile_photo ? user.profile_photo : User} 
           alt="" 
-          className="rounded-full w-32 h-32"
+          className="rounded-full w-32 h-32 lg:h-48 lg:w-48 object-cover"
         />
         <div>
           {/* <p className="text-lg font-medium font-Poppins">Edit Profile Image</p> */}

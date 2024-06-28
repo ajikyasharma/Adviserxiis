@@ -67,11 +67,11 @@ function Services() {
     return <div className='h-screen flex justify-center items-center'><CircularProgress  /></div>; // Show a loading message or spinner while fetching data
   }
   return (
-    <div className="flex flex-col p-6 space-y-6">
+    <div className="flex flex-col pt-0 p-6 space-y-6">
 
     <div className="flex justify-between items-center">
-    <p className='font-Poppins text-xl sm:text-3xl font-bold s my-2'>Services</p>
-      <button className="bg-[#489CFF] text-white rounded-md py-2 px-4" onClick={()=> navigate('/adviser/createservice')}>Create New Service</button>
+    <p className='font-Poppins text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold s my-2'>Services</p>
+      <button className="bg-[#489CFF] text-white rounded-md py-2 px-4 md:text-lg lg:text-xl" onClick={()=> navigate('/adviser/createservice')}>Create New Service</button>
     </div>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
@@ -83,7 +83,7 @@ function Services() {
                   <h2 className="text-xl font-bold font-Poppins">{service.data.service_name}</h2>
                   <p className="mt-2 text-gray-700 font-Poppins">{service.data.about_service}</p>
                   <p className="mt-4 font-bold font-Poppins">Duration : {service.data.duration} |  Rs {service.data.price}/-</p>
-                  <button className="mt-4 bg-[#489CFF] text-white rounded-md py-2 px-4 font-Poppins">Edit</button>
+                  <button className="mt-4 bg-[#489CFF] text-white rounded-md py-2  px-4 md:px-[30px] font-Poppins">Edit</button>
                 </div>
       ))}
 

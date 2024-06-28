@@ -18,7 +18,7 @@ function Header({ setShowSideBar, showSideBar }) {
         showSideBar ? "pl-[300px] bg-white" : "bg-white"
       }`}
     >
-      <div className="pl-4 md:pl-16">
+      <div className="lg:hidden pl-4 md:pl-16">
         <Bars3CenterLeftIcon
           className="h-8 w-8 text-gray-700 cursor-pointer"
           onClick={() => setShowSideBar(!showSideBar)}

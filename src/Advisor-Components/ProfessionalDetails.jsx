@@ -86,17 +86,17 @@ function ProfessionalDetails() {
   return (
     <div className='min-h-screen flex flex-col md:flex-row'>
       <div
-        className="absolute top-0 right-0 w-full h-full bg-no-repeat bg-right-top"
+        className="hidden sm:block absolute top-0 right-0 w-full h-full bg-no-repeat bg-right-top"
         style={{ backgroundImage: `url(${background3})`, backgroundSize: '60% auto' }}
       ></div>
-      <div className='min-h-screen w-full md:w-3/6 flex flex-col items-center mt-[200px]  md:mt-[150px] '>
+      <div className='min-h-screen w-full md:w-3/6 flex flex-col items-center mt-[60px] sm:mt-[150px] '>
         <div className='flex items-center justify-center' >
           <img className="object-cover" src={logo} alt="" />
         </div>
 
         <div className="relative z-10 w-full max-w-md p-8  ">
           {/* <h2 className="text-2xl font-bold mb-6 text-center">PROFESSIONAL INFORMATION</h2> */}
-          <p className='font-workSans text-md mt-4  text-[#489CFF]' style={{ marginTop: "50px", marginBottom: "20px" }}>PROFESSIONAL INFORMATION
+          <p className='font-workSans text-md mt-4  text-[#489CFF] mb-[10px] sm:mb-[20px]' style={{ marginTop: "50px" }}>PROFESSIONAL INFORMATION
           </p>
           <form>
             <div className="mb-4">

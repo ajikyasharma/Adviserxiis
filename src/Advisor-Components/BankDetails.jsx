@@ -84,7 +84,7 @@ function BankDetails() {
   const navigate = useNavigate()
   return (
     <div className='min-h-screen flex flex-col  md:flex-row-reverse'>
-      <div className=' w-full md:w-3/6 bg-cover flex justify-center items-center ' style={{ backgroundImage: `url(${background2})` }} >
+      <div className='hidden w-full md:w-3/6 bg-cover sm:flex justify-center items-center ' style={{ backgroundImage: `url(${background2})` }} >
         <img className="object-contain h-auto max-w-full" style={{ paddingTop: "80px" }} src={image4} alt="" />
       </div>
       <div className='min-h-screen w-full md:w-3/6 flex flex-col items-center'>

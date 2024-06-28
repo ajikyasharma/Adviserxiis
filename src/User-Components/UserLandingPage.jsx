@@ -17,13 +17,13 @@ function UserLandingPage() {
   return (
     <div className="min-h-screen flex flex-col pt-[80px]">
       <div className=" container mx-auto flex-grow">
-        <section className="relative bg-[#489CFF] text-white py-16 px-4 md:px-8">
+        <section className="relative bg-[#489CFF] text-white py-16 px-4 md:px-8 ">
           <div className="container mx-auto flex flex-col md:flex-row items-center">
             <div className="md:w-2/5 mt-[40px] md:mt-[100px]">
               <h1 className="text-4xl md:text-5xl font-bold mb-4 font-Poppins text-black">
-                Get professional advice from top experts
+                Get professional,<br /> advice from top experts
               </h1>
-              <div className="relative ">
+              {/* <div className="relative ">
                 <input
                   type="text"
                   className="w-full p-3 h-16 rounded shadow text-black font-Poppins"
@@ -32,12 +32,13 @@ function UserLandingPage() {
                 <button className="absolute right-0 top-0 my-2 mr-2 p-3 bg-[#489CFF] text-white  rounded font-Poppins">
                   Search
                 </button>
-              </div>
+              </div> */}
             </div>
+          
             <div className="md:w-3/5 flex justify-center mt-8 md:mt-0">
               <img
                 src={bg1}
-                alt="Top Right Illustration"
+                alt=""
                 className="max-w-full h-auto"
               />
             </div>
@@ -85,10 +86,10 @@ function UserLandingPage() {
         </section>
 
         <div className="font-Poppins">
-          <h2 className="text-3xl font-bold my-4 text-center">Catergories</h2>
+          <h2 className="text-3xl lg:text-4xl mb-[20px] font-bold my-4 text-center">Catergories</h2>
 
           <div className="my-4 ">
-            <ul className=" grid grid-cols-3 gap-4 sm:flex sm:flex-wrap sm:space-x-4 md:space-x-12 sm:space-y-2 px-4">
+            <ul className=" grid grid-cols-3 gap-4 sm:flex sm:flex-wrap sm:space-x-4 sm:justify-center md:space-x-12 sm:space-y-2 px-4">
               <li className="px-4 py-2 rounded-full bg-[#F3F3F3] text-lg font-semibold text-center">
                 <a href="/" className="">
                   Dietitian
@@ -114,16 +115,7 @@ function UserLandingPage() {
                   Funds
                 </a>
               </li>
-              <li className="px-4 py-2 rounded-full bg-[#F3F3F3] text-lg font-semibold text-center">
-                <a href="/" className="">
-                  Funds
-                </a>
-              </li>
-              <li className="px-4 py-2 rounded-full bg-[#F3F3F3] text-lg font-semibold text-center">
-                <a href="/" className="">
-                  Funds
-                </a>
-              </li>
+
               <li className="px-4 py-2 rounded-full bg-[#F3F3F3] text-lg font-semibold text-center">
                 <a href="/" className="">
                   Startups
@@ -160,12 +152,12 @@ function UserLandingPage() {
 
         <div className="font-Poppins md:mt-[100px] mt-[50px]">
           <div>
-            <h2 className="text-3xl font-bold my-4 text-center">
+            <h2 className="text-3xl lg:text-4xl md:mt-[100px] font-bold my-4 text-center">
               How it works
             </h2>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between mt-[60px]">
+          <div className="flex flex-col md:flex-row justify-between mt-[60px] lg:px-[200px]">
             <div className="flex flex-col">
               <img src={image2} alt="" className="" />
 
@@ -187,13 +179,13 @@ function UserLandingPage() {
       </div>
 
       <div
-        className="relative h-[350px] bg-cover bg-center flex justify-center items-center  font-Poppins mt-[100px]"
+        className="relative h-[350px] md:h-[450px] bg-cover bg-center flex justify-center items-center  font-Poppins mt-[100px] bg-opacity-10"
         style={{ backgroundImage: `url(${bg2})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black to-gary-200 opacity-10 "></div>
 
         <div>
-          <p className="text-4xl lg:text-5xl font-bold text-white text-center">
+          <p className="text-4xl lg:text-5xl font-bold text-white text-center ">
             Now time to take professional Advise
           </p>
           <div className="flex justify-center">

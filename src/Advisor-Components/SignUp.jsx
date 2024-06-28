@@ -196,7 +196,7 @@ function SignUp() {
 
   return (
     <div className='min-h-screen flex flex-col md:flex-row'>
-      <div className=' w-full md:w-3/6 bg-cover flex justify-center items-center ' style={{ backgroundImage: `url(${background2})` }} >
+      <div className='hidden  w-full md:w-3/6 bg-cover sm:flex justify-center items-center ' style={{ backgroundImage: `url(${background2})` }} >
         <img className="object-contain h-auto max-w-full" style={{ paddingTop: "80px" }} src={image3} alt="" />
       </div>
       <div className='min-h-screen w-full md:w-3/6 flex flex-col items-center'>

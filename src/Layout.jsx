@@ -44,9 +44,11 @@ function Layout() {
       </Transition>
 
       <div className="flex-1">
-        <Header setShowSideBar={setShowSideBar} showSideBar={showSideBar} />
+        <div className="lg:hidden">
+        <Header  setShowSideBar={setShowSideBar} showSideBar={showSideBar} />
+        </div>
         <div
-          className={`pt-20 p-4 transition-all duration-[400ms] ${
+          className={`pt-20 lg:pt-[50px]  p-4 transition-all duration-[400ms] ${
             showSideBar && !isMobile ? "pl-[350px] p-4" : ""
           }`}
         >

@@ -31,11 +31,11 @@ const SideBar = forwardRef(({ showSideBar }, ref) => {
 
 
   return (
-    <div ref={ref} className="fixed w-[270px] h-full ">
-            <div className="flex justify-center  ">
-            <div className='flex items-center justify-center' style={{ marginTop: "70px" }}>
+    <div ref={ref} className="fixed w-[300px] h-full ">
+            <div className="flex  ">
+            <div className='flex items-center justify-center pl-[50px] mt-[70px] lg:mt-[30px] lg:mb-[20px] '>
               <Link to='/adviser' className="cursor-pointer">
-              <img className="object-cover" src={logo} alt="" />
+              <img className="object-cover h-24" src={logo} alt="" />
               </Link>
           
         </div>
@@ -43,14 +43,14 @@ const SideBar = forwardRef(({ showSideBar }, ref) => {
       <div className=" bg-[#489CFF] h-full rounded-tr-[100px]">
 
 
-      <div className="flex flex-col pt-[20px]">
+      <div className="flex flex-col pt-[40px] pl-[30px]">
 
         <NavLink
           to="/adviser/dashboard"
           className={({ isActive }) =>
             ` ${
               isActive
-                ? " text-white font-Poppins"
+                ? " text-white font-Poppins "
                 : "text-gray-300 hover:text-white font-Poppins"
             } `
           }
@@ -60,7 +60,7 @@ const SideBar = forwardRef(({ showSideBar }, ref) => {
           >
 
             <div>
-              <p className="font-Poppins font-2xl ">Dashboard</p>
+              <p className="font-Poppins font-2xl " style={{fontSize:"20px"}}>Dashboard</p>
             </div>
           </div>
         </NavLink>
@@ -79,7 +79,7 @@ const SideBar = forwardRef(({ showSideBar }, ref) => {
           >
 
             <div>
-              <p className="font-Poppins font-2xl">Services</p>
+              <p className="font-Poppins font-2xl" style={{fontSize:"20px"}}>Services</p>
             </div>
           </div>
         </NavLink>
@@ -99,7 +99,7 @@ const SideBar = forwardRef(({ showSideBar }, ref) => {
           >
 
             <div>
-              <p className="font-Poppins font-2xl">Profile</p>
+              <p className="font-Poppins font-2xl" style={{fontSize:"20px"}}>Profile</p>
             </div>
           </div>
         </NavLink>
@@ -113,7 +113,7 @@ const SideBar = forwardRef(({ showSideBar }, ref) => {
           >
 
             <div>
-              <p className="font-Poppins font-2xl">Logout</p>
+              <p className="font-Poppins font-2xl" style={{fontSize:"20px"}}>Logout</p>
             </div>
           </div>
         </div>

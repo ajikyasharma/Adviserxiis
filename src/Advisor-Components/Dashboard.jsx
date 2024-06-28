@@ -177,11 +177,11 @@ function Dashboard() {
     return <div className='h-screen flex justify-center items-center'><CircularProgress  /></div>; // Show a loading message or spinner while fetching data
   }
   return (
-    <div className=''>
+    <div className='max-w-[1440px]'>
           <div>
-    <p className='font-Poppins text-xl sm:text-3xl font-bold s my-2'>Dashboard</p>
+    <p className='font-Poppins text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold s my-2'>Dashboard</p>
     </div>
-    <div className="flex flex-col md:flex-row justify-center md:justify-between sm:p-6 space-y-6 ">
+    <div className="flex flex-col md:flex-row justify-center md:justify-between sm:p-6 space-y-6 max-w-[1440px]">
 
     <div className="flex flex-col  sm:justify-between  md:items-start w-full md:w-3/6  ">
       <div className="flex items-center space-x-4 w-full my-4">
@@ -189,61 +189,60 @@ function Dashboard() {
         <img 
            src={user && user.profile_photo ? user.profile_photo :User}
           alt="" 
-          className="rounded-full w-32 h-32"
+          className="rounded-full w-32 h-32 lg:h-48 lg:w-48 object-cover"
         />
         <div>
-          <h1 className="text-xl font-bold font-Poppins">Welcome !!</h1>
-          <p className="text-lg font-bold font-Poppins">{user && user.username ? user.username : 'User'}</p>
+          <h1 className="text-lg md:text-xl lg:text-2xl font-Poppins mb-[10px]">Welcome !!</h1>
+          <p className="text-xl md:text-2xl lg:text-3xl font-bold font-Poppins">{user && user.username ? user.username : 'User'}</p>
         </div>
       </div>
 
-      {/* <div className="bg-[#489CFF] text-white rounded-xl w-full p-6 md:w-3/5 m-4">
-        <p className="text-lg font-Poppins">Total Earning</p>
+      <div className="mt-[30px]">
+        <p className="text-lg lg:text-3xl font-Poppins ml-4 font-bold">Total Earning</p>
+        <div className='bg-[#489CFF] text-white rounded-xl p-6 w-[320px] sm:w-[350px] md:w-[400px] m-4 '>
         <h2 className="text-4xl font-bold font-Poppins">₹ {user && user.earnings ? user.earnings : 0}</h2>
-        <button className="mt-4 bg-white text-[#489CFF] rounded-md py-2 px-4 font-Poppins">Request Withdraw</button>
-      </div> */}
+        <button className="mt-4 bg-white text-black rounded-[60px] py-2 px-[20px] font-Poppins">Request Withdraw</button>
+        </div>
+      </div>
     </div>
 
   
-    <div className="bg-[#489CFF] text-white rounded-xl  p-6 w-[300px] sm:w-[350px] m-4">
-        <p className="text-lg font-Poppins">Total Earning</p>
-        <h2 className="text-4xl font-bold font-Poppins">₹ {user && user.earnings ? user.earnings : 0}</h2>
-        <button className="mt-4 bg-white text-[#489CFF] rounded-md py-2 px-4 font-Poppins">Request Withdraw</button>
-      </div>
+
 
      
 
 
-    {/* <div className=" bg-white rounded-xl shadow-md  p-6 w-full  md:w-2/6 my-4">
-        <h2 className="text-xl font-bold font-Poppins">Upcoming Booking</h2>
+    <div className="  py-6  w-[320px] sm:w-[350px]   md:w-3/6 my-4 ">
+        <h2 className="text-xl md:tetx-2xl lg:text-3xl font-bold font-Poppins">Upcoming Booking</h2>
         <div className="mt-4 space-y-4">
-          <div className="bg-gray-100 p-4 rounded-md flex justify-between items-center">
+          <div className="bg-gray-100 p-4 rounded-md flex justify-between items-center md:text-lg lg:text-xl">
             <div>
-              <p className='font-Poppins'>User Name : Ritik</p>
+              <p className='font-Poppins font-bold'>User Name : Ritik</p>
               <p className='font-Poppins'>Service Request : 499</p>
               <p className='font-Poppins'>Booking for : Today, 10 mins left</p>
             </div>
-            <button className="bg-[#489CFF] text-white rounded-md py-2 px-4 font-Poppins">Join</button>
+            <button className="bg-[#489CFF] text-white rounded-md py-2 px-4 font-Poppins md:w-24">Join</button>
           </div>
-          <div className="bg-gray-100 p-4 rounded-md flex justify-between items-center">
+          <div className="bg-gray-100 p-4 rounded-md flex justify-between items-center md:text-lg lg:text-xl">
             <div>
-              <p className='font-Poppins'>User Name : Ritik</p>
+              <p className='font-Poppins font-bold'>User Name : Ritik</p>
               <p className='font-Poppins'>Service Request : 499</p>
               <p className='font-Poppins'>Booking for : Tomorrow, 9pm</p>
             </div>
-            <button className="bg-gray-300 text-white rounded-md py-2 px-4 font-Poppins" disabled>Join</button>
+            <button className="bg-gray-300 text-white rounded-md py-2 px-4 font-Poppins md:w-24" disabled>Join</button>
           </div>
         </div>
-      </div> */}
+      </div>
     
 
 
   </div>
-  <div className="flex  space-x-6 mt-[50px] sm:mt-[0px]">
-      <div className="flex-1 bg-white rounded-xl shadow-md p-6 ">
-        <h2 className="text-xl font-bold font-Poppins">Appointments</h2>
+  <div className="flex flex-col  mt-[50px] sm:mt-[0px] md:ml-4">
+  <h2 className="text-xl md:text-2xl lg:text-3xl md:p-6 font-bold font-Poppins">Appointments</h2>
+      <div className="flex-1 bg-white rounded-md shadow-lg p-6 ">
+
         <table className="min-w-full mt-4 text-left font-Poppins overflow-x-auto">
-          <thead>
+          <thead style={{fontSize:"20px"}}>
             <tr>
               <th className="py-2 ">Purchase Date</th>
               <th className="py-2 ">Name</th>
@@ -253,7 +252,7 @@ function Dashboard() {
               <th className="py-2">Price</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody style={{fontSize:"20px"}}>
             {appointmentData.map((data, idx) => (
                            <tr>
                            <td className="py-2">{convertDateFormat(data.purchased_date)}</td>

@@ -368,7 +368,7 @@ function UserCheckoutPage() {
               <img
                 src={adviser && adviser.profile_photo ? adviser.profile_photo : User}
                 alt=""
-                className="h-32 w-32 rounded-full"
+                className="h-32 w-32 rounded-full object-cover"
               />
             </div>
             <div className='w-4/6 md:w-5/6'>

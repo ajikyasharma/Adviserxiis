@@ -94,12 +94,12 @@ function UserCategory() {
 <img
   src={adviser && adviser.data.profile_photo ? adviser.data.profile_photo : User }
   alt="Consultant"
-  className="rounded-full h-24 w-24"
+  className="rounded-full h-24 w-24 object-cover"
 />
 <div>
 <Rating name="read-only" value={5} readOnly />
 </div>
-<p className='text-center text-sm'>English, Hindi</p>
+{/* <p className='text-center text-sm'>English, Hindi</p> */}
 {/* <p className='text-center text-sm'>₹ 5/min</p> */}
 </div>
 <div className="ml-4 mt-[10px] ">

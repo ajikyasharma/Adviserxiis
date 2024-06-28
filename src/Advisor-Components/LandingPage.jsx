@@ -7,8 +7,12 @@ import logo from '../assets/logo.png'
 import imgText1 from '../assets/imgText1.png'
 import imgText2 from '../assets/imgText2.png'
 import Navbar from './Navbar';
+import { useNavigate } from 'react-router-dom';
 
 function LandingPage() {
+ const adviserid = JSON.parse(localStorage.getItem('adviserid'))
+ const navigate = useNavigate()
+
   return (
     <div className="bg-cover bg-center min-h-screen " style={{ backgroundImage: `url(${background})` }}>
       <Navbar />
@@ -25,7 +29,8 @@ function LandingPage() {
                 Join our Army of 1000+ <br />
                 Advisers
               </p>
-              <button className='bg-[#489CFF] text-white px-2 py-2 sm:px-4 sm:py-2 rounded-md cursor-pointer font-Poppins my-3'>Create My Page</button>
+              { adviserid == null && <button className='bg-[#489CFF] text-white px-2 py-2 sm:px-4 sm:py-2 rounded-md cursor-pointer font-Poppins my-3' onClick={()=> navigate('/adviser/login')}>Create My Page</button>}
+              
             </div>
           </div>
           <div className=" md:w-3/5 flex items-center justify-center">
@@ -90,7 +95,10 @@ function LandingPage() {
             Don’t Miss out the chance<br /> of becoming <span className='text-black text-center'>TOP 1 %</span>
           </p>
           <div className='flex justify-center'>
-            <button className='bg-[#489CFF] text-white px-2 py-2 sm:px-4 sm:py-2 rounded-md cursor-pointer md:text-2xl font-Poppins md:h-16 md:w-64 my-3'>Create My Page</button>
+            {
+              adviserid == null && <button className='bg-[#489CFF] text-white px-2 py-2 sm:px-4 sm:py-2 rounded-md cursor-pointer md:text-2xl font-Poppins md:h-16 md:w-64 my-3' onClick={()=> navigate('/adviser/login')}>Create My Page</button>
+            }
+            
           </div>
         </div>
       </div>
@@ -138,7 +146,8 @@ function LandingPage() {
                 Side hustle <br />
                 today
               </p>
-              <button className='bg-[#489CFF] text-white px-4  py-1 sm:px-4 sm:py-2 rounded-md cursor-pointer font-Poppins my-3 text-lg sm:text-xl'>Get Started</button>
+              { adviserid == null &&     <button className='bg-[#489CFF] text-white px-4  py-1 sm:px-4 sm:py-2 rounded-md cursor-pointer font-Poppins my-3 text-lg sm:text-xl' onClick={()=> navigate('/adviser/login')}>Get Started</button> }
+
             </div>
           </div>
 
