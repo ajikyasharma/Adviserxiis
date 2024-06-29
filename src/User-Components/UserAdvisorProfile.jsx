@@ -92,15 +92,16 @@ function UserAdviserProfile() {
       </button>
         </div>
 
-      <div className='flex items-center'>
-      <div className="  w-2/6 md:w-1/6 mr-[30px] md:mr-[50px] ">
+      <div className='flex items-center  w-full'>
+      <div className=" w-1/6 mr-[30px] md:mr-[50px] ">
       <img
             src={adviser && adviser.profile_photo ? adviser.profile_photo : User}
             alt=""
-            className="h-32 w-32 rounded-full object-cover"
+            className="h-32 w-32 rounded-full "
+            style={{objectFit:"cover"}}
           />
       </div>
-      <div className='w-4/6 md:w-5/6'>
+      <div className='w-5/6'>
       <h1 className="text-2xl font-semibold mb-[10px]">{adviser.username}</h1>
       <p className="text-gray-500">{adviser.professional_bio
       }</p>

@@ -90,19 +90,20 @@ function UserCategory() {
            {advisers.map((adviser, idx) => (
 
 <div className="bg-white rounded-lg shadow p-4 px-[20px] flex cursor-pointer" key={idx}  onClick={()=> handleClick(adviser.id)}>
-<div className=' flex flex-col justify-center items-center'>
+<div className='w-1/5 flex flex-col justify-center items-center'>
 <img
   src={adviser && adviser.data.profile_photo ? adviser.data.profile_photo : User }
-  alt="Consultant"
-  className="rounded-full h-24 w-24 object-cover"
+  alt=""
+  className="rounded-full h-28 w-28 object-cover my-[10px]"
 />
+
 <div>
-<Rating name="read-only" value={5} readOnly />
+{/* <Rating name="read-only" value={5} readOnly /> */}
 </div>
 {/* <p className='text-center text-sm'>English, Hindi</p> */}
 {/* <p className='text-center text-sm'>₹ 5/min</p> */}
 </div>
-<div className="ml-4 mt-[10px] ">
+<div className="w-4/5 ml-4 mt-[10px] ">
   <div>
   <h2 className="text-2xl font-bold mt-[10px] mb-[8px]">{adviser.data.username}</h2>
   </div>

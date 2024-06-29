@@ -363,15 +363,15 @@ function UserCheckoutPage() {
             </button>
           </div>
 
-          <div className='flex items-center'>
-            <div className=" w-2/6 md:w-1/6 mr-[30px] md:mr-[50px] ">
+          <div className='flex items-center w-full'>
+            <div className=" w-1/6 mr-[30px] md:mr-[50px] ">
               <img
                 src={adviser && adviser.profile_photo ? adviser.profile_photo : User}
                 alt=""
                 className="h-32 w-32 rounded-full object-cover"
               />
             </div>
-            <div className='w-4/6 md:w-5/6'>
+            <div className='w-5/6'>
               <h1 className="text-2xl font-semibold">{adviser && adviser.username ? adviser.username : ''}</h1>
               <p className="text-gray-500">{adviser && adviser.professional_bio ? adviser.professional_bio : ''}</p>
             </div>
@@ -379,12 +379,12 @@ function UserCheckoutPage() {
         </div>
 
         <div className='md:ml-[250px] flex flex-col md:flex-row'>
-          <div className='w-full md:w-1/5 md:mr-[30px]'>
+          <div className='w-full md:w-1/6 md:mr-[30px]'>
             <h2 className="text-xl font-semibold mb-2">Service Description</h2>
             <p className="text-gray-500">{service && service.about_service ? service.about_service : ''}</p>
           </div>
 
-          <div className="w-full mt-[20px] md:mt-[0px]  md:w-3/5 lg:w-2/5 bg-gray-100 p-6 rounded-lg shadow-md">
+          <div className="w-full mt-[20px] md:mt-[0px]  md:w-3/6 bg-gray-100 p-6 rounded-lg shadow-md">
             <form className="space-y-4">
               <div>
                 <label className="block text-gray-700">Service</label>

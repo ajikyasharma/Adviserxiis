@@ -12,38 +12,42 @@ import bg2 from "../user-assets/bg2.jpeg";
 import insta1 from '../user-assets/insta1.png'
 import fb1 from '../user-assets/fb1.png'
 import linkedin1 from '../user-assets/linkedin1.png'
+import { useNavigate } from "react-router-dom";
 
 function UserLandingPage() {
+ 
+  const navigate = useNavigate()
+
   return (
     <div className="min-h-screen flex flex-col pt-[80px]">
       <div className=" container mx-auto flex-grow">
-        <section className="relative bg-[#489CFF] text-white py-16 px-4 md:px-8 ">
-          <div className="container mx-auto flex flex-col md:flex-row items-center">
-            <div className="md:w-2/5 mt-[40px] md:mt-[100px]">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 font-Poppins text-black">
-                Get professional,<br /> advice from top experts
-              </h1>
-              {/* <div className="relative ">
-                <input
-                  type="text"
-                  className="w-full p-3 h-16 rounded shadow text-black font-Poppins"
-                  placeholder="Search Adviser"
-                />
-                <button className="absolute right-0 top-0 my-2 mr-2 p-3 bg-[#489CFF] text-white  rounded font-Poppins">
-                  Search
-                </button>
-              </div> */}
-            </div>
-          
-            <div className="md:w-3/5 flex justify-center mt-8 md:mt-0">
-              <img
-                src={bg1}
-                alt=""
-                className="max-w-full h-auto"
-              />
-            </div>
-          </div>
-        </section>
+      <section className="relative bg-[#489CFF] text-white py-16 px-4 md:px-8">
+  <div className="container mx-auto flex flex-col md:flex-row items-center">
+    <div className="md:w-2/5 mt-[40px] md:mt-[100px]">
+      <h1 className="text-4xl md:text-5xl font-bold mb-4 font-Poppins text-black">
+        Get professional,<br /> advice from top experts
+      </h1>
+      <div className="relative">
+        <input
+          type="text"
+          className="w-full p-3 h-16 rounded shadow text-black font-Poppins"
+          placeholder="Search Adviser"
+        />
+        <button className="absolute right-0 top-0 my-2 mr-2 p-3 bg-[#489CFF] text-white rounded font-Poppins">
+          Search
+        </button>
+      </div>
+    </div>
+
+    <div className="md:w-3/5 flex justify-center mt-8 md:mt-0 relative z-10">
+      <img
+        src={bg1}
+        alt=""
+        className="max-w-full h-auto md:translate-y-10 md:-translate-x-10"
+      />
+    </div>
+  </div>
+</section>
         <section className="bg-[#F2F2F24D] mt-4 rounded-lg py-16 px-4 md:px-8 font-Poppins">
           <div className="container mx-auto text-center md:mx-[50px]">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -159,18 +163,18 @@ function UserLandingPage() {
 
           <div className="flex flex-col md:flex-row justify-between mt-[60px] lg:px-[200px]">
             <div className="flex flex-col">
-              <img src={image2} alt="" className="" />
+              <img src={image2} alt="" className=" h-32 md:h-48 lg:h-56 " />
 
               <p className="text-3xl  my-4 text-center">Choose your Adviser</p>
             </div>
             <div className="flex flex-col">
-              <img src={image3} alt="" className="" />
+              <img src={image3} alt="" className=" h-32 md:h-48 lg:h-56 " />
 
               <p className="text-3xl  my-4 text-center">Book Service</p>
             </div>
 
             <div className="flex flex-col">
-              <img src={image4} alt="" className="" />
+              <img src={image4} alt="" className=" h-32 md:h-48 lg:h-56 " />
 
               <p className="text-3xl  my-4 text-center">Enjoy Service</p>
             </div>
@@ -179,22 +183,22 @@ function UserLandingPage() {
       </div>
 
       <div
-        className="relative h-[350px] md:h-[450px] bg-cover bg-center flex justify-center items-center  font-Poppins mt-[100px] bg-opacity-10"
-        style={{ backgroundImage: `url(${bg2})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-black to-gary-200 opacity-10 "></div>
+  className="relative h-[350px] md:h-[450px] bg-cover bg-center flex justify-center items-center font-Poppins mt-[100px]"
+  style={{ backgroundImage: `url(${bg2})` }}
+>
+  <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-200" style={{ opacity: 0.5 }}></div>
 
-        <div>
-          <p className="text-4xl lg:text-5xl font-bold text-white text-center ">
-            Now time to take professional Advise
-          </p>
-          <div className="flex justify-center">
-            <button className="h-16 text-center px-[15px] text-white bg-[#407BFF] rounded-md mt-[20px] text-xl font-bold ">
-              Find Your adviser
-            </button>
-          </div>
-        </div>
-      </div>
+  <div className="relative z-10">
+    <p className="text-4xl lg:text-5xl font-bold text-white text-center">
+      Now time to take professional Advise
+    </p>
+    <div className="flex justify-center">
+      <button className="h-16 text-center px-[15px] text-white bg-[#407BFF] rounded-md mt-[20px] text-xl font-bold" onClick={()=>navigate('/category')}>
+        Find Your adviser
+      </button>
+    </div>
+  </div>
+</div>
 
       <div className="text-white bg-[#407BFF] font-Poppins ">
         <div className="container mx-auto py-4 flex flex-col md:flex-row justify-between">

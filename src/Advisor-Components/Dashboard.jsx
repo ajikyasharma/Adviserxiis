@@ -16,6 +16,13 @@ function Dashboard() {
   const userId = JSON.parse(localStorage.getItem('adviserid'));
 
   const [appointmentData, setAppointmantData] = useState([])
+  const [lastAppointments, setLastAppointments] = useState([])
+  const [upcommingAppoinment, setUpcommingAppointments] = useState([])
+
+  const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+
 
   function convertDateFormat(dateString) {
     // Split the input date string by the hyphen
@@ -161,6 +168,19 @@ function Dashboard() {
         };
       }));
       setAppointmantData(enrichedPayments)
+      const servicesBeforeToday = enrichedPayments.filter(service => {
+        const serviceDate = new Date(service.scheduled_date);
+        return serviceDate < today;
+      });
+
+      setLastAppointments(servicesBeforeToday)
+      
+      const servicesTodayAndAfter = enrichedPayments.filter(service => {
+        const serviceDate = new Date(service.scheduled_date);
+        return serviceDate >= today;
+      });
+
+      setUpcommingAppointments(servicesTodayAndAfter)
       // console.log("Enriched Payments:", enrichedPayments);
     }).catch((error) => {
       console.error('Error fetching enriched payments:', error);
@@ -183,7 +203,7 @@ function Dashboard() {
     </div>
     <div className="flex flex-col md:flex-row justify-center md:justify-between sm:p-6 space-y-6 max-w-[1440px]">
 
-    <div className="flex flex-col  sm:justify-between  md:items-start w-full md:w-3/6  ">
+    <div className="flex flex-col justify-center  sm:justify-between  md:items-start w-full md:w-3/6  ">
       <div className="flex items-center space-x-4 w-full my-4">
 
         <img 
@@ -215,22 +235,33 @@ function Dashboard() {
     <div className="  py-6  w-[320px] sm:w-[350px]   md:w-3/6 my-4 ">
         <h2 className="text-xl md:tetx-2xl lg:text-3xl font-bold font-Poppins">Upcoming Booking</h2>
         <div className="mt-4 space-y-4">
+          {
+            upcommingAppoinment.length == 0 && <div className='text-xl font-Poppins pl-2'>
+                <p>No data available</p>
+               </div>
+          }
+        {upcommingAppoinment.length > 0 && upcommingAppoinment[0] && 
           <div className="bg-gray-100 p-4 rounded-md flex justify-between items-center md:text-lg lg:text-xl">
-            <div>
-              <p className='font-Poppins font-bold'>User Name : Ritik</p>
-              <p className='font-Poppins'>Service Request : 499</p>
-              <p className='font-Poppins'>Booking for : Today, 10 mins left</p>
+                      <div>
+              <p className='font-Poppins font-bold'>User Name : {upcommingAppoinment[0].user.name}</p>
+              <p className='font-Poppins'>Service Name : {upcommingAppoinment[0].service.service_name}</p>
+              <p className='font-Poppins'>Appointment Date : {convertDateFormat(upcommingAppoinment[0].scheduled_date)}</p>
             </div>
-            <button className="bg-[#489CFF] text-white rounded-md py-2 px-4 font-Poppins md:w-24">Join</button>
+
+            <button className="bg-[#489CFF] text-white rounded-md py-2 px-4 font-Poppins md:w-24" onClick={()=> navigate(`/room/${upcommingAppoinment[0].meetingid}`)}>Join</button>
           </div>
+}
+{upcommingAppoinment.length > 0 && upcommingAppoinment[1] && 
           <div className="bg-gray-100 p-4 rounded-md flex justify-between items-center md:text-lg lg:text-xl">
-            <div>
-              <p className='font-Poppins font-bold'>User Name : Ritik</p>
-              <p className='font-Poppins'>Service Request : 499</p>
-              <p className='font-Poppins'>Booking for : Tomorrow, 9pm</p>
+                      <div>
+              <p className='font-Poppins font-bold'>User Name : {upcommingAppoinment[1].user.name}</p>
+              <p className='font-Poppins'>Service Name : {upcommingAppoinment[1].service.service_name}</p>
+              <p className='font-Poppins'>Appointment Date : {convertDateFormat(upcommingAppoinment[1].scheduled_date)}</p>
             </div>
-            <button className="bg-gray-300 text-white rounded-md py-2 px-4 font-Poppins md:w-24" disabled>Join</button>
+
+            <button className="bg-[#489CFF] text-white rounded-md py-2 px-4 font-Poppins md:w-24" onClick={()=> navigate(`/room/${upcommingAppoinment[0].meetingid}`)}>Join</button>
           </div>
+}
         </div>
       </div>
     
@@ -238,11 +269,11 @@ function Dashboard() {
 
   </div>
   <div className="flex flex-col  mt-[50px] sm:mt-[0px] md:ml-4">
-  <h2 className="text-xl md:text-2xl lg:text-3xl md:p-6 font-bold font-Poppins">Appointments</h2>
+  <h2 className="text-xl md:text-2xl lg:text-3xl md:p-6 font-bold font-Poppins">Last Appointments</h2>
       <div className="flex-1 bg-white rounded-md shadow-lg p-6 ">
 
         <table className="min-w-full mt-4 text-left font-Poppins overflow-x-auto">
-          <thead style={{fontSize:"20px"}}>
+          <thead style={{fontSize:"20px"}}> 
             <tr>
               <th className="py-2 ">Purchase Date</th>
               <th className="py-2 ">Name</th>
@@ -253,7 +284,7 @@ function Dashboard() {
             </tr>
           </thead>
           <tbody style={{fontSize:"20px"}}>
-            {appointmentData.map((data, idx) => (
+            { lastAppointments.length > 0 ?      lastAppointments.map((data, idx) => (
                            <tr>
                            <td className="py-2">{convertDateFormat(data.purchased_date)}</td>
                            <td className="py-2">{data.user.name}</td>
@@ -262,7 +293,14 @@ function Dashboard() {
                            <td className="py-2">{data.scheduled_time}</td>
                            <td className="py-2">{data.service.price}</td>
                          </tr>
-            ))}
+            )) : (
+              <tr>
+              <td className="py-2 text-center" colSpan="6">
+                No data available
+              </td>
+            </tr>
+            ) }
+
 
 
           </tbody>
